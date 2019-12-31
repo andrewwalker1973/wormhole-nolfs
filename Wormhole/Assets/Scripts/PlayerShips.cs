@@ -32,7 +32,7 @@ public class PlayerShips : MonoBehaviour
 
     // added in to keep record of tiles to move across
     Tile[] moveQueue;
-    int moveQueueIndex;
+   public  int moveQueueIndex;
 
     bool isAnimating = false;
 
@@ -135,14 +135,27 @@ public class PlayerShips : MonoBehaviour
             }
             else
             {
-            
-                Debug.Log("Crossing Tile10" + this.moveQueueIndex);
-                if (this.moveQueueIndex == 10)
+
+                  //    Debug.Log("Crossing Tile10" + this.moveQueueIndex);
+                  if (this.moveQueueIndex == 10)
+                  {
+                 //     Debug.Log("Rotating by 90 degree to go UP");
+                      transform.Rotate(0, 90, 0);
+                  }
+
+
+                if (this.moveQueueIndex == 12)
                 {
-                    Debug.Log("Rotating by 90 degree to go UP");
+                //    Debug.Log("Rotating by 90 degree to go UP");
                     transform.Rotate(0, 90, 0);
                 }
-            
+
+
+
+
+
+
+
 
                 SetNewTargetPosition(nextTile.transform.position);
                 moveQueueIndex++;

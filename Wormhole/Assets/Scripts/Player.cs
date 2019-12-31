@@ -185,30 +185,27 @@ public class Player : MonoBehaviour
                 case 0:
              player1_ships = Instantiate(Ship1, Player1_SpawnPoint.transform.position, Player1_SpawnPoint.transform.rotation);
               
-                player1_ships.transform.localScale = new Vector3(0.1f,0.1f,0.1f);
-                    player1_ships.SetActive(true);
+                player1_ships.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+               player1_ships.transform.position = new Vector3(-5, 15, -134);
+                  player1_ships.SetActive(true);
                     player1_ships.name = "PLAYER1";
-              
-
-
-
-
                     break;
                 case 1:
-                    player1_ships = Instantiate(Ship3, Player1_SpawnPoint.transform.position, Player1_SpawnPoint.transform.rotation);
-                    player1_ships.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+                    player1_ships = Instantiate(Ship2, Player1_SpawnPoint.transform.position, Player1_SpawnPoint.transform.rotation);
+                    player1_ships.transform.localScale = new Vector3(0.2f, 0.4f, 0.2f);
+                     player1_ships.transform.position = new Vector3(23, 15, -130);
                     player1_ships.SetActive(true);
                     player1_ships.name = "PLAYER1";
                     break;
                 case 2:
-                    player1_ships =  Instantiate(Ship2, Player1_SpawnPoint.transform.position, Player1_SpawnPoint.transform.rotation);
-                    player1_ships.transform.localScale = new Vector3(20, 20, 20);
+                    player1_ships =  Instantiate(Ship3, Player1_SpawnPoint.transform.position, Player1_SpawnPoint.transform.rotation);
+                    player1_ships.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
                     player1_ships.SetActive(true);
                     player1_ships.name = "PLAYER1";
                     break;
                 case 3:
                 player1_ships = Instantiate(Ship4, Player1_SpawnPoint.transform.position, Player1_SpawnPoint.transform.rotation);
-                player1_ships.transform.localScale = new Vector3(0.2f,0.2f,0.2f);
+                player1_ships.transform.localScale = new Vector3(0.5f,0.5f,0.5f);
                 player1_ships.SetActive(true);
                 player1_ships.name = "PLAYER1";
                 break;
@@ -225,19 +222,21 @@ public class Player : MonoBehaviour
         {
             case 0:
                 player2_ships = Instantiate(Ship1, Player2_SpawnPoint.transform.position, Player2_SpawnPoint.transform.rotation);
-                player2_ships.transform.localScale = new Vector3(2, 2, 2);
+                player2_ships.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                player1_ships.transform.position = new Vector3(-5, 15, -134);
                 player2_ships.SetActive(true);
                 player2_ships.name = "PLAYER2";
                 break;
             case 1:
-                player2_ships = Instantiate(Ship3, Player2_SpawnPoint.transform.position, Player2_SpawnPoint.transform.rotation);
-                player2_ships.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+                player2_ships = Instantiate(Ship2, Player2_SpawnPoint.transform.position, Player2_SpawnPoint.transform.rotation);
+                player2_ships.transform.localScale = new Vector3(0.2f, 0.4f, 0.2f);
+                player2_ships.transform.position = new Vector3(-5, 15, -138);
                 player2_ships.SetActive(true);
                 player2_ships.name = "PLAYER2";
                 break;
             case 2:
-                player2_ships = Instantiate(Ship2, Player2_SpawnPoint.transform.position, Player2_SpawnPoint.transform.rotation);
-                player2_ships.transform.localScale = new Vector3(20, 20, 20);
+                player2_ships = Instantiate(Ship3, Player2_SpawnPoint.transform.position, Player2_SpawnPoint.transform.rotation);
+                player2_ships.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
                 player2_ships.SetActive(true);
                 player2_ships.name = "PLAYER2";
                 break;
@@ -259,19 +258,22 @@ public class Player : MonoBehaviour
         {
             case 0:
                 player3_ships = Instantiate(Ship1, Player3_SpawnPoint.transform.position, Player3_SpawnPoint.transform.rotation);
-                player3_ships.transform.localScale = new Vector3(2, 2, 2);
+                player3_ships.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+                player1_ships.transform.position = new Vector3(-5, 15, -134);
                 player3_ships.SetActive(true);
                 player3_ships.name = "PLAYER3";
                 break;
             case 1:
-                player3_ships = Instantiate(Ship3, Player3_SpawnPoint.transform.position, Player3_SpawnPoint.transform.rotation);
-                player3_ships.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+                player3_ships = Instantiate(Ship2, Player3_SpawnPoint.transform.position, Player3_SpawnPoint.transform.rotation);
+                player3_ships.transform.localScale = new Vector3(0.2f, 0.4f, 0.2f);
+                player3_ships.transform.position = new Vector3(23, 15, -130);
                 player3_ships.SetActive(true);
                 player3_ships.name = "PLAYER3";
                 break;
             case 2:
-                player3_ships = Instantiate(Ship2, Player3_SpawnPoint.transform.position, Player3_SpawnPoint.transform.rotation);
-                player3_ships.transform.localScale = new Vector3(20, 20, 20);
+                player3_ships = Instantiate(Ship3, Player3_SpawnPoint.transform.position, Player3_SpawnPoint.transform.rotation);
+                player3_ships.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+                player3_ships.transform.position = new Vector3(0.5f, 2, -133);
                 player3_ships.SetActive(true);
                 player3_ships.name = "PLAYER3";
                 break;
@@ -292,25 +294,28 @@ public class Player : MonoBehaviour
         {
             case 0:
                 player4_ships = Instantiate(Ship1, Player4_SpawnPoint.transform.position, Player4_SpawnPoint.transform.rotation);
-                player4_ships.transform.localScale = new Vector3(2, 2, 2);
+                player4_ships.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+                player1_ships.transform.position = new Vector3(-5, 15, -134);
                 player4_ships.SetActive(true);
                 player4_ships.name = "PLAYER4";
                 break;
             case 1:
-                player4_ships = Instantiate(Ship3, Player4_SpawnPoint.transform.position, Player4_SpawnPoint.transform.rotation);
-                player4_ships.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+                player4_ships = Instantiate(Ship2, Player4_SpawnPoint.transform.position, Player4_SpawnPoint.transform.rotation);
+                player4_ships.transform.localScale = new Vector3(0.2f, 0.4f, 0.2f);
+                player4_ships.transform.position = new Vector3(23, 15, -130);
                 player4_ships.SetActive(true);
                 player4_ships.name = "PLAYER4";
                 break;
             case 2:
-                player4_ships = Instantiate(Ship2, Player4_SpawnPoint.transform.position, Player4_SpawnPoint.transform.rotation);
-                player4_ships.transform.localScale = new Vector3(20, 20, 20);
+                player4_ships = Instantiate(Ship3, Player4_SpawnPoint.transform.position, Player4_SpawnPoint.transform.rotation);
+                player4_ships.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
                 player4_ships.SetActive(true);
                 player4_ships.name = "PLAYER4";
                 break;
             case 3:
                 player4_ships = Instantiate(Ship4, Player4_SpawnPoint.transform.position, Player4_SpawnPoint.transform.rotation);
-                player4_ships.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+                player4_ships.transform.localScale = new Vector3(0.1f,0.1f,0.1f);
+                player4_ships.transform.position = new Vector3(-4,12, -128);
                 player4_ships.SetActive(true);
                 player4_ships.name = "PLAYER4";
                 break;
