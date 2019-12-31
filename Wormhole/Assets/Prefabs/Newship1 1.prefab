@@ -155,6 +155,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: newship1
       objectReference: {fileID: 0}
+    - target: {fileID: 9094455641180005305, guid: bd752d4e4d3dd774d961f6787f2df7c3,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd752d4e4d3dd774d961f6787f2df7c3, type: 3}
 --- !u!4 &7359106691123338938 stripped

@@ -185,7 +185,7 @@ public class Player : MonoBehaviour
                 case 0:
              player1_ships = Instantiate(Ship1, Player1_SpawnPoint.transform.position, Player1_SpawnPoint.transform.rotation);
               
-                player1_ships.transform.localScale = new Vector3(2, 2, 2);
+                player1_ships.transform.localScale = new Vector3(0.1f,0.1f,0.1f);
                     player1_ships.SetActive(true);
                     player1_ships.name = "PLAYER1";
               

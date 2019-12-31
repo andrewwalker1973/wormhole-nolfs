@@ -89,7 +89,6 @@ public class PlayerShips : MonoBehaviour
                 this.transform.position = Vector3.SmoothDamp(
                 this.transform.position,
                 new Vector3(this.transform.position.x, 0, this.transform.position.z),
-             // new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z),
                 ref velocity,
                 smoothTimeVertical);
             }
@@ -97,6 +96,7 @@ public class PlayerShips : MonoBehaviour
             {
                 //right position and rihht height, advance the queue
                 AdvancedMoveQueue();
+               
             }
 
         }
@@ -135,20 +135,14 @@ public class PlayerShips : MonoBehaviour
             }
             else
             {
-                // try add in face right direction code
-         /*     Vector3 relativePos =  targetPosition - transform.position;
-               Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
-                Debug.Log("relativePos" + relativePos);
-                Debug.Log("Vector3.up" + Vector3.up);
-               Debug.Log("rotation " + rotation);
-              transform.rotation  = rotation;
-             //   transform.Rotate(0,90,0);
-                Debug.Log("transform.rotation " + transform.rotation);
-         */       // end code to face right direction
-            //    transform.Rotate(Vector3.up * 50.0f * Time.deltaTime);
-
-
-
+            
+                Debug.Log("Crossing Tile10" + this.moveQueueIndex);
+                if (this.moveQueueIndex == 10)
+                {
+                    Debug.Log("Rotating by 90 degree to go UP");
+                    transform.Rotate(0, 90, 0);
+                }
+            
 
                 SetNewTargetPosition(nextTile.transform.position);
                 moveQueueIndex++;
@@ -157,6 +151,7 @@ public class PlayerShips : MonoBehaviour
         }
         else
         {
+           
             //the movement queue is empty, we are done moving
             Debug.Log("Done animating.");
             this.isAnimating = false;
