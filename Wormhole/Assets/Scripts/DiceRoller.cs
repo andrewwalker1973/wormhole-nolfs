@@ -22,7 +22,9 @@ public class DiceRoller : MonoBehaviour
         //AW find a way to set dice image to blank
         //   anim = GetComponent<Animator>();
 
-       
+
+        
+
     }
 
     public int[] DiceValues;        // int of all dice values
@@ -56,7 +58,7 @@ public class DiceRoller : MonoBehaviour
 
  //   public void TurnEnded()
  //   {
- //       Debug.Log("HI");
+    //   Debug.Log("HI");
  //      this.transform.GetChild(0).GetComponent<Image>().sprite = DiceBlank[Random.Range(0, DiceImageOne.Length)];
          
   //  }
@@ -125,7 +127,7 @@ public class DiceRoller : MonoBehaviour
         }
 
         ///  alter this to set dice value for testing   
-   theStateManager.DiceTotal = 11;
+  // theStateManager.DiceTotal = 11;
         theStateManager.IsDoneRolling = true;
         theStateManager.CheckLegalMoves();
     }

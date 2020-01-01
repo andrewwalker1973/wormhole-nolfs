@@ -11,66 +11,75 @@ public class StateManger : MonoBehaviour
         ThePlayerships = GameObject.FindObjectOfType<PlayerShips>();
         //    theCameraController = GameObject.FindObjectOfType<CameraController>();
 
+
+
+    //    Player1_follow_cam = GameObject.FindWithTag("Player1_follow_camera").GetComponent<Camera>();
+        disableAllCamera();
+        Player1_follow_Camera.enabled = true;
+        Player1_follow_Camera.depth = 1;
+        Player1_follow_Camera_Object.SetActive(true);
+        Debug.Log("set camera1");
+
         // who is actually playing ?
 
         // 0 = human
         //1 = computer
         //2 = not playing
 
-  /*   ThePlayerships.PlayerId = -1; // try set it to set player 1 as playerid 0 
-      //  CurrentPlayerId = 0; 
+        /*   ThePlayerships.PlayerId = -1; // try set it to set player 1 as playerid 0 
+            //  CurrentPlayerId = 0; 
 
 
-        if (ThePlayers.player1_hum_comp == 0 || ThePlayers.player1_hum_comp == 1)
-        {
-            countOfPlayersActuallyPlaying++;
-            //        ThePlayerships.PlayerId ++;
-            
-           
+              if (ThePlayers.player1_hum_comp == 0 || ThePlayers.player1_hum_comp == 1)
+              {
+                  countOfPlayersActuallyPlaying++;
+                  //        ThePlayerships.PlayerId ++;
 
 
-            Debug.Log(" player1");
-            Debug.Log(" player1 - countOfPlayersActuallyPlaying " + countOfPlayersActuallyPlaying);
-            Debug.Log(" player1 - ThePlayerships.PlayerId " + ThePlayerships.PlayerId);
 
-        }
 
-        if (ThePlayers.player2_hum_comp == 0 || ThePlayers.player2_hum_comp == 1)
-        {
-            countOfPlayersActuallyPlaying++;
-            //         ThePlayerships.PlayerId++;
-         //   ThePlayerships.PlayerId = 11;
+                  Debug.Log(" player1");
+                  Debug.Log(" player1 - countOfPlayersActuallyPlaying " + countOfPlayersActuallyPlaying);
+                  Debug.Log(" player1 - ThePlayerships.PlayerId " + ThePlayerships.PlayerId);
 
-            Debug.Log(" player1");
-            Debug.Log(" player1 - countOfPlayersActuallyPlaying " + countOfPlayersActuallyPlaying);
-            Debug.Log(" player1 - ThePlayerships.PlayerId " + ThePlayerships.PlayerId);
+              }
 
-        }
+              if (ThePlayers.player2_hum_comp == 0 || ThePlayers.player2_hum_comp == 1)
+              {
+                  countOfPlayersActuallyPlaying++;
+                  //         ThePlayerships.PlayerId++;
+               //   ThePlayerships.PlayerId = 11;
 
-        if (ThePlayers.player3_hum_comp == 0 || ThePlayers.player3_hum_comp == 1)
-        {
-            countOfPlayersActuallyPlaying++;
-     //       ThePlayerships.PlayerId++;
+                  Debug.Log(" player1");
+                  Debug.Log(" player1 - countOfPlayersActuallyPlaying " + countOfPlayersActuallyPlaying);
+                  Debug.Log(" player1 - ThePlayerships.PlayerId " + ThePlayerships.PlayerId);
 
-            Debug.Log(" player1");
-            Debug.Log(" player1 - countOfPlayersActuallyPlaying " + countOfPlayersActuallyPlaying);
-            Debug.Log(" player1 - ThePlayerships.PlayerId " + ThePlayerships.PlayerId);
-        }
+              }
 
-        if (ThePlayers.player4_hum_comp == 0 || ThePlayers.player4_hum_comp == 1)
-        {
-            countOfPlayersActuallyPlaying++;
-     //       ThePlayerships.PlayerId++;
-            Debug.Log(" player1");
-            Debug.Log(" player1 - countOfPlayersActuallyPlaying " + countOfPlayersActuallyPlaying);
-            Debug.Log(" player1 - ThePlayerships.PlayerId " + ThePlayerships.PlayerId);
-        }
+              if (ThePlayers.player3_hum_comp == 0 || ThePlayers.player3_hum_comp == 1)
+              {
+                  countOfPlayersActuallyPlaying++;
+           //       ThePlayerships.PlayerId++;
 
-        NumberOfPlayers = countOfPlayersActuallyPlaying;
-        Debug.Log("NumberOfPlayers" + NumberOfPlayers);
+                  Debug.Log(" player1");
+                  Debug.Log(" player1 - countOfPlayersActuallyPlaying " + countOfPlayersActuallyPlaying);
+                  Debug.Log(" player1 - ThePlayerships.PlayerId " + ThePlayerships.PlayerId);
+              }
 
-       // CurrentPlayerId = 0;
-       */
+              if (ThePlayers.player4_hum_comp == 0 || ThePlayers.player4_hum_comp == 1)
+              {
+                  countOfPlayersActuallyPlaying++;
+           //       ThePlayerships.PlayerId++;
+                  Debug.Log(" player1");
+                  Debug.Log(" player1 - countOfPlayersActuallyPlaying " + countOfPlayersActuallyPlaying);
+                  Debug.Log(" player1 - ThePlayerships.PlayerId " + ThePlayerships.PlayerId);
+              }
+
+              NumberOfPlayers = countOfPlayersActuallyPlaying;
+              Debug.Log("NumberOfPlayers" + NumberOfPlayers);
+
+             // CurrentPlayerId = 0;
+             */
     }
 
 
@@ -85,14 +94,35 @@ public class StateManger : MonoBehaviour
     public bool IsDoneAnimating = false; // Have we finshed moving
 
     public GameObject NoLegalMovesPopup;   //game object for test on screen
+ //   Camera Player1_follow_cam;
 
-   
 
   //  int countOfPlayersActuallyPlaying = 0;
 
     PlayerShips ThePlayerships;
   //  CameraController theCameraController;
 
+
+        //Code to allow for Camera Selection 
+        public Camera MainCamera;
+  //  public Camera Player1_top_Camera;
+    public Camera Player1_follow_Camera;
+//    public Camera Player2_top_Camera;
+    public Camera Player2_follow_Camera;
+ //   public Camera Player3_top_Camera;
+ //   public Camera Player3_follow_Camera;
+//    public Camera Player4_top_Camera;
+//    public Camera Player4_follow_Camera;
+
+    public GameObject MainCamera_Object;
+ //   public GameObject Player1_top_Camera_Object;
+   public GameObject Player1_follow_Camera_Object;
+ //   public GameObject Player2_top_Camera_Object;
+  public GameObject Player2_follow_Camera_Object;
+ //   public GameObject Player3_top_Camera_Object;
+ //   public GameObject Player3_follow_Camera_Object;
+ //   public GameObject Player4_top_Camera_Object;
+ //   public GameObject Player4_follow_Camera_Object;
 
     public void NewTurn()
     {
@@ -105,11 +135,11 @@ public class StateManger : MonoBehaviour
         IsDoneAnimating = false;
 
 
-     
-        // TODO move to next player
-        CurrentPlayerId = (CurrentPlayerId + 1) % NumberOfPlayers;   // episode 6 20:56   trys to make sure on the number of players
+       
+    // TODO move to next player
+    CurrentPlayerId = (CurrentPlayerId + 1) % NumberOfPlayers;   // episode 6 20:56   trys to make sure on the number of players
 
-              
+        Camera_controls();
 
 
     }
@@ -152,5 +182,61 @@ public class StateManger : MonoBehaviour
         NewTurn();
         
 
+    }
+
+    public void disableAllCamera()
+    {
+        MainCamera.enabled = false;
+        Player1_follow_Camera.enabled = false;
+        Player2_follow_Camera.enabled = false;
+ //       Player3_follow_Camera.enabled = false;
+ //       Player4_follow_Camera.enabled = false;
+
+        MainCamera_Object.SetActive(false);
+        Player1_follow_Camera_Object.SetActive(false);
+       Player2_follow_Camera_Object.SetActive(false);
+        //       Player3_follow_Camera_Object.SetActive(false);
+        //      Player4_follow_Camera_Object.SetActive(false);
+
+        Player1_follow_Camera.depth = 0;
+        Player2_follow_Camera.depth = 0;
+
+
+        Debug.Log("Disabled all Cameras");
+
+    }
+    public void Camera_controls()
+    {
+        switch (CurrentPlayerId)
+        {
+            case 0:
+                disableAllCamera();
+                Player1_follow_Camera.enabled = true;
+                Player1_follow_Camera_Object.SetActive(true);
+                Player1_follow_Camera.depth = 1;
+                Debug.Log("set camera1");
+
+                break;
+            case 1:
+                disableAllCamera();
+               Player2_follow_Camera.enabled = true;
+               Player2_follow_Camera_Object.SetActive(true);
+                Player2_follow_Camera.depth = 1;
+                Debug.Log("set camera2");
+                break;
+            case 2:
+                disableAllCamera();
+    //            Player3_follow_Camera.enabled = true;
+     //           Player3_follow_Camera_Object.SetActive(true);
+                Debug.Log("set camera3");
+
+                break;
+            case 3:
+                disableAllCamera();
+    //            Player4_follow_Camera.enabled = true;
+    //            Player4_follow_Camera_Object.SetActive(true);
+     //           Debug.Log("set camera4");
+                break;
+        }
     }
 }

@@ -53,10 +53,12 @@ public class PlayerShips : MonoBehaviour
 
         ThePlayers = GameObject.FindObjectOfType<Player>();
         theCameraController = GameObject.FindObjectOfType<CameraController>();
-    //    theDiceRoller = GameObject.FindObjectOfType<DiceRoller>();
+        //    theDiceRoller = GameObject.FindObjectOfType<DiceRoller>();
 
-
-
+        theStateManager.disableAllCamera();
+        theStateManager.Player1_follow_Camera.enabled = true;
+        theStateManager.Player1_follow_Camera_Object.SetActive(true);
+        theStateManager.Player1_follow_Camera.depth = 1;
 
 
 
