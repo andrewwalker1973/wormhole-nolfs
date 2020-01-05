@@ -10,7 +10,8 @@ public class Tile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       // ThePlayerships = GameObject.FindObjectOfType<PlayerShips>();
+       
+        // ThePlayerships = GameObject.FindObjectOfType<PlayerShips>();
     }
 
     public Tile[] NextTiles;
