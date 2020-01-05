@@ -213,10 +213,17 @@ public class PlayerShips : MonoBehaviour
         velocity = Vector3.zero;
     }
 
+
     void OnMouseUp()
     {
+         MoveMe();
+
+    }
 
 
+    public void MoveMe()
+    {
+        
 
 
         if (theStateManager.CurrentPlayerId != PlayerId)
@@ -276,55 +283,19 @@ public class PlayerShips : MonoBehaviour
             return;
         }
 
-        //Debug.Log("Spaces to move" + spacesToMove);
-        // Andrew, this does not seem to be coming though correctly
-
-  //      moveQueue = new Tile[spacesToMove];
-    //    Tile finalTile = currentTile;
+    
 
         moveQueue = GetTilesAhead(spacesToMove);
        Tile finalTile = moveQueue[moveQueue.Length - 1];
 
-  /*     for (int i = 0; i < spacesToMove; i++)
-        {
-            //  check if no tile? ie off board ?
-            if (finalTile == null && scoreMe == false)
-            {
-                finalTile = startingTile;
-            }
-            else
-            {
-
-                if (finalTile.NextTiles == null || finalTile.NextTiles.Length == 0)
-                {
-                    // TODO  we have reached the end and score player
-                      Debug.Log("Score!!!!!");
-                  
-                    scoreMe = true;
-                    finalTile = null;
-                }
-                else if (finalTile.NextTiles.Length > 1)
-                {
-                    // branch based on player ID
-                    finalTile = finalTile.NextTiles[ PlayerId ];
-                }
-                else
-                {
-                    finalTile = finalTile.NextTiles[0];
-                }
-
-
-            }
-            moveQueue[i] = finalTile;
-     */       
+  
     
 if (finalTile == null)
         {
             // we are scoring this player
             scoreMe = true;
         }
-else
-// TODO - check to see if the destination is legal
+    else
         {
             if (CanLegallyMoveTo(finalTile) == false)
             {
@@ -333,18 +304,53 @@ else
                 moveQueue = null;
                 return;            
             }
-            // if there is an ememy tile in our space we kick iot out
+
+            /*    // If there is an enemy tile in our legal space, the we kick it out.
+                if (finalTile.PlayerStone != null)
+                {
+                    //finalTile.PlayerStone.ReturnToStorage();
+                    stoneToBop = finalTile.PlayerStone;
+                    stoneToBop.CurrentTile.PlayerStone = null;
+                    stoneToBop.CurrentTile = null;
+                }
+            */
+
+            /*    this.transform.SetParent(null); // Become Batman      remove from tile so other player can use it
+
+                // Remove ourselves from our old tile
+                if (CurrentTile != null)
+                {
+                    CurrentTile.PlayerStone = null;
+                }
+            */
+
+            // Even before the animation is done, set our current tile to the new tile
+            currentTile = finalTile;
+            if (finalTile.IsScoringSpace == false)   // "Scoring" tiles are always "empty"
+            {
+                finalTile.PlayerShips = this;
+            }
+
+/*    removed as I think he changed thios this to score better
             if (finalTile.PlayerShips != null)
             {
                 finalTile.PlayerShips.ReturnToStorage();
             }
+            */
         }
 
-      //  finalTile.PlayerShips = this;
+        /*  removed my code for his below
+          moveQueueIndex = 0;
+          currentTile = finalTile;
+          theStateManager.IsDoneClicking = true;
+          this.isAnimating = true;
+
+      */
         moveQueueIndex = 0;
-        currentTile = finalTile;
+
         theStateManager.IsDoneClicking = true;
         this.isAnimating = true;
+     //   theStateManager.AnimationsPlaying++;
 
     }
 
@@ -356,8 +362,8 @@ else
             return null;
         }
 
-  
 
+        // Where should we end up?
         Tile[] listOfTiles = new Tile[spacesToMove];
         Tile finalTile = currentTile;
 
@@ -398,6 +404,12 @@ else
         return listOfTiles;
     }
 
+
+    public Tile GetTileAhead()
+    {
+        return GetTileAhead(theStateManager.DiceTotal);
+    }
+
     // return the final tile we have landed on
     Tile GetTileAhead(int spacesToMove)
     {
@@ -413,13 +425,21 @@ else
 
     public bool CanLegallyMoveAhead(int spacesToMove)
     {
+        if (currentTile != null && currentTile.IsScoringSpace)
+        {
+            // This stone is already on a scoring tile, so we can't move.
+            return false;
+        }
+
         Tile theTile = GetTileAhead(spacesToMove);
+
         return CanLegallyMoveTo(theTile);
     }
 
-
     bool CanLegallyMoveTo(Tile destinationTile)
     {
+
+       
         // does the tilealready have a stone - not needed for me
         // is this one of our stones - not needed for me
         // is this a safe tile for enemy ?
@@ -438,6 +458,9 @@ else
             return true;
         }
 
+
+   
+
         if (destinationTile.PlayerShips.PlayerId == this.PlayerId)
         {
             // we cant land on one of our stones
@@ -446,12 +469,21 @@ else
             // if this is an enemy stone is it in a safe square ?
             // TODO Safe Squares ?
 
+            /*   // If it's an enemy stone, is it in a safe square?
+          if (destinationTile.IsRollAgain == true)
+          {
+              // Can't bop someone on a safe tile!
+              return false;
+          }
+
+      */
+
             // if we have gotten here we can legaly land on the enmy stone and kick it off
 
-            
+
 
         }
-        
+
         return true;
     }
 
@@ -460,5 +492,27 @@ else
         // if we had defined stonestorage this is where t wouldreturn it to storage
         Debug.Log("Return to storage was activated");
 
+
+    /*    Debug.Log("ReturnToStorage");
+        //currentTile.PlayerStone = null;
+        //currentTile = null;
+
+        this.isAnimating = true;
+        theStateManager.AnimationsPlaying++;
+
+        moveQueue = null;
+
+        // Save our current position
+        Vector3 savePosition = this.transform.position;
+
+        MyStoneStorage.AddStoneToStorage(this.gameObject);
+
+        // Set our new position to the animation target
+        SetNewTargetPosition(this.transform.position);
+
+        // Restore our saved position
+        this.transform.position = savePosition;
+
+    */
     }
 }

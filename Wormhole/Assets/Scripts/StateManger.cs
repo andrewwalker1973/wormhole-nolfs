@@ -14,21 +14,19 @@ public class StateManger : MonoBehaviour
         Camera ThePlayer3_camera = GameObject.Find("Player3_Follow_Camera(Clone)").GetComponent<Camera>();
         Camera ThePlayer4_camera = GameObject.Find("Player4_Follow_Camera(Clone)").GetComponent<Camera>();
 
-        // ThePlayer1_camera = Camera.FindObjectOfType<Camera>();
+        PlayerAIs = new AIPlayer[NumberOfPlayers];
+        // Debug.Log("PlayerAIs" + PlayerAIs);
+        //PlayerAIs[0] = null;   //Is a human player  null 
+        //  PlayerAIs[0] = new AIPlayer();  is an AI PLAYER
+        PlayerAIs[0] = null;
+        PlayerAIs[1] = new AIPlayer(); //An AI player
+        PlayerAIs[2] = new AIPlayer();
+        PlayerAIs[3] = new AIPlayer();
 
-        //   Player1_follow_Camera = Player2_Follow_Camera(Clone)
-        //    theCameraController = GameObject.FindObjectOfType<CameraController>();
+           // for some reason if all players are AI it mucks up 
 
-        //   Player1_follow_Camera = GameObject.FindObjectOfType<Camera>();
-        //    Player1_follow_Camera1 = Camera.f("Player1_follow_Camera (Clone)");
 
-        //    Player1_follow_cam = GameObject.FindWithTag("Player1_follow_camera").GetComponent<Camera>();
-        /*     disableAllCamera();
-             Player1_follow_Camera.enabled = true;
-             Player1_follow_Camera.depth = 1;
-             Player1_follow_Camera_Object.SetActive(true);
-             Debug.Log("set camera1");
-     */
+
         // who is actually playing ?
 
         // 0 = human
@@ -94,19 +92,18 @@ public class StateManger : MonoBehaviour
 
     Player ThePlayers;
 
-    public int NumberOfPlayers = 2; //max number of players playing
+    public int NumberOfPlayers = 4; //max number of players playing
     public int CurrentPlayerId = 0;  //set current playerid = 0 Ie - Player1
     public int DiceTotal;           // Total all dice rolls
+
+    AIPlayer[] PlayerAIs;
 
     public bool IsDoneRolling = false;  // is done rolling false - have we finshed rollling
     public bool IsDoneClicking = false; //have we finished clicking
     public bool IsDoneAnimating = false; // Have we finshed moving
 
     public GameObject NoLegalMovesPopup;   //game object for test on screen
- //   Camera Player1_follow_cam;
-
-
-  //  int countOfPlayersActuallyPlaying = 0;
+ 
 
     PlayerShips ThePlayerships;
   //  CameraController theCameraController;
@@ -162,12 +159,18 @@ public class StateManger : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {          
         // is the tunrn done ?
         if (IsDoneRolling && IsDoneClicking && IsDoneAnimating)
         {
             Debug.Log ("Turn is done");
             NewTurn();
+            return;
+        }
+
+        if (PlayerAIs[CurrentPlayerId] != null)
+        {
+            PlayerAIs[CurrentPlayerId].DoAI();
         }
     }
 
