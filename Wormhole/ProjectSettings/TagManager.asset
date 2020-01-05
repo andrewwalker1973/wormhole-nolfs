@@ -9,6 +9,9 @@ TagManager:
   - Player2
   - Player3
   - Player4
+  - Game_player_1
+  - Game_player_2
+  - Ship2
   layers:
   - Default
   - TransparentFX

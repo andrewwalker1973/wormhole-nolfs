@@ -43,8 +43,23 @@ public class Player : MonoBehaviour
     GameObject player3_ships;
     GameObject player4_ships;
 
-   
+  
+    public GameObject Player1_Follow_Camera;
+    public GameObject Player2_Follow_Camera;
+    public GameObject Player3_Follow_Camera;
+    public GameObject Player4_Follow_Camera;
 
+    public Camera Camera_Player1_follow;
+    public Camera Camera_Player2_follow;
+    public Camera Camera_Player3_follow;
+    public Camera Camera_Player4_follow;
+
+    //CompleteCameraController TheCompleteCameraController;
+
+    GameObject player1_ships_camera;
+    GameObject player2_ships_camera;
+    GameObject player3_ships_camera;
+    GameObject player4_ships_camera;
 
 
     void Start()
@@ -65,8 +80,12 @@ public class Player : MonoBehaviour
         player4_hum_comp = PlayerPrefs.GetFloat("player4_playing_input");
         player4_ship = PlayerPrefs.GetFloat("player4_ship");
 
-        
 
+        //TODO - camera fly in
+        //TODO for now just set player1 camera active
+
+     //   Camera_Player1_follow.enabled = true;
+     //   Camera_Player2_follow.enabled = false;
 
         if (this.gameObject.name == "Player1" && player1_onboard == false)
             {
@@ -91,7 +110,8 @@ public class Player : MonoBehaviour
                     }
          
                 player1_onboard = true;
-            }
+            player1_ships_camera.SetActive(true);
+        }
 
         if (this.gameObject.name == "Player2" && player2_onboard == false)
         {
@@ -188,8 +208,19 @@ public class Player : MonoBehaviour
                 player1_ships.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
                player1_ships.transform.position = new Vector3(-5, 15, -134);
                   player1_ships.SetActive(true);
+                player1_ships.tag = "Game_player_1";
                     player1_ships.name = "PLAYER1";
-                    break;
+
+                player1_ships_camera = Instantiate(Player1_Follow_Camera, Player1_SpawnPoint.transform.position, Player1_SpawnPoint.transform.rotation);
+               player1_ships_camera.SetActive(false);
+                player1_ships_camera.transform.parent = player1_ships.transform;
+
+
+
+
+
+
+                break;
                 case 1:
                     player1_ships = Instantiate(Ship2, Player1_SpawnPoint.transform.position, Player1_SpawnPoint.transform.rotation);
                     player1_ships.transform.localScale = new Vector3(0.2f, 0.4f, 0.2f);
@@ -226,13 +257,23 @@ public class Player : MonoBehaviour
                 player1_ships.transform.position = new Vector3(-5, 15, -134);
                 player2_ships.SetActive(true);
                 player2_ships.name = "PLAYER2";
+                player2_ships.tag = "Game_player_2";
+               
+                player2_ships_camera = Instantiate(Player2_Follow_Camera, Player2_SpawnPoint.transform.position, Player2_SpawnPoint.transform.rotation);
+                player2_ships_camera.SetActive(true);
                 break;
             case 1:
                 player2_ships = Instantiate(Ship2, Player2_SpawnPoint.transform.position, Player2_SpawnPoint.transform.rotation);
                 player2_ships.transform.localScale = new Vector3(0.2f, 0.4f, 0.2f);
                 player2_ships.transform.position = new Vector3(-5, 15, -138);
-                player2_ships.SetActive(true);
-                player2_ships.name = "PLAYER2";
+               player2_ships.SetActive(true);
+                                player2_ships.name = "PLAYER2";
+                player2_ships.tag = "Game_player_2";
+                Camera_Player2_follow.enabled = false;
+
+                player2_ships_camera = Instantiate(Player2_Follow_Camera, Player2_SpawnPoint.transform.position, Player2_SpawnPoint.transform.rotation);
+                player2_ships_camera.SetActive(true);
+                player2_ships_camera.transform.parent = player2_ships.transform;
                 break;
             case 2:
                 player2_ships = Instantiate(Ship3, Player2_SpawnPoint.transform.position, Player2_SpawnPoint.transform.rotation);
@@ -276,6 +317,12 @@ public class Player : MonoBehaviour
                 player3_ships.transform.position = new Vector3(0.5f, 2, -133);
                 player3_ships.SetActive(true);
                 player3_ships.name = "PLAYER3";
+
+                Camera_Player3_follow.enabled = false;
+
+                player3_ships_camera = Instantiate(Player3_Follow_Camera, Player3_SpawnPoint.transform.position, Player3_SpawnPoint.transform.rotation);
+                player3_ships_camera.SetActive(true);
+                player3_ships_camera.transform.parent = player3_ships.transform;
                 break;
             case 3:
                 player3_ships = Instantiate(Ship4, Player3_SpawnPoint.transform.position, Player3_SpawnPoint.transform.rotation);
@@ -318,6 +365,12 @@ public class Player : MonoBehaviour
                 player4_ships.transform.position = new Vector3(-4,12, -128);
                 player4_ships.SetActive(true);
                 player4_ships.name = "PLAYER4";
+
+                Camera_Player4_follow.enabled = false;
+
+                player4_ships_camera = Instantiate(Player4_Follow_Camera, Player4_SpawnPoint.transform.position, Player4_SpawnPoint.transform.rotation);
+                player4_ships_camera.SetActive(true);
+                player4_ships_camera.transform.parent = player4_ships.transform;
                 break;
         }
     }

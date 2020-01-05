@@ -7,7 +7,7 @@ public class PlayerShips : MonoBehaviour
 
 
     StateManger theStateManager;
-    CameraController theCameraController;
+    //CameraController theCameraController;
 
     //added in for smooth move
     Vector3 targetPosition;
@@ -38,7 +38,7 @@ public class PlayerShips : MonoBehaviour
 
     Player ThePlayers;
     private readonly object PlayerShipss;
-    
+    Tile theTiles;
 
     //  DiceRoller theDiceRoller;
 
@@ -52,14 +52,15 @@ public class PlayerShips : MonoBehaviour
         targetPosition = this.transform.position;
 
         ThePlayers = GameObject.FindObjectOfType<Player>();
-        theCameraController = GameObject.FindObjectOfType<CameraController>();
-        //    theDiceRoller = GameObject.FindObjectOfType<DiceRoller>();
-
-        theStateManager.disableAllCamera();
-        theStateManager.Player1_follow_Camera.enabled = true;
-        theStateManager.Player1_follow_Camera_Object.SetActive(true);
-        theStateManager.Player1_follow_Camera.depth = 1;
-
+        theTiles = GameObject.FindObjectOfType<Tile>();
+        /*    theCameraController = GameObject.FindObjectOfType<CameraController>();
+            //    theDiceRoller = GameObject.FindObjectOfType<DiceRoller>();
+            */
+        /*   theStateManager.disableAllCamera();
+           theStateManager.Player1_follow_Camera.enabled = true;
+           theStateManager.Player1_follow_Camera_Object.SetActive(true);
+           theStateManager.Player1_follow_Camera.depth = 1;
+           */
 
 
     }
@@ -83,7 +84,7 @@ public class PlayerShips : MonoBehaviour
             new Vector3(this.transform.position.x, targetPosition.y, this.transform.position.z),
             targetPosition)
             < smoothDistance)
-        {
+           {
 
             // reached the target how is the height
             if (moveQueue != null && moveQueueIndex == (moveQueue.Length) && this.transform.position.y > smoothDistance)
@@ -134,32 +135,60 @@ public class PlayerShips : MonoBehaviour
                 //TODO something for end game winner, maybe move to winner area ?
                 SetNewTargetPosition(this.transform.position + Vector3.right * 1f);
 
+            /*    //Try tunr the charater
+                if (theTiles.IsrightTurnSpace == true)
+                {
+                    transform.Rotate(0, 90, 0);
+                    Debug.Log("Turning right");
+                }
+                // --------------------
+                */
+
             }
             else
             {
 
-                  //    Debug.Log("Crossing Tile10" + this.moveQueueIndex);
-                  if (this.moveQueueIndex == 10)
+                //    Debug.Log("Crossing Tile10   " + this.moveQueueIndex);
+                //  Debug.Log("Current Tile " + currentTile);
+                //  Debug.Log("Next Tile " + nextTile);
+                /*    if (this.moveQueueIndex == 10)
+                    {
+                 //       Debug.Log("Rotating by 90 degree to go UP");
+                        transform.Rotate(0, 90, 0);
+                    }
+
+
+                  if (this.moveQueueIndex == 11)
                   {
-                 //     Debug.Log("Rotating by 90 degree to go UP");
+               //     Debug.Log("Rotating by 90 degree to go UP");
                       transform.Rotate(0, 90, 0);
                   }
-
-
-                if (this.moveQueueIndex == 12)
+                 
+                Debug.Log("Turn right ?" + theTiles.TurnRight);
+                if (theTiles.TurnRight == true)
                 {
-                //    Debug.Log("Rotating by 90 degree to go UP");
                     transform.Rotate(0, 90, 0);
+                    Debug.Log("Turning right in player script");
                 }
-
-
-
-
-
+                */
+                
 
 
 
                 SetNewTargetPosition(nextTile.transform.position);
+                // try to face char in directin on travel
+            /*    float moveHorizontal = Input.GetAxisRaw("Horizontal");
+                float moveVertical = Input.GetAxisRaw("Vertical");
+                Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+                transform.rotation = Quaternion.LookRotation(movement);
+                transform.Translate(movement * 1f * Time.deltaTime, Space.World);
+                
+                
+
+
+                // -----------------------
+
+                */
                 moveQueueIndex++;
             }
             

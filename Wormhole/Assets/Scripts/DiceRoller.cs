@@ -18,12 +18,13 @@ public class DiceRoller : MonoBehaviour
         DiceValues = new int[1];        // only using one dice
         DiceFaceImage = GetComponent<Image>();
         theStateManager = GameObject.FindObjectOfType<StateManger>();
+     
 
         //AW find a way to set dice image to blank
         //   anim = GetComponent<Animator>();
 
 
-        
+
 
     }
 
@@ -127,7 +128,7 @@ public class DiceRoller : MonoBehaviour
         }
 
         ///  alter this to set dice value for testing   
-  // theStateManager.DiceTotal = 11;
+theStateManager.DiceTotal = 11;
         theStateManager.IsDoneRolling = true;
         theStateManager.CheckLegalMoves();
     }

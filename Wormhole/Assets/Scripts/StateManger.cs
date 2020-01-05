@@ -9,17 +9,26 @@ public class StateManger : MonoBehaviour
     {
         ThePlayers = GameObject.FindObjectOfType<Player>();
         ThePlayerships = GameObject.FindObjectOfType<PlayerShips>();
+        Camera ThePlayer1_camera = GameObject.Find("Player1_Follow_Camera(Clone)").GetComponent<Camera>();
+        Camera ThePlayer2_camera = GameObject.Find("Player2_Follow_Camera(Clone)").GetComponent<Camera>();
+        Camera ThePlayer3_camera = GameObject.Find("Player3_Follow_Camera(Clone)").GetComponent<Camera>();
+        Camera ThePlayer4_camera = GameObject.Find("Player4_Follow_Camera(Clone)").GetComponent<Camera>();
+
+        // ThePlayer1_camera = Camera.FindObjectOfType<Camera>();
+
+        //   Player1_follow_Camera = Player2_Follow_Camera(Clone)
         //    theCameraController = GameObject.FindObjectOfType<CameraController>();
 
+        //   Player1_follow_Camera = GameObject.FindObjectOfType<Camera>();
+        //    Player1_follow_Camera1 = Camera.f("Player1_follow_Camera (Clone)");
 
-
-    //    Player1_follow_cam = GameObject.FindWithTag("Player1_follow_camera").GetComponent<Camera>();
-        disableAllCamera();
-        Player1_follow_Camera.enabled = true;
-        Player1_follow_Camera.depth = 1;
-        Player1_follow_Camera_Object.SetActive(true);
-        Debug.Log("set camera1");
-
+        //    Player1_follow_cam = GameObject.FindWithTag("Player1_follow_camera").GetComponent<Camera>();
+        /*     disableAllCamera();
+             Player1_follow_Camera.enabled = true;
+             Player1_follow_Camera.depth = 1;
+             Player1_follow_Camera_Object.SetActive(true);
+             Debug.Log("set camera1");
+     */
         // who is actually playing ?
 
         // 0 = human
@@ -104,25 +113,33 @@ public class StateManger : MonoBehaviour
 
 
         //Code to allow for Camera Selection 
-        public Camera MainCamera;
+       public Camera MainCamera;
   //  public Camera Player1_top_Camera;
-    public Camera Player1_follow_Camera;
+//   public Camera Player1_follow_Camera;
+//    Camera Player1_follow_Camera1;
 //    public Camera Player2_top_Camera;
-    public Camera Player2_follow_Camera;
+  //  public Camera Player2_follow_Camera;
  //   public Camera Player3_top_Camera;
  //   public Camera Player3_follow_Camera;
 //    public Camera Player4_top_Camera;
 //    public Camera Player4_follow_Camera;
 
-    public GameObject MainCamera_Object;
+ //   public GameObject MainCamera_Object;
  //   public GameObject Player1_top_Camera_Object;
-   public GameObject Player1_follow_Camera_Object;
+ //  public GameObject Player1_follow_Camera_Object;
  //   public GameObject Player2_top_Camera_Object;
-  public GameObject Player2_follow_Camera_Object;
- //   public GameObject Player3_top_Camera_Object;
- //   public GameObject Player3_follow_Camera_Object;
- //   public GameObject Player4_top_Camera_Object;
- //   public GameObject Player4_follow_Camera_Object;
+  //public GameObject Player2_follow_Camera_Object;
+    //   public GameObject Player3_top_Camera_Object;
+    //   public GameObject Player3_follow_Camera_Object;
+    //   public GameObject Player4_top_Camera_Object;
+    //   public GameObject Player4_follow_Camera_Object;
+
+
+ public Camera ThePlayer1_camera;
+ public   Camera ThePlayer2_camera;
+    public Camera ThePlayer3_camera;
+    public Camera ThePlayer4_camera;
+
 
     public void NewTurn()
     {
@@ -138,7 +155,6 @@ public class StateManger : MonoBehaviour
        
     // TODO move to next player
     CurrentPlayerId = (CurrentPlayerId + 1) % NumberOfPlayers;   // episode 6 20:56   trys to make sure on the number of players
-
         Camera_controls();
 
 
@@ -184,25 +200,18 @@ public class StateManger : MonoBehaviour
 
     }
 
-    public void disableAllCamera()
+   public void disableAllCamera()
     {
+        Camera ThePlayer1_camera = GameObject.Find("Player1_Follow_Camera(Clone)").GetComponent<Camera>();
+        Camera ThePlayer2_camera = GameObject.Find("Player2_Follow_Camera(Clone)").GetComponent<Camera>();
+        Camera ThePlayer3_camera = GameObject.Find("Player3_Follow_Camera(Clone)").GetComponent<Camera>();
+        Camera ThePlayer4_camera = GameObject.Find("Player4_Follow_Camera(Clone)").GetComponent<Camera>();
         MainCamera.enabled = false;
-        Player1_follow_Camera.enabled = false;
-        Player2_follow_Camera.enabled = false;
- //       Player3_follow_Camera.enabled = false;
- //       Player4_follow_Camera.enabled = false;
-
-        MainCamera_Object.SetActive(false);
-        Player1_follow_Camera_Object.SetActive(false);
-       Player2_follow_Camera_Object.SetActive(false);
-        //       Player3_follow_Camera_Object.SetActive(false);
-        //      Player4_follow_Camera_Object.SetActive(false);
-
-        Player1_follow_Camera.depth = 0;
-        Player2_follow_Camera.depth = 0;
-
-
-        Debug.Log("Disabled all Cameras");
+        ThePlayer1_camera.enabled = false;
+        ThePlayer2_camera.enabled = false;
+        ThePlayer3_camera.enabled = false;
+        ThePlayer4_camera.enabled = false;
+      //  Debug.Log("Disabled all Cameras");
 
     }
     public void Camera_controls()
@@ -210,33 +219,39 @@ public class StateManger : MonoBehaviour
         switch (CurrentPlayerId)
         {
             case 0:
+                Camera ThePlayer1_camera = GameObject.Find("Player1_Follow_Camera(Clone)").GetComponent<Camera>();
                 disableAllCamera();
-                Player1_follow_Camera.enabled = true;
-                Player1_follow_Camera_Object.SetActive(true);
-                Player1_follow_Camera.depth = 1;
-                Debug.Log("set camera1");
+                ThePlayer1_camera.enabled = true;
+           //   Player1_follow_Camera_Object.SetActive(true);
+             // Player1_follow_Camera.depth = 1;
+             //   Debug.Log("set camera1");
+                
 
                 break;
             case 1:
+                Camera ThePlayer2_camera = GameObject.Find("Player2_Follow_Camera(Clone)").GetComponent<Camera>();
                 disableAllCamera();
-               Player2_follow_Camera.enabled = true;
-               Player2_follow_Camera_Object.SetActive(true);
-                Player2_follow_Camera.depth = 1;
-                Debug.Log("set camera2");
+                ThePlayer2_camera.enabled = true;
+            // Player2_follow_Camera_Object.SetActive(true);
+             // Player2_follow_Camera.depth = 1;
+             //   Debug.Log("set camera2");
                 break;
             case 2:
+                Camera ThePlayer3_camera = GameObject.Find("Player3_Follow_Camera(Clone)").GetComponent<Camera>();
                 disableAllCamera();
-    //            Player3_follow_Camera.enabled = true;
+                ThePlayer3_camera.enabled = true;
      //           Player3_follow_Camera_Object.SetActive(true);
-                Debug.Log("set camera3");
+             //   Debug.Log("set camera3");
 
                 break;
             case 3:
+                Camera ThePlayer4_camera = GameObject.Find("Player4_Follow_Camera(Clone)").GetComponent<Camera>();
                 disableAllCamera();
-    //            Player4_follow_Camera.enabled = true;
-    //            Player4_follow_Camera_Object.SetActive(true);
-     //           Debug.Log("set camera4");
+                ThePlayer4_camera.enabled = true;
+                //            Player4_follow_Camera_Object.SetActive(true);
+                //           Debug.Log("set camera4");
                 break;
         }
     }
+    
 }
