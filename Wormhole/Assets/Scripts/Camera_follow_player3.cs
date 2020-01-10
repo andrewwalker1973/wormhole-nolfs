@@ -6,7 +6,7 @@ public class Camera_follow_player3 : MonoBehaviour
 {
     Transform target3;
     GameObject PLayer3_ship;
-    public float smoothspeed = 0.125f;
+    public float smoothspeed = 4f;
     public Vector3 offset;
 
     Player ThePlayer;

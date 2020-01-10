@@ -1251,6 +1251,11 @@ PrefabInstance:
       propertyPath: IsScoringSpace
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3797151724029737519, guid: fed07fdeba14f614c94d6c2d735b223f,
+        type: 3}
+      propertyPath: IsleftTurnSpace
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7407321643086691386, guid: fed07fdeba14f614c94d6c2d735b223f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1436,6 +1441,11 @@ PrefabInstance:
       propertyPath: IsScoringSpace
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3797151724029737519, guid: fed07fdeba14f614c94d6c2d735b223f,
+        type: 3}
+      propertyPath: IsleftTurnSpace
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7407321643086691386, guid: fed07fdeba14f614c94d6c2d735b223f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1563,6 +1573,7 @@ MonoBehaviour:
   PlayerShips: {fileID: 0}
   IsScoringSpace: 1
   IsrightTurnSpace: 0
+  IsleftTurnSpace: 0
 --- !u!4 &357230451 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9200987514293831499, guid: 8420fc1506ee29245826dc62fb3ed1dc,
@@ -4115,6 +4126,11 @@ PrefabInstance:
       propertyPath: NextTiles.Array.data[0]
       value: 
       objectReference: {fileID: 1536472269}
+    - target: {fileID: 3797151724029737519, guid: fed07fdeba14f614c94d6c2d735b223f,
+        type: 3}
+      propertyPath: IsrightTurnSpace
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7407321643086691386, guid: fed07fdeba14f614c94d6c2d735b223f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5521,6 +5537,7 @@ MonoBehaviour:
   PlayerShips: {fileID: 0}
   IsScoringSpace: 0
   IsrightTurnSpace: 0
+  IsleftTurnSpace: 0
 --- !u!1001 &1213296534
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5806,6 +5823,11 @@ PrefabInstance:
         type: 3}
       propertyPath: IsScoringSpace
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3797151724029737519, guid: fed07fdeba14f614c94d6c2d735b223f,
+        type: 3}
+      propertyPath: IsrightTurnSpace
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7407321643086691386, guid: fed07fdeba14f614c94d6c2d735b223f,
         type: 3}
@@ -6159,21 +6181,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300000, guid: f24986c5005449f4e96046f5edb103a7, type: 3}
---- !u!114 &1309003729
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1309003727}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0533a5310359c0f44a82b5f208bda792, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startingTile: {fileID: 878362614}
-  PlayerId: 0
-  moveQueueIndex: 0
 --- !u!1001 &1312996502
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9353,6 +9360,7 @@ MonoBehaviour:
   PlayerShips: {fileID: 0}
   IsScoringSpace: 1
   IsrightTurnSpace: 0
+  IsleftTurnSpace: 0
 --- !u!1 &1624583245
 GameObject:
   m_ObjectHideFlags: 0
@@ -11470,6 +11478,7 @@ MonoBehaviour:
   PlayerShips: {fileID: 0}
   IsScoringSpace: 1
   IsrightTurnSpace: 0
+  IsleftTurnSpace: 0
 --- !u!1 &1944461363
 GameObject:
   m_ObjectHideFlags: 0
@@ -11518,6 +11527,7 @@ MonoBehaviour:
   PlayerShips: {fileID: 0}
   IsScoringSpace: 1
   IsrightTurnSpace: 0
+  IsleftTurnSpace: 0
 --- !u!1001 &1945455939
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12234,6 +12244,11 @@ PrefabInstance:
       propertyPath: IsScoringSpace
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3797151724029737519, guid: fed07fdeba14f614c94d6c2d735b223f,
+        type: 3}
+      propertyPath: IsrightTurnSpace
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7407321643086691386, guid: fed07fdeba14f614c94d6c2d735b223f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12438,6 +12453,7 @@ MonoBehaviour:
   PlayerShips: {fileID: 0}
   IsScoringSpace: 0
   IsrightTurnSpace: 0
+  IsleftTurnSpace: 0
 --- !u!1001 &3396187831249607452
 PrefabInstance:
   m_ObjectHideFlags: 0

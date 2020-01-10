@@ -18,7 +18,8 @@ public class Tile : MonoBehaviour
     public PlayerShips PlayerShips;
     public bool IsScoringSpace;
     public bool IsrightTurnSpace;
- 
+    public bool IsleftTurnSpace;
+
 
 
     // Update is called once per frame

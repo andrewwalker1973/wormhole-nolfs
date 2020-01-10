@@ -96,5 +96,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0756612688cbe32438fe956ab644e954, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smoothspeed: 0.125
+  smoothspeed: 4
   offset: {x: 100, y: 70, z: 0}

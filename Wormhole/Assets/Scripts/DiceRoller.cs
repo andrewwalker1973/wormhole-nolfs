@@ -128,7 +128,7 @@ public class DiceRoller : MonoBehaviour
         }
 
         ///  alter this to set dice value for testing   
-     //   theStateManager.DiceTotal = 3;
+     //   theStateManager.DiceTotal = 31;
         theStateManager.IsDoneRolling = true;
         theStateManager.CheckLegalMoves();
     }

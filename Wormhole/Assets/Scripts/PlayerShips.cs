@@ -53,16 +53,7 @@ public class PlayerShips : MonoBehaviour
 
         ThePlayers = GameObject.FindObjectOfType<Player>();
         theTiles = GameObject.FindObjectOfType<Tile>();
-        /*    theCameraController = GameObject.FindObjectOfType<CameraController>();
-            //    theDiceRoller = GameObject.FindObjectOfType<DiceRoller>();
-            */
-        /*   theStateManager.disableAllCamera();
-           theStateManager.Player1_follow_Camera.enabled = true;
-           theStateManager.Player1_follow_Camera_Object.SetActive(true);
-           theStateManager.Player1_follow_Camera.depth = 1;
-           */
-
-
+        
     }
 
 
@@ -135,18 +126,23 @@ public class PlayerShips : MonoBehaviour
                 //TODO something for end game winner, maybe move to winner area ?
                 SetNewTargetPosition(this.transform.position + Vector3.right * 1f);
 
-            /*    //Try tunr the charater
-                if (theTiles.IsrightTurnSpace == true)
-                {
-                    transform.Rotate(0, 90, 0);
-                    Debug.Log("Turning right");
-                }
-                // --------------------
-                */
-
-            }
+                       }
             else
             {
+              //  Debug.Log("nextTile  " + nextTile);
+                if (nextTile.IsrightTurnSpace == true)
+                {
+                   // Debug.Log("must turn here");
+                  //  Debug.Log("Rotating by 90 degree to go UP");
+                    transform.Rotate(0, 90, 0);
+                }
+
+                if (nextTile.IsleftTurnSpace == true)
+                {
+                 //   Debug.Log("must turn here");
+                  //  Debug.Log("Rotating by 90 degree to go UP");
+                    transform.Rotate(0, -90, 0);
+                }
 
                 //    Debug.Log("Crossing Tile10   " + this.moveQueueIndex);
                 //  Debug.Log("Current Tile " + currentTile);
@@ -171,7 +167,7 @@ public class PlayerShips : MonoBehaviour
                     Debug.Log("Turning right in player script");
                 }
                 */
-                
+
 
 
 
@@ -200,12 +196,29 @@ public class PlayerShips : MonoBehaviour
             Debug.Log("Done animating.");
             this.isAnimating = false;
             theStateManager.IsDoneAnimating = true;
-         //   theDiceRoller.TurnEnded();
+            //   theDiceRoller.TurnEnded();
+
+          //  StartCoroutine(ExampleCoroutine());  /// try wait for 5 sec
+ 
 
 
 
         }
     }
+
+
+  /*   IEnumerator ExampleCoroutine()
+    {
+        //Print the time of when the function is first called.
+        Debug.Log("Started Coroutine at timestamp : " + Time.time);
+
+        //yield on a new YieldInstruction that waits for 5 seconds.
+        yield return new WaitForSeconds(5);
+
+        //After we have waited 5 seconds print the time again.
+        Debug.Log("Finished Coroutine at timestamp : " + Time.time);
+    }
+    */
 
     void SetNewTargetPosition(Vector3 pos)
     {

@@ -7,34 +7,35 @@ using UnityEngine;
 public class AIPlayer
 {
 
+    StateManger theStateManager;    // create access to statmanger vars
+    DiceRoller TheDiceRoller;        // create access to DiceRoller vars
 
-    StateManger statemanger;
+
 
     public AIPlayer()
     {
-        statemanger = GameObject.FindObjectOfType<StateManger>();
+        theStateManager = GameObject.FindObjectOfType<StateManger>();   // create access to statmanger vars
+        TheDiceRoller = GameObject.FindObjectOfType<DiceRoller>();      // create access to DiceRoller vars
+
+
+
 
     }
     
    virtual public void  DoAI()
     {
-       
-
-        if (statemanger.IsDoneRolling == false)
+        if (theStateManager.IsDoneRolling == false)
         {
-            // we need to roll the dice
-            
-            DoRoll();
-
+            // we need to roll the dice            
+            DoRoll();          
             return;
         }
 
-        if (statemanger.IsDoneClicking == false)
+        if (theStateManager.IsDoneClicking == false)
         {
-
-            // 
+           
             // we have a die roll but still need to pick ship and move
-            DoClick();
+            DoClick();        
             return;
 
         }
@@ -42,67 +43,73 @@ public class AIPlayer
 
     virtual protected void DoRoll()
     {
-        // roll without clicking the button
-         GameObject.FindObjectOfType<DiceRoller>().RollTheDice();       // find the script diceroller and run the function "rollthedice
+        // roll without clicking the button      
+        GameObject.FindObjectOfType<DiceRoller>().RollTheDice();       // find the script diceroller and run the function "rollthedice
         
     }
 
     virtual protected void DoClick()
     {
-        // Pick a ship to move and then click it
-
-
-        
+        // Pick a stone to move, then "click" it.
+      
         PlayerShips[] legalStones = GetLegalMoves();
 
         if (legalStones == null || legalStones.Length == 0)
         {
-            // we have no legal moves, how did we get here
-            return; 
+            // We have no legal moves.  How did we get here?
+            // We might still be in a delayed coroutine somewhere. Let's not freak out.
+            return;
         }
 
-        // basic AI Picks a legal move at random
-        PlayerShips PickedShip = legalStones[Random.Range(0, legalStones.Length)];
+        // BasicAI simply picks a legal move at random
+
+        PlayerShips pickedStone = PickStoneToMove(legalStones);
+
+           pickedStone.MoveMe();            // run the moveme function in playerships script
+       
+    }
 
 
-        // Try slow the AI down when all 4 are AI
-      
-        PickedShip.MoveMe();
 
+
+virtual protected PlayerShips PickStoneToMove(PlayerShips[] legalStones)
+{
+        
+        return legalStones[Random.Range(0, 0)];
+        
 
     }
 
 
-    protected PlayerShips[] GetLegalMoves()
+
+/// Returns a list of stones that can be legally moved
+
+protected PlayerShips[] GetLegalMoves()
+{
+     
+       List<PlayerShips> legalStones = new List<PlayerShips>();
+     
+        if (theStateManager.DiceTotal == 0)   // make sure we dont roll a 0
     {
-
-        List<PlayerShips> legalStones = new List<PlayerShips>();
-        
-        // if we roll a 0 we have no legal moves
-        if (statemanger.DiceTotal == 0)
-        {
-           return legalStones.ToArray();
-
-        }
-        //loop through all the player stones
-
-        PlayerShips[] pss = GameObject.FindObjectsOfType<PlayerShips>();
-        foreach ( PlayerShips ps in pss)
-        {
-            if (ps.PlayerId == statemanger.CurrentPlayerId)
-            {
-                if (ps.CanLegallyMoveAhead(statemanger.DiceTotal))
-                {
-                    legalStones.Add(ps);
-                }
-            }
-
-        //Highlight the ones that can be legal moved
-        // if no logal moves wait a second then move to next player with message
-
-        
+        return legalStones.ToArray();
     }
 
+    // Loop through all of a player's stones
+    PlayerShips[] pss = GameObject.FindObjectsOfType<PlayerShips>();
+
+        foreach (PlayerShips ps in pss)             //check on every ship found to see if it can move
+    {
+        if (ps.PlayerId == theStateManager.CurrentPlayerId)
+        {
+            if (ps.CanLegallyMoveAhead(theStateManager.DiceTotal))  // check if ship can move based on dice total display
+            {
+
+                    legalStones.Add(ps);   // send back values to array
+            }
+        }
+    }
+       
         return legalStones.ToArray();
 }
+
 }
