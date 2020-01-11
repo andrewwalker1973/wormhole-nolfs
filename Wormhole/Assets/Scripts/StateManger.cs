@@ -10,6 +10,7 @@ public class StateManger : MonoBehaviour
         ThePlayers = GameObject.FindObjectOfType<Player>();
        ThePlayerships = GameObject.FindObjectOfType<PlayerShips>();
         TheDiceRoller = GameObject.FindObjectOfType<DiceRoller>();
+      //  theChanceCards = GameObject.FindObjectOfType<ChanceCards>();
         Camera ThePlayer1_camera = GameObject.Find("Player1_Follow_Camera(Clone)").GetComponent<Camera>();
         Camera ThePlayer2_camera = GameObject.Find("Player2_Follow_Camera(Clone)").GetComponent<Camera>();
         Camera ThePlayer3_camera = GameObject.Find("Player3_Follow_Camera(Clone)").GetComponent<Camera>();
@@ -21,19 +22,33 @@ public class StateManger : MonoBehaviour
 
         
         //Code Added to force the required players
-       ThePlayers.player1_hum_comp = 1;
-        ThePlayers.player2_hum_comp = 1;
-       ThePlayers.player3_hum_comp = 1;
-        ThePlayers.player4_hum_comp = 1;
+       ThePlayers.player1_hum_comp = 0;
+        ThePlayers.player2_hum_comp = 0;
+       ThePlayers.player3_hum_comp = 0;
+        ThePlayers.player4_hum_comp = 0;
 
 
         setUpPlayers();   // run the function to determine who is human or computer
+
+        /*    string[] ChanceCards =
+            {
+                 "Roll Again",
+                 "Skip Turn",
+                 "Skip Turn",
+                 "Not Used"
+             };
+             */
+
+        
+        Debug.Log("ChanceCards Start " + ChanceCards1.Length);
+        
 
     }
 
 
     Player ThePlayers;                  // gain access to player scrip vars
     DiceRoller TheDiceRoller;           // gain access to diceroller scrip vars
+   // ChanceCards theChanceCards;
 
     public int NumberOfPlayers = 4; //max number of players playing
     public int CurrentPlayerId = 0;  //set current playerid = 0 Ie - Player1
@@ -64,6 +79,18 @@ public class StateManger : MonoBehaviour
     public Camera ThePlayer3_camera;
     public Camera ThePlayer4_camera;
 
+
+    public string[] ChanceCards1 =
+   {
+        "Roll Again",
+        "Skip Turn"
+        
+
+    };
+
+    //Setup the randomizer for the array
+    Random rand = new Random();
+    
 
     // Function to setup the players as human or computer
     void setUpPlayers()
@@ -223,7 +250,38 @@ public class StateManger : MonoBehaviour
 
     }
 
+    public void RollAgain()
+    {
 
+        Debug.Log("Roll Again");
+        //start of a players turn
+        IsDoneRolling = false;
+        IsDoneClicking = false;
+        IsDoneAnimating = false;
+    }
+
+
+    public void ChanceCard()
+    {
+    
+        Debug.Log("cHANCEcARD");
+        Debug.Log("ChanceCards Start function " + ChanceCards1.Length);
+        string chanceCards = ChanceCards1[Random.Range(0, ChanceCards1.Length)];
+        Debug.Log("ChanceCards.Length" + ChanceCards1.Length);
+        Debug.Log("chanceCards selected" + chanceCards);
+        if (chanceCards == "Roll Again")
+        {
+            Debug.Log("rolling again");
+            RollAgain();
+        }
+        //Skip Turn
+        if (chanceCards == "Skip Turn")
+        {
+            Debug.Log("Skipping next turn");
+            
+        }
+
+    }
     //Function to set the right follow camera to the righ player
     public void Camera_controls()
     {

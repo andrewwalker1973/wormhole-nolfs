@@ -1574,6 +1574,8 @@ MonoBehaviour:
   IsScoringSpace: 1
   IsrightTurnSpace: 0
   IsleftTurnSpace: 0
+  IsRollAgain: 0
+  ChanceCard: 0
 --- !u!4 &357230451 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9200987514293831499, guid: 8420fc1506ee29245826dc62fb3ed1dc,
@@ -2458,6 +2460,12 @@ MonoBehaviour:
   ThePlayer2_camera: {fileID: 0}
   ThePlayer3_camera: {fileID: 0}
   ThePlayer4_camera: {fileID: 0}
+  ChanceCards1:
+  - Roll Again
+  - Skip Turn
+  - Roll Again
+  - Skip Turn
+  - Skip Turn
 --- !u!114 &611670175 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3797151724029737519, guid: fed07fdeba14f614c94d6c2d735b223f,
@@ -5538,6 +5546,8 @@ MonoBehaviour:
   IsScoringSpace: 0
   IsrightTurnSpace: 0
   IsleftTurnSpace: 0
+  IsRollAgain: 0
+  ChanceCard: 1
 --- !u!1001 &1213296534
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9361,6 +9371,8 @@ MonoBehaviour:
   IsScoringSpace: 1
   IsrightTurnSpace: 0
   IsleftTurnSpace: 0
+  IsRollAgain: 0
+  ChanceCard: 0
 --- !u!1 &1624583245
 GameObject:
   m_ObjectHideFlags: 0
@@ -9780,6 +9792,12 @@ MonoBehaviour:
     type: 3}
   ThePlayer4_camera: {fileID: 885875427835807451, guid: 8b130fced75f07444927c2c450370521,
     type: 3}
+  ChanceCards1:
+  - Roll Again
+  - Skip Turn
+  - Roll Again
+  - Skip Turn
+  - Skip Turn
 --- !u!4 &1693336085
 Transform:
   m_ObjectHideFlags: 0
@@ -11479,6 +11497,8 @@ MonoBehaviour:
   IsScoringSpace: 1
   IsrightTurnSpace: 0
   IsleftTurnSpace: 0
+  IsRollAgain: 0
+  ChanceCard: 0
 --- !u!1 &1944461363
 GameObject:
   m_ObjectHideFlags: 0
@@ -11528,6 +11548,8 @@ MonoBehaviour:
   IsScoringSpace: 1
   IsrightTurnSpace: 0
   IsleftTurnSpace: 0
+  IsRollAgain: 0
+  ChanceCard: 0
 --- !u!1001 &1945455939
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12454,6 +12476,8 @@ MonoBehaviour:
   IsScoringSpace: 0
   IsrightTurnSpace: 0
   IsleftTurnSpace: 0
+  IsRollAgain: 0
+  ChanceCard: 0
 --- !u!1001 &3396187831249607452
 PrefabInstance:
   m_ObjectHideFlags: 0

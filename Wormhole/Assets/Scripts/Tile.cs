@@ -19,6 +19,8 @@ public class Tile : MonoBehaviour
     public bool IsScoringSpace;
     public bool IsrightTurnSpace;
     public bool IsleftTurnSpace;
+    public bool IsRollAgain;
+    public bool ChanceCard;
 
 
 

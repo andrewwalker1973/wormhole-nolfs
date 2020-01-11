@@ -7,6 +7,8 @@ public class PlayerShips : MonoBehaviour
 
 
     StateManger theStateManager;
+  //  ChanceCards theChanceCards;
+
     //CameraController theCameraController;
 
     //added in for smooth move
@@ -48,6 +50,7 @@ public class PlayerShips : MonoBehaviour
     void Start()
     {
         theStateManager = GameObject.FindObjectOfType<StateManger>();
+      //  theChanceCards = GameObject.FindObjectOfType<ChanceCards>();
 
         targetPosition = this.transform.position;
 
@@ -132,45 +135,19 @@ public class PlayerShips : MonoBehaviour
               //  Debug.Log("nextTile  " + nextTile);
                 if (nextTile.IsrightTurnSpace == true)
                 {
-                   // Debug.Log("must turn here");
-                  //  Debug.Log("Rotating by 90 degree to go UP");
+                   
+                  //  Rotating by 90 degree to go UP
                     transform.Rotate(0, 90, 0);
                 }
 
                 if (nextTile.IsleftTurnSpace == true)
                 {
-                 //   Debug.Log("must turn here");
-                  //  Debug.Log("Rotating by 90 degree to go UP");
+                 
+                  //  Rotating by -90 degree to go Left");
                     transform.Rotate(0, -90, 0);
                 }
 
-                //    Debug.Log("Crossing Tile10   " + this.moveQueueIndex);
-                //  Debug.Log("Current Tile " + currentTile);
-                //  Debug.Log("Next Tile " + nextTile);
-                /*    if (this.moveQueueIndex == 10)
-                    {
-                 //       Debug.Log("Rotating by 90 degree to go UP");
-                        transform.Rotate(0, 90, 0);
-                    }
-
-
-                  if (this.moveQueueIndex == 11)
-                  {
-               //     Debug.Log("Rotating by 90 degree to go UP");
-                      transform.Rotate(0, 90, 0);
-                  }
-                 
-                Debug.Log("Turn right ?" + theTiles.TurnRight);
-                if (theTiles.TurnRight == true)
-                {
-                    transform.Rotate(0, 90, 0);
-                    Debug.Log("Turning right in player script");
-                }
-                */
-
-
-
-
+                
                 SetNewTargetPosition(nextTile.transform.position);
                 // try to face char in directin on travel
             /*    float moveHorizontal = Input.GetAxisRaw("Horizontal");
@@ -198,27 +175,22 @@ public class PlayerShips : MonoBehaviour
             theStateManager.IsDoneAnimating = true;
             //   theDiceRoller.TurnEnded();
 
-          //  StartCoroutine(ExampleCoroutine());  /// try wait for 5 sec
- 
+        if (currentTile !=null && currentTile.IsRollAgain)
+            {
+                theStateManager.RollAgain();
+            }
 
+            if (currentTile != null && currentTile.ChanceCard)
+            {
+                theStateManager.ChanceCard();
+            }
 
 
         }
     }
 
 
-  /*   IEnumerator ExampleCoroutine()
-    {
-        //Print the time of when the function is first called.
-        Debug.Log("Started Coroutine at timestamp : " + Time.time);
-
-        //yield on a new YieldInstruction that waits for 5 seconds.
-        yield return new WaitForSeconds(5);
-
-        //After we have waited 5 seconds print the time again.
-        Debug.Log("Finished Coroutine at timestamp : " + Time.time);
-    }
-    */
+ 
 
     void SetNewTargetPosition(Vector3 pos)
     {
@@ -245,30 +217,7 @@ public class PlayerShips : MonoBehaviour
 
         }
 
-        // test to see if I can get the camera to move to different ships at player turn
-
-     /* if (this.PlayerId == 0)
-        {
-            // theCameraController.target = this.transform.name(Ship1};
-            theCameraController.target = GameObject.FindGameObjectWithTag("Player1").transform;
-        }
-        if (this.PlayerId == 1)
-        {
-            // theCameraController.target = this.transform.name(Ship1};
-            theCameraController.target = GameObject.FindGameObjectWithTag("Player2").transform;
-        }
-
-        if (this.PlayerId == 2)
-        {
-            // theCameraController.target = this.transform.name(Ship1};
-            theCameraController.target = GameObject.FindGameObjectWithTag("Player3").transform;
-        }
-        if (this.PlayerId == 3)
-        {
-            // theCameraController.target = this.transform.name(Ship1};
-            theCameraController.target = GameObject.FindGameObjectWithTag("Player4").transform;
-        }
-*/
+       
         if (theStateManager.IsDoneRolling == false)
         {
             //we cant move yet
@@ -472,16 +421,21 @@ if (finalTile == null)
         }
 
 
-   
+
 
         if (destinationTile.PlayerShips.PlayerId == this.PlayerId)
         {
             // we cant land on one of our stones
             return false;
 
+        }
             // if this is an enemy stone is it in a safe square ?
             // TODO Safe Squares ?
 
+        if (destinationTile.IsRollAgain == true)
+        {
+            return false;
+        }
             /*   // If it's an enemy stone, is it in a safe square?
           if (destinationTile.IsRollAgain == true)
           {
@@ -495,7 +449,7 @@ if (finalTile == null)
 
 
 
-        }
+       
 
         return true;
     }
