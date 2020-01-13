@@ -30,26 +30,14 @@ public class StateManger : MonoBehaviour
 
         setUpPlayers();   // run the function to determine who is human or computer
 
-        /*    string[] ChanceCards =
-            {
-                 "Roll Again",
-                 "Skip Turn",
-                 "Skip Turn",
-                 "Not Used"
-             };
-             */
-
-        
-        Debug.Log("ChanceCards Start " + ChanceCards1.Length);
-        
+              
 
     }
 
 
     Player ThePlayers;                  // gain access to player scrip vars
     DiceRoller TheDiceRoller;           // gain access to diceroller scrip vars
-   // ChanceCards theChanceCards;
-
+   
     public int NumberOfPlayers = 4; //max number of players playing
     public int CurrentPlayerId = 0;  //set current playerid = 0 Ie - Player1
     public int DiceTotal;           // Total all dice rolls
@@ -61,10 +49,25 @@ public class StateManger : MonoBehaviour
     public bool IsDoneRolling = false;  // is done rolling false - have we finshed rollling
     public bool IsDoneClicking = false; //have we finished clicking
     public bool IsDoneAnimating = false; // Have we finshed moving
+    public bool IsDoneRERoll = false;  // Variable to monitor the reroll function
 
-    public GameObject NoLegalMovesPopup;   //game object for test on screen
- 
+    // below to manage the skip roll process 
+    public bool IsSkipRoll1 = false;  // variable for player1 skip roll
+    public bool IsSkipRoll2 = false;    // variable for player2 skip roll
+    public bool IsSkipRoll3 = false;    // variable for player3 skip roll
+    public bool IsSkipRoll4 = false;    // variable for player4 skip roll
 
+    public int player1_skipping = 0;    // is player 1 skipping  0 = no 1 = yes
+    public int player2_skipping = 0;    // is player 2 skipping  0 = no 1 = yes
+    public int player3_skipping = 0;    // is player 3 skipping  0 = no 1 = yes
+    public int player4_skipping = 0;    // is player 4 skipping  0 = no 1 = yes
+
+
+
+    public GameObject NoLegalMovesPopup;   //game object for no legal moves on screen
+    public GameObject UIRollAgainPopup;   //game object for roll again on screen
+    public GameObject UISkipTurnMessage;   //game object for skip turn on screen
+    
     PlayerShips ThePlayerships;         // gain access to the playerships vars
 
 
@@ -79,13 +82,11 @@ public class StateManger : MonoBehaviour
     public Camera ThePlayer3_camera;
     public Camera ThePlayer4_camera;
 
-
+    //Create the string array for the chance card system
     public string[] ChanceCards1 =
    {
-        "Roll Again",
-        "Skip Turn"
-        
-
+        "Roll Again",       // variable1  roll again
+        "Skip Turn"     // Variable 2 skip turn        
     };
 
     //Setup the randomizer for the array
@@ -110,8 +111,6 @@ public class StateManger : MonoBehaviour
         }
 
 
-
-
         if (ThePlayers.player2_hum_comp == 0)
         {
             PlayerAIs[1] = null;
@@ -121,8 +120,6 @@ public class StateManger : MonoBehaviour
         {
             PlayerAIs[1] = new AIPlayer();
         }
-
-
 
 
         if (ThePlayers.player3_hum_comp == 0)
@@ -136,8 +133,6 @@ public class StateManger : MonoBehaviour
         }
 
 
-
-
         if (ThePlayers.player4_hum_comp == 0)
         {
             PlayerAIs[3] = null;
@@ -147,8 +142,6 @@ public class StateManger : MonoBehaviour
         {
             PlayerAIs[3] = new AIPlayer();
         }
-
-
 
     }
 
@@ -162,45 +155,120 @@ public class StateManger : MonoBehaviour
     }
 
 
-   
-
     // fucntion for new turn of player
     public void NewTurn()
     {
-  
-        //start of a players turn
-        IsDoneRolling = false;
-        IsDoneClicking = false;
-        IsDoneAnimating = false;
+      
+
+            //start of a players turn
+            IsDoneRolling = false;
+            IsDoneClicking = false;
+            IsDoneAnimating = false;
+
+            if (IsDoneRERoll == true)
+            {
+                UIRollAgainPopup.SetActive(false);
+                IsDoneRERoll = false;
+            }
+
+           
 
 
-       
-    // TODO move to next player
-    CurrentPlayerId = (CurrentPlayerId + 1) % NumberOfPlayers;   // rotate through the players
-        Camera_controls();      // Funtion to set the follow camera to follow playing player
+            // TODO move to next player
+            CurrentPlayerId = (CurrentPlayerId + 1) % NumberOfPlayers;   // rotate through the players
+                                                                         //  Debug.Log("at increment of player ID");
 
 
+          
+          Camera_controls();      // Funtion to set the follow camera to follow playing player
+        
+        // Check if the Player is skipping a Turn
+
+        if ((IsSkipRoll1 == true ) || (IsSkipRoll2 == true) || (IsSkipRoll3 == true) || (IsSkipRoll4 == true)) // if any are equal to true then player is skipping the turn
+        {
+            check_skip_roll();      // run the function to check and run the skip function
+        }
+
+    }
+
+
+    // Function to check if player is skipping the turn and then skip the turn
+   void check_skip_roll()
+    {
+
+       // TODO Find a way to show the player is skipping the turn
+        if (CurrentPlayerId == 0 && player1_skipping == 1)  // if player id and skip id match then skip the turn
+        {
+           // UISkipTurnMessage.SetActive(true);
+            SkipTurn();                 // skip the turn
+            player1_skipping = 0;       // set back to no skip setting
+            IsSkipRoll1 = false;        // set back to no skip setting
+           
+          //  UISkipTurnMessage.SetActive(false);
+        }
+
+        if (CurrentPlayerId == 1 && player2_skipping == 1)
+        {
+           // UISkipTurnMessage.SetActive(true);
+            SkipTurn();
+            player2_skipping = 0;
+            IsSkipRoll2 = false;
+            
+         //   UISkipTurnMessage.SetActive(false);
+        }
+
+        if (CurrentPlayerId == 2 && player3_skipping == 1)
+        {
+           // UISkipTurnMessage.SetActive(true);
+            SkipTurn();
+            player3_skipping = 0;
+            IsSkipRoll3 = false;
+            
+          //  UISkipTurnMessage.SetActive(false);
+        }
+
+        if (CurrentPlayerId == 3 && player4_skipping == 1)
+        {
+          //  UISkipTurnMessage.SetActive(true);
+            SkipTurn();
+            player4_skipping = 0;
+            IsSkipRoll4 = false;
+            
+          //  UISkipTurnMessage.SetActive(false);
+        }
+
+    }
+
+    // fucntion to skip the player turn
+    void SkipTurn()
+    {
+       // set all the varibale equal to values when turn is done
+        IsDoneRolling = true;
+        IsDoneClicking = true;
+        IsDoneAnimating = true;
+      
     }
 
     // Update is called once per frame
     void Update()
-    {          
+    {
         // is the tunrn done ?
         if (IsDoneRolling && IsDoneClicking && IsDoneAnimating)
         {
-         //   Debug.Log ("Turn is done");
-            NewTurn();
+
+            NewTurn();          // run the new turn fucntion
             return;
         }
 
-        if (PlayerAIs[CurrentPlayerId] != null)   // Process to run the AI script for AI players
-        {
-          //  Debug.Log("CurrentPlayerId for AI" + CurrentPlayerId);
-            PlayerAIs[CurrentPlayerId].DoAI();
-        }
+
+            if (PlayerAIs[CurrentPlayerId] != null)   // Process to run the AI script for AI players
+            {
+               
+                PlayerAIs[CurrentPlayerId].DoAI();
+            }
+        
+
     }
-
-
 
 
     // Function to check that the move is legal
@@ -250,47 +318,92 @@ public class StateManger : MonoBehaviour
 
     }
 
+
+    // funciton to make the system wait a few seconds -- TODO why does this not work
+    public IEnumerator Wait(float delayInSecs)
+    {
+        yield return new WaitForSeconds(delayInSecs);
+    }
+
+
+    //fucntion for the roll again fucntion
     public void RollAgain()
     {
 
-        Debug.Log("Roll Again");
+        // Reset all the variables back to begin of turn setting
         //start of a players turn
         IsDoneRolling = false;
         IsDoneClicking = false;
         IsDoneAnimating = false;
+        IsDoneRERoll = true;
     }
 
 
+    // Function for the Chnace card system
     public void ChanceCard()
     {
     
-        Debug.Log("cHANCEcARD");
-        Debug.Log("ChanceCards Start function " + ChanceCards1.Length);
+            // randomize through the chance string and select a value
         string chanceCards = ChanceCards1[Random.Range(0, ChanceCards1.Length)];
-        Debug.Log("ChanceCards.Length" + ChanceCards1.Length);
-        Debug.Log("chanceCards selected" + chanceCards);
-        if (chanceCards == "Roll Again")
+     
+        // check what the value is and perform the fucntioin based on the string output
+        if (chanceCards == "Roll Again")        // roll again chance selected
         {
-            Debug.Log("rolling again");
-            RollAgain();
+                     
+            UIRollAgainPopup.SetActive(true);       // dispaly roll again on UI
+            IsDoneRERoll = true;            // Set the value for roll gain to be true so that the roll again functon willreset values
+            
+            RollAgain();                // run the roll again fucntion
+            
         }
         //Skip Turn
-        if (chanceCards == "Skip Turn")
+        if (chanceCards == "Skip Turn")         // Chance cards selected
         {
-            Debug.Log("Skipping next turn");
-            
+
+            // based on the current player ID set the variables to skipp the next turn
+            switch (CurrentPlayerId)
+            {
+                case 0:         // player id  is 0
+
+                 
+                    player1_skipping = 1;       // set to enable skip turn
+                    IsSkipRoll1 = true;         // set to enable skip turn
+                    break;
+                case 1:     // Player id = 1
+
+                    
+                    player2_skipping = 1;
+                    IsSkipRoll2 = true;
+                    break;
+                case 2:
+
+                    
+                    player3_skipping = 1;
+                    IsSkipRoll3 = true;
+                     break;
+                case 3:
+
+                    player4_skipping = 1;
+                    IsSkipRoll4 = true;
+                    break;
+                
+            }
+
+
         }
 
     }
+
+
     //Function to set the right follow camera to the righ player
     public void Camera_controls()
     {
         switch (CurrentPlayerId)
         {
             case 0:
-                Camera ThePlayer1_camera = GameObject.Find("Player1_Follow_Camera(Clone)").GetComponent<Camera>();
-                disableAllCamera();
-                ThePlayer1_camera.enabled = true;
+                Camera ThePlayer1_camera = GameObject.Find("Player1_Follow_Camera(Clone)").GetComponent<Camera>();   //find the follow camera for player1
+                disableAllCamera();                 // disable all the cameras
+                ThePlayer1_camera.enabled = true;       // enable only player1 follow camera
                 break;
             case 1:
                 Camera ThePlayer2_camera = GameObject.Find("Player2_Follow_Camera(Clone)").GetComponent<Camera>();

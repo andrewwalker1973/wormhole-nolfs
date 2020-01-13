@@ -23,8 +23,9 @@ public class PlayerShips : MonoBehaviour
     Tile currentTile;
 
     public int PlayerId;
+    
 
- 
+
 
 
 
@@ -482,4 +483,57 @@ if (finalTile == null)
 
     */
     }
+
+ /*   int spacesToMoveBack =4;
+    // Try find a way to go backwards
+    Tile[] GetTilesbehind(int spacesToMoveBack)
+    {
+        if (spacesToMoveBack == 0)
+        {
+            return null;
+        }
+
+
+        // Where should we end up?
+        Tile[] listOfTiles = new Tile[spacesToMoveBack];
+        Tile finalTile = currentTile;
+
+
+        for (int i = spacesToMoveBack; i < 0; i--)
+       // for (int i = 0; i < spacesToMove; i++)
+        {
+            //  check if no tile? ie off board ?
+            if (finalTile == null)
+            {
+                finalTile = startingTile;
+            }
+            else
+            {
+
+                if (finalTile.NextTiles == null || finalTile.NextTiles.Length == 0)
+                {
+
+                    //we are overshooting the victory tile 
+                    // break and return the array which will have nulls at the end
+                    break;
+                }
+                else if (finalTile.NextTiles.Length > 1)
+                {
+                    // branch based on player ID
+                    finalTile = finalTile.NextTiles[PlayerId];
+                }
+                else
+                {
+                    finalTile = finalTile.NextTiles[0];
+                }
+
+
+            }
+            listOfTiles[i] = finalTile;
+        }
+
+        return listOfTiles;
+    }
+    */
+ 
 }
