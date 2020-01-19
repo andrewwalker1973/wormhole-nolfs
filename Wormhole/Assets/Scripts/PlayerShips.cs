@@ -7,7 +7,7 @@ public class PlayerShips : MonoBehaviour
 
 
     StateManger theStateManager;
-  //  ChanceCards theChanceCards;
+    //  ChanceCards theChanceCards;
 
     //CameraController theCameraController;
 
@@ -23,7 +23,7 @@ public class PlayerShips : MonoBehaviour
     Tile currentTile;
 
     public int PlayerId;
-    
+
 
 
 
@@ -35,7 +35,7 @@ public class PlayerShips : MonoBehaviour
 
     // added in to keep record of tiles to move across
     Tile[] moveQueue;
-   public  int moveQueueIndex;
+    public int moveQueueIndex;
 
     bool isAnimating = false;
 
@@ -51,18 +51,18 @@ public class PlayerShips : MonoBehaviour
     void Start()
     {
         theStateManager = GameObject.FindObjectOfType<StateManger>();
-      //  theChanceCards = GameObject.FindObjectOfType<ChanceCards>();
+        //  theChanceCards = GameObject.FindObjectOfType<ChanceCards>();
 
         targetPosition = this.transform.position;
 
         ThePlayers = GameObject.FindObjectOfType<Player>();
         theTiles = GameObject.FindObjectOfType<Tile>();
-        
+
     }
 
 
 
-    
+
 
 
 
@@ -79,7 +79,7 @@ public class PlayerShips : MonoBehaviour
             new Vector3(this.transform.position.x, targetPosition.y, this.transform.position.z),
             targetPosition)
             < smoothDistance)
-           {
+        {
 
             // reached the target how is the height
             if (moveQueue != null && moveQueueIndex == (moveQueue.Length) && this.transform.position.y > smoothDistance)
@@ -94,7 +94,7 @@ public class PlayerShips : MonoBehaviour
             {
                 //right position and rihht height, advance the queue
                 AdvancedMoveQueue();
-               
+
             }
 
         }
@@ -130,53 +130,53 @@ public class PlayerShips : MonoBehaviour
                 //TODO something for end game winner, maybe move to winner area ?
                 SetNewTargetPosition(this.transform.position + Vector3.right * 1f);
 
-                       }
+            }
             else
             {
-              //  Debug.Log("nextTile  " + nextTile);
+                //  Debug.Log("nextTile  " + nextTile);
                 if (nextTile.IsrightTurnSpace == true)
                 {
-                   
-                  //  Rotating by 90 degree to go UP
+
+                    //  Rotating by 90 degree to go UP
                     transform.Rotate(0, 90, 0);
                 }
 
                 if (nextTile.IsleftTurnSpace == true)
                 {
-                 
-                  //  Rotating by -90 degree to go Left");
+
+                    //  Rotating by -90 degree to go Left");
                     transform.Rotate(0, -90, 0);
                 }
 
-                
+
                 SetNewTargetPosition(nextTile.transform.position);
                 // try to face char in directin on travel
-            /*    float moveHorizontal = Input.GetAxisRaw("Horizontal");
-                float moveVertical = Input.GetAxisRaw("Vertical");
-                Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
-                transform.rotation = Quaternion.LookRotation(movement);
-                transform.Translate(movement * 1f * Time.deltaTime, Space.World);
-                
-                
+                /*    float moveHorizontal = Input.GetAxisRaw("Horizontal");
+                    float moveVertical = Input.GetAxisRaw("Vertical");
+                    Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+                    transform.rotation = Quaternion.LookRotation(movement);
+                    transform.Translate(movement * 1f * Time.deltaTime, Space.World);
 
 
-                // -----------------------
 
-                */
+
+                    // -----------------------
+
+                    */
                 moveQueueIndex++;
             }
-            
+
         }
         else
         {
-           
+
             //the movement queue is empty, we are done moving
             Debug.Log("Done animating.");
             this.isAnimating = false;
             theStateManager.IsDoneAnimating = true;
             //   theDiceRoller.TurnEnded();
 
-        if (currentTile !=null && currentTile.IsRollAgain)
+            if (currentTile != null && currentTile.IsRollAgain)
             {
                 theStateManager.RollAgain();
             }
@@ -191,7 +191,7 @@ public class PlayerShips : MonoBehaviour
     }
 
 
- 
+
 
     void SetNewTargetPosition(Vector3 pos)
     {
@@ -202,10 +202,25 @@ public class PlayerShips : MonoBehaviour
 
     void OnMouseUp()
     {
-         MoveMe();
+        MoveMe();
 
     }
 
+  /*  public void Chance_move_me()
+        {
+
+        if (theStateManager.CurrentPlayerId == 0)
+        {
+            Player ThePlayer1_Chance;
+            GameObject PLayer1_ship_chance;
+            ThePlayer1_Chance = GameObject.FindObjectOfType<Player>();
+            PLayer1_ship_chance = GameObject.Find("PLAYER1");
+            // PLayer1_ship_chance.transform;
+        }
+
+    }
+
+    */
 
     public void MoveMe()
     {
@@ -268,24 +283,7 @@ if (finalTile == null)
                 return;            
             }
 
-            /*    // If there is an enemy tile in our legal space, the we kick it out.
-                if (finalTile.PlayerStone != null)
-                {
-                    //finalTile.PlayerStone.ReturnToStorage();
-                    stoneToBop = finalTile.PlayerStone;
-                    stoneToBop.CurrentTile.PlayerStone = null;
-                    stoneToBop.CurrentTile = null;
-                }
-            */
-
-            /*    this.transform.SetParent(null); // Become Batman      remove from tile so other player can use it
-
-                // Remove ourselves from our old tile
-                if (CurrentTile != null)
-                {
-                    CurrentTile.PlayerStone = null;
-                }
-            */
+            
 
             // Even before the animation is done, set our current tile to the new tile
             currentTile = finalTile;
@@ -294,21 +292,10 @@ if (finalTile == null)
                 finalTile.PlayerShips = this;
             }
 
-/*    removed as I think he changed thios this to score better
-            if (finalTile.PlayerShips != null)
-            {
-                finalTile.PlayerShips.ReturnToStorage();
-            }
-            */
+
         }
 
-        /*  removed my code for his below
-          moveQueueIndex = 0;
-          currentTile = finalTile;
-          theStateManager.IsDoneClicking = true;
-          this.isAnimating = true;
-
-      */
+        
         moveQueueIndex = 0;
 
         theStateManager.IsDoneClicking = true;

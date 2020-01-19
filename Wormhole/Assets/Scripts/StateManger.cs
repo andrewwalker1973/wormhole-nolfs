@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class StateManger : MonoBehaviour
 {
@@ -10,7 +12,8 @@ public class StateManger : MonoBehaviour
         ThePlayers = GameObject.FindObjectOfType<Player>();
        ThePlayerships = GameObject.FindObjectOfType<PlayerShips>();
         TheDiceRoller = GameObject.FindObjectOfType<DiceRoller>();
-      //  theChanceCards = GameObject.FindObjectOfType<ChanceCards>();
+        TheChanceOptions = GameObject.FindObjectOfType<ChanceOptions>();
+       
         Camera ThePlayer1_camera = GameObject.Find("Player1_Follow_Camera(Clone)").GetComponent<Camera>();
         Camera ThePlayer2_camera = GameObject.Find("Player2_Follow_Camera(Clone)").GetComponent<Camera>();
         Camera ThePlayer3_camera = GameObject.Find("Player3_Follow_Camera(Clone)").GetComponent<Camera>();
@@ -30,7 +33,7 @@ public class StateManger : MonoBehaviour
 
         setUpPlayers();   // run the function to determine who is human or computer
 
-              
+      
 
     }
 
@@ -67,13 +70,21 @@ public class StateManger : MonoBehaviour
     public GameObject NoLegalMovesPopup;   //game object for no legal moves on screen
     public GameObject UIRollAgainPopup;   //game object for roll again on screen
     public GameObject UISkipTurnMessage;   //game object for skip turn on screen
-    
+    public GameObject UIMoveAhead3;   //game object for skip turn on screen
+    public GameObject UIMoveAhead6;   //game object for skip turn on screen
+
     PlayerShips ThePlayerships;         // gain access to the playerships vars
+    ChanceOptions TheChanceOptions;
 
+    public TextMeshProUGUI PlayerSKipMessage;
+   // public TextMeshProUGUI PlayerMoveAhead3;
+  //  public TextMeshProUGUI PlayerMoveAhead6;
 
+    Player ThePlayer;
+    Player ThePlayer1;
 
-        //Code to allow for Camera Selection 
-       public Camera MainCamera;            //define the main camera
+    //Code to allow for Camera Selection 
+    public Camera MainCamera;            //define the main camera
   
 
     //define the player follow cameras
@@ -187,6 +198,7 @@ public class StateManger : MonoBehaviour
         if ((IsSkipRoll1 == true ) || (IsSkipRoll2 == true) || (IsSkipRoll3 == true) || (IsSkipRoll4 == true)) // if any are equal to true then player is skipping the turn
         {
             check_skip_roll();      // run the function to check and run the skip function
+
         }
 
     }
@@ -199,42 +211,46 @@ public class StateManger : MonoBehaviour
        // TODO Find a way to show the player is skipping the turn
         if (CurrentPlayerId == 0 && player1_skipping == 1)  // if player id and skip id match then skip the turn
         {
-           // UISkipTurnMessage.SetActive(true);
+            
             SkipTurn();                 // skip the turn
             player1_skipping = 0;       // set back to no skip setting
             IsSkipRoll1 = false;        // set back to no skip setting
-           
+            
+
           //  UISkipTurnMessage.SetActive(false);
         }
 
         if (CurrentPlayerId == 1 && player2_skipping == 1)
         {
-           // UISkipTurnMessage.SetActive(true);
+            
             SkipTurn();
             player2_skipping = 0;
             IsSkipRoll2 = false;
             
-         //   UISkipTurnMessage.SetActive(false);
+
+            //   UISkipTurnMessage.SetActive(false);
         }
 
         if (CurrentPlayerId == 2 && player3_skipping == 1)
         {
-           // UISkipTurnMessage.SetActive(true);
+            
             SkipTurn();
             player3_skipping = 0;
             IsSkipRoll3 = false;
             
-          //  UISkipTurnMessage.SetActive(false);
+
+            //  UISkipTurnMessage.SetActive(false);
         }
 
         if (CurrentPlayerId == 3 && player4_skipping == 1)
         {
-          //  UISkipTurnMessage.SetActive(true);
+            
             SkipTurn();
             player4_skipping = 0;
             IsSkipRoll4 = false;
             
-          //  UISkipTurnMessage.SetActive(false);
+
+            //  UISkipTurnMessage.SetActive(false);
         }
 
     }
@@ -301,9 +317,70 @@ public class StateManger : MonoBehaviour
 
     }
 
+    IEnumerator SkipRollUICoroutine()
+    {
 
-    //function to disable all the cmaera to make sure the right camera is active as necessary
-   public void disableAllCamera()
+
+        //  GetComponent<TMP_Text>().text = "Hello";
+        //  UISkipTurnMessage.SetActive(true);
+        // wait one sec\
+        Debug.Log("Skipping tunr co-routine");
+        UISkipTurnMessage.SetActive(true);
+        yield return new WaitForSecondsRealtime(3);
+        UISkipTurnMessage.SetActive(false);
+        yield return new WaitForSecondsRealtime(3);
+
+    }
+
+    
+        IEnumerator MoveAhead3RollUICoroutine()
+    {
+
+
+        //  GetComponent<TMP_Text>().text = "Hello";
+       UIMoveAhead3.SetActive(true);
+       // PlayerMoveAhead3.enabled = true;
+        // wait one sec
+        yield return new WaitForSecondsRealtime(2);
+       UIMoveAhead3.SetActive(false);
+        yield return new WaitForSecondsRealtime(2);
+        DoChanceClick();
+         StartCoroutine(JustWaitUICoroutine());
+
+    }
+
+
+    IEnumerator MoveAhead6RollUICoroutine()
+    {
+
+
+        //  GetComponent<TMP_Text>().text = "Hello";
+     UIMoveAhead6.SetActive(true);
+    //    PlayerMoveAhead6.enabled = true;
+        // wait one sec
+        yield return new WaitForSecondsRealtime(2);
+        UIMoveAhead6.SetActive(false);
+        yield return new WaitForSecondsRealtime(2);
+        DoChanceClick();
+        StartCoroutine(JustWaitUICoroutine());
+
+    }
+    IEnumerator JustWaitUICoroutine()
+    {
+
+        // wait one sec
+        Debug.Log("Just Wait)");
+        
+        
+
+        yield return new WaitForSecondsRealtime(1);
+        
+
+
+    }
+
+
+        public void disableAllCamera()
     {
         Camera ThePlayer1_camera = GameObject.Find("Player1_Follow_Camera(Clone)").GetComponent<Camera>();
         Camera ThePlayer2_camera = GameObject.Find("Player2_Follow_Camera(Clone)").GetComponent<Camera>();
@@ -319,11 +396,7 @@ public class StateManger : MonoBehaviour
     }
 
 
-    // funciton to make the system wait a few seconds -- TODO why does this not work
-    public IEnumerator Wait(float delayInSecs)
-    {
-        yield return new WaitForSeconds(delayInSecs);
-    }
+    
 
 
     //fucntion for the roll again fucntion
@@ -356,6 +429,8 @@ public class StateManger : MonoBehaviour
             RollAgain();                // run the roll again fucntion
             
         }
+
+       
         //Skip Turn
         if (chanceCards == "Skip Turn")         // Chance cards selected
         {
@@ -368,29 +443,113 @@ public class StateManger : MonoBehaviour
                  
                     player1_skipping = 1;       // set to enable skip turn
                     IsSkipRoll1 = true;         // set to enable skip turn
+                    PlayerSKipMessage.text = "Player1 will Skip Next Turn";
+                    PlayerSKipMessage.enabled = true;
+
+
+                    StartCoroutine(SkipRollUICoroutine());
+                    StartCoroutine(JustWaitUICoroutine());
+
+
+
                     break;
                 case 1:     // Player id = 1
 
                     
                     player2_skipping = 1;
                     IsSkipRoll2 = true;
+                    PlayerSKipMessage.text = "Player2 will Skip Next Turn";
+                    
+                  StartCoroutine(SkipRollUICoroutine());
+                    StartCoroutine(JustWaitUICoroutine());
+
+
                     break;
                 case 2:
 
                     
                     player3_skipping = 1;
                     IsSkipRoll3 = true;
-                     break;
+                    PlayerSKipMessage.text = "Player3 will Skip Next Turn";
+                    
+                    StartCoroutine(SkipRollUICoroutine());
+                    StartCoroutine(JustWaitUICoroutine());
+
+
+                    break;
                 case 3:
 
                     player4_skipping = 1;
                     IsSkipRoll4 = true;
+                    PlayerSKipMessage.text = "Player4 will Skip Next Turn";
+                    
+                   StartCoroutine(SkipRollUICoroutine());
+                    StartCoroutine(JustWaitUICoroutine());
+
+
                     break;
                 
             }
 
 
+
         }
+        if (chanceCards == "MoveAhead3")
+        {
+            Debug.Log("Move ahead 3 spaces");
+          //  UIMoveAhead3.SetActive(true);
+            // Set the variables to be the same a new roll start
+           // UIMoveAhead3.SetActive(true);
+         // UIRollAgainPopup.SetActive(true);
+            // StartCoroutine(MoveAhead3RollUICoroutine());
+            Debug.Log("move 3 enableade");
+            IsDoneRolling = true;
+            IsDoneClicking = false;
+            IsDoneAnimating = false;
+            IsDoneRERoll = true;
+            DiceTotal = 3;
+      //      PlayerMoveAhead3.text = "Player1 Move Ahead 3 Spaces";
+        //   PlayerMoveAhead3.enabled = true;
+        //    UIMoveAhead3.SetActive(true);
+         //   UIRollAgainPopup.SetActive(true);
+            StartCoroutine(MoveAhead3RollUICoroutine());
+
+         //   DoChanceClick();
+        //    StartCoroutine(JustWaitUICoroutine());
+            //   UIMoveAhead3.SetActive(false);
+
+        }
+
+        if (chanceCards == "MoveAhead6")
+        {
+            Debug.Log("Move ahead 6 spaces");
+           // UIRollAgainPopup.SetActive(true);
+            //     PlayerMoveAhead6.enabled = true;
+         //   UIMoveAhead6.SetActive(true);
+          //  UIRoll.SetActive(true); 
+            //    StartCoroutine(MoveAhead6RollUICoroutine());
+
+            Debug.Log("move 6 enableade");
+
+            // Set the variables to be the same a new roll start
+            IsDoneRolling = true;
+            IsDoneClicking = false;
+            IsDoneAnimating = false;
+            IsDoneRERoll = true;
+            DiceTotal = 6;
+       //     PlayerMoveAhead6.text = "Player1 Move Ahead 6 Spaces";
+      //      PlayerMoveAhead6.enabled = true;
+          //  UIMoveAhead6.SetActive(true);
+            
+          //  UIRollAgainPopup.SetActive(true);
+           StartCoroutine(MoveAhead6RollUICoroutine());
+         //   DoChanceClick();
+         //   StartCoroutine(JustWaitUICoroutine());
+            //  UIMoveAhead6.SetActive(false);
+
+
+        }
+
 
     }
 
@@ -422,5 +581,87 @@ public class StateManger : MonoBehaviour
                 break;
         }
     }
+
+
+
+
+
+    ///////////Chance Cod
+    virtual public  void  DoChanceClick()
+                    {
+                        // Pick a stone to move, then "click" it.
+
+                        PlayerShips[] ChancelegalStones = GetChanceLegalMoves();
+
+                        if (ChancelegalStones == null || ChancelegalStones.Length == 0)
+                        {
+                            // We have no legal moves.  How did we get here?
+                            // We might still be in a delayed coroutine somewhere. Let's not freak out.
+                            return;
+                        }
+
+                        // BasicAI simply picks a legal move at random
+
+                        PlayerShips pickedStone = PickChanceStoneToMove(ChancelegalStones);
+                        Debug.Log("Picked Stone " + pickedStone);
+      //  UIMoveAhead3.SetActive(false);
+     //   UIMoveAhead6.SetActive(false);
+        pickedStone.MoveMe();            // run the moveme function in playerships script
+
+                    }
+
+  public   PlayerShips[] GetChanceLegalMoves()
+                            {
+
+                                List<PlayerShips> ChancelegalStones = new List<PlayerShips>();
+
+                                if (DiceTotal == 0)   // make sure we dont roll a 0
+                                {
+                                    return ChancelegalStones.ToArray();
+                                }
+
+        // Loop through all of a player's stones
+        if (CurrentPlayerId == 0)
+        {
+            GameObject PLayer1_ship;
+
+            ThePlayer1 = GameObject.FindObjectOfType<Player>();
+            PLayer1_ship = GameObject.Find("PLAYER1");
+            
+        }
+
+
+
+      //  PlayerShips1[] pss = GameObject.FindGameObjectsWithTag("Andrew1");
+
+        PlayerShips[] pss = GameObject.FindObjectsOfType<PlayerShips>();
+
+                                foreach (PlayerShips ps in pss)             //check on every ship found to see if it can move
+                                {
+                                    if (ps.PlayerId == CurrentPlayerId)
+                                    {
+                                         Debug.Log("ps.PlayerId " + ps.PlayerId);
+               
+
+
+                if (ps.CanLegallyMoveAhead(DiceTotal))  // check if ship can move based on dice total display
+                                        {
+                                            Debug.Log("ps to array" + ps);
+                                            ChancelegalStones.Add(ps);   // send back values to array
+                                        }
+                                    }
+                                }
+
+                                return ChancelegalStones.ToArray();
+                            }
+
+
+  virtual protected PlayerShips PickChanceStoneToMove(PlayerShips[] ChancelegalStones)
+            {
+
+                return ChancelegalStones[Random.Range(0, 0)];
+
+
+            }
     
 }
