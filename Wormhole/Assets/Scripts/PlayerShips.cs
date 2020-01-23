@@ -20,12 +20,21 @@ public class PlayerShips : MonoBehaviour
     float smoothHeight = 35f;
 
     public Tile startingTile;
+    
     Tile currentTile;
+
+    // try get wormhole to work
+    public Tile wormholedest24;
+    public Tile wormholedest48;
+    public Tile wormholedest28;
+    public Tile wormholedest52;
+
+    //   Tile WormholeDest;
 
     public int PlayerId;
 
 
-
+    public int wormholeenter = 0;
 
 
 
@@ -150,19 +159,8 @@ public class PlayerShips : MonoBehaviour
 
 
                 SetNewTargetPosition(nextTile.transform.position);
-                // try to face char in directin on travel
-                /*    float moveHorizontal = Input.GetAxisRaw("Horizontal");
-                    float moveVertical = Input.GetAxisRaw("Vertical");
-                    Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
-                    transform.rotation = Quaternion.LookRotation(movement);
-                    transform.Translate(movement * 1f * Time.deltaTime, Space.World);
+                
 
-
-
-
-                    // -----------------------
-
-                    */
                 moveQueueIndex++;
             }
 
@@ -173,7 +171,7 @@ public class PlayerShips : MonoBehaviour
             //the movement queue is empty, we are done moving
             Debug.Log("Done animating.");
             this.isAnimating = false;
-            theStateManager.IsDoneAnimating = true;
+            theStateManager.AnimationsPlaying --;
             //   theDiceRoller.TurnEnded();
 
             if (currentTile != null && currentTile.IsRollAgain)
@@ -186,6 +184,85 @@ public class PlayerShips : MonoBehaviour
                 theStateManager.ChanceCard();
             }
 
+            if (currentTile != null && currentTile.Wormhole2)
+            {
+
+                // StartCoroutine(UIWormholeenter());
+                //   wormholeenter = 1;
+                // StartCoroutine(JustWaitUICoroutineWormhole());
+                // while (wormholeenter != 0)
+                // {
+                wormholeenter = 1;
+               // StartCoroutine(PauseGame(50f));    
+              // wormholemove();
+                theStateManager.AnimationsPlaying++;
+                    Tile finalTile = moveQueue[moveQueue.Length - 1];
+                    finalTile = wormholedest24;
+                    this.transform.position = finalTile.transform.position;
+                    this.targetPosition = finalTile.transform.position;     // this set the tagetfixd to new tile
+                    currentTile = finalTile;
+                    moveQueue = null;
+                    moveQueueIndex = 0;
+                    StartCoroutine(PauseGameexit(2f));
+            //  }
+
+            
+                // add in wormhole dest in player script
+
+
+            }
+
+            if (currentTile != null && currentTile.Wormhole5)
+            {
+                Tile finalTile = moveQueue[moveQueue.Length - 1];
+                finalTile = wormholedest48;
+
+
+                
+                
+               /* this.transform.position = finalTile.transform.position;
+                this.targetPosition = finalTile.transform.position;     // this set the tagetfixd to new tile
+                currentTile = finalTile;
+                moveQueue = null;
+                moveQueueIndex = 0;
+*/
+                // add in wormhole dest in player script
+
+
+            }
+
+            if (currentTile != null && currentTile.Wormhole8)
+            {
+
+                Tile finalTile = moveQueue[moveQueue.Length - 1];
+                finalTile = wormholedest28;
+                this.transform.position = finalTile.transform.position;
+                this.targetPosition = finalTile.transform.position;     // this set the tagetfixd to new tile
+                currentTile = finalTile;
+                moveQueue = null;
+                moveQueueIndex = 0;
+
+                // add in wormhole dest in player script
+
+
+            }
+
+            if (currentTile != null && currentTile.Wormhole11)
+            {
+                //StartCoroutine(UIWormholeenter());
+                Tile finalTile = moveQueue[moveQueue.Length - 1];
+                finalTile = wormholedest52;
+                this.transform.position = finalTile.transform.position;
+                this.targetPosition = finalTile.transform.position;     // this set the tagetfixd to new tile
+                StartCoroutine(UIWormholeenter());
+                currentTile = finalTile;
+                moveQueue = null;
+                moveQueueIndex = 0;
+
+                // add in wormhole dest in player script
+
+
+            }
 
         }
     }
@@ -206,25 +283,11 @@ public class PlayerShips : MonoBehaviour
 
     }
 
-  /*  public void Chance_move_me()
-        {
 
-        if (theStateManager.CurrentPlayerId == 0)
-        {
-            Player ThePlayer1_Chance;
-            GameObject PLayer1_ship_chance;
-            ThePlayer1_Chance = GameObject.FindObjectOfType<Player>();
-            PLayer1_ship_chance = GameObject.Find("PLAYER1");
-            // PLayer1_ship_chance.transform;
-        }
-
-    }
-
-    */
 
     public void MoveMe()
     {
-        
+
 
 
         if (theStateManager.CurrentPlayerId != PlayerId)
@@ -233,14 +296,14 @@ public class PlayerShips : MonoBehaviour
 
         }
 
-       
+
         if (theStateManager.IsDoneRolling == false)
         {
             //we cant move yet
 
             // Have we rolled the dice ?
 
-           
+
 
             //CHECK TO MAKE SURE THERE IS NO ui OBJECT IN THE WAY
             return;
@@ -255,35 +318,35 @@ public class PlayerShips : MonoBehaviour
 
         int spacesToMove = theStateManager.DiceTotal;
 
-   //removeing due to movie 7 1:27    
-    if (spacesToMove == 0)
+        //removeing due to movie 7 1:27    
+        if (spacesToMove == 0)
         {
             return;
         }
 
-    
+
 
         moveQueue = GetTilesAhead(spacesToMove);
-       Tile finalTile = moveQueue[moveQueue.Length - 1];
+      Tile finalTile = moveQueue[moveQueue.Length - 1];
 
-  
-    
-if (finalTile == null)
+
+
+        if (finalTile == null)
         {
             // we are scoring this player
             scoreMe = true;
         }
-    else
+        else
         {
             if (CanLegallyMoveTo(finalTile) == false)
             {
                 // not allowed
                 finalTile = currentTile;
                 moveQueue = null;
-                return;            
+                return;
             }
 
-            
+
 
             // Even before the animation is done, set our current tile to the new tile
             currentTile = finalTile;
@@ -295,12 +358,14 @@ if (finalTile == null)
 
         }
 
-        
+
         moveQueueIndex = 0;
+
+     
 
         theStateManager.IsDoneClicking = true;
         this.isAnimating = true;
-     //   theStateManager.AnimationsPlaying++;
+        theStateManager.AnimationsPlaying++;
 
     }
 
@@ -370,7 +435,7 @@ if (finalTile == null)
             // we are not moving at all retun the current tile ?
             return currentTile;
         }
-        return tiles [ tiles.Length -1];
+        return tiles[tiles.Length - 1];
     }
 
     public bool CanLegallyMoveAhead(int spacesToMove)
@@ -389,7 +454,7 @@ if (finalTile == null)
     bool CanLegallyMoveTo(Tile destinationTile)
     {
 
-       
+
         // does the tilealready have a stone - not needed for me
         // is this one of our stones - not needed for me
         // is this a safe tile for enemy ?
@@ -399,8 +464,8 @@ if (finalTile == null)
             return false;
 
             // We are trying to move off the board
-          //  Debug.Log("We are trying to move off baord which is leagl.");
-          //  return true;
+            //  Debug.Log("We are trying to move off baord which is leagl.");
+            //  return true;
         }
         //is the tile empty
         if (destinationTile.PlayerShips == null)
@@ -417,27 +482,27 @@ if (finalTile == null)
             return false;
 
         }
-            // if this is an enemy stone is it in a safe square ?
-            // TODO Safe Squares ?
+        // if this is an enemy stone is it in a safe square ?
+        // TODO Safe Squares ?
 
         if (destinationTile.IsRollAgain == true)
         {
             return false;
         }
-            /*   // If it's an enemy stone, is it in a safe square?
-          if (destinationTile.IsRollAgain == true)
-          {
-              // Can't bop someone on a safe tile!
-              return false;
-          }
+        /*   // If it's an enemy stone, is it in a safe square?
+      if (destinationTile.IsRollAgain == true)
+      {
+          // Can't bop someone on a safe tile!
+          return false;
+      }
 
-      */
+  */
 
-            // if we have gotten here we can legaly land on the enmy stone and kick it off
+        // if we have gotten here we can legaly land on the enmy stone and kick it off
 
 
 
-       
+
 
         return true;
     }
@@ -447,80 +512,87 @@ if (finalTile == null)
         // if we had defined stonestorage this is where t wouldreturn it to storage
         Debug.Log("Return to storage was activated");
 
-
-    /*    Debug.Log("ReturnToStorage");
-        //currentTile.PlayerStone = null;
-        //currentTile = null;
-
-        this.isAnimating = true;
-        theStateManager.AnimationsPlaying++;
-
-        moveQueue = null;
-
-        // Save our current position
-        Vector3 savePosition = this.transform.position;
-
-        MyStoneStorage.AddStoneToStorage(this.gameObject);
-
-        // Set our new position to the animation target
-        SetNewTargetPosition(this.transform.position);
-
-        // Restore our saved position
-        this.transform.position = savePosition;
-
-    */
     }
 
- /*   int spacesToMoveBack =4;
-    // Try find a way to go backwards
-    Tile[] GetTilesbehind(int spacesToMoveBack)
+   
+    IEnumerator UIWormholeenter()
     {
-        if (spacesToMoveBack == 0)
-        {
-            return null;
-        }
 
-
-        // Where should we end up?
-        Tile[] listOfTiles = new Tile[spacesToMoveBack];
-        Tile finalTile = currentTile;
-
-
-        for (int i = spacesToMoveBack; i < 0; i--)
-       // for (int i = 0; i < spacesToMove; i++)
-        {
-            //  check if no tile? ie off board ?
-            if (finalTile == null)
-            {
-                finalTile = startingTile;
-            }
-            else
-            {
-
-                if (finalTile.NextTiles == null || finalTile.NextTiles.Length == 0)
-                {
-
-                    //we are overshooting the victory tile 
-                    // break and return the array which will have nulls at the end
-                    break;
-                }
-                else if (finalTile.NextTiles.Length > 1)
-                {
-                    // branch based on player ID
-                    finalTile = finalTile.NextTiles[PlayerId];
-                }
-                else
-                {
-                    finalTile = finalTile.NextTiles[0];
-                }
-
-
-            }
-            listOfTiles[i] = finalTile;
-        }
-
-        return listOfTiles;
+              
+        theStateManager.UIWormhole.SetActive(true);
+        yield return new WaitForSecondsRealtime(2);
+        
+        theStateManager.UIWormhole.SetActive(false);
+        
+        yield return new WaitForSecondsRealtime(6);
+           
     }
-    */
- 
+
+    public IEnumerator PauseGame (float Pausetime)
+    {
+        Debug.Log("instide PauseGame into");
+     //   theStateManager.UIWormhole.SetActive(true);
+        Time.timeScale = 0f;
+        float pauseEndTime = Time.realtimeSinceStartup + Pausetime;
+     //   while (wormholeenter != 0)
+    //    {
+            while (Time.realtimeSinceStartup < pauseEndTime)
+            {
+                yield return 0;
+            }
+      //      wormholeenter = 0;
+     //   }
+        Time.timeScale = 1f;
+        Debug.Log("Done with Pause into");
+        wormholemove();
+        // theStateManager.UIWormhole.SetActive(false);
+        //  wormholeenter = 0;
+
+
+
+    }
+
+    public IEnumerator PauseGameexit(float Pausetimeexit)
+    {
+        Debug.Log("instide PauseGame exit");
+        Time.timeScale = 0f;
+        float pauseEndTimeexit = Time.realtimeSinceStartup + Pausetimeexit;
+        while (Time.realtimeSinceStartup < pauseEndTimeexit)
+        {
+            yield return 0;
+        }
+        Time.timeScale = 1f;
+        Debug.Log("Done with Pause eit");
+        theStateManager.AnimationsPlaying--;
+
+    }
+
+    IEnumerator JustWaitUICoroutineWormhole()
+    {
+
+        // wait one sec
+        Debug.Log("Just Wait)");
+
+
+      //  Time.timeScale = 0f;
+        yield return new WaitForSecondsRealtime(10);
+      //  Time.timeScale = 1f;
+     Debug.Log("end wormhole being waint");
+
+
+
+    }
+
+    void wormholemove()
+    {
+        theStateManager.AnimationsPlaying++;
+        Tile finalTile = moveQueue[moveQueue.Length - 1];
+        finalTile = wormholedest24;
+        this.transform.position = finalTile.transform.position;
+        this.targetPosition = finalTile.transform.position;     // this set the tagetfixd to new tile
+        currentTile = finalTile;
+        moveQueue = null;
+        moveQueueIndex = 0;
+        StartCoroutine(PauseGameexit(2f));
+    }
 }

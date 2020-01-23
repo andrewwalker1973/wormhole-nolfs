@@ -51,8 +51,9 @@ public class StateManger : MonoBehaviour
 
     public bool IsDoneRolling = false;  // is done rolling false - have we finshed rollling
     public bool IsDoneClicking = false; //have we finished clicking
-    public bool IsDoneAnimating = false; // Have we finshed moving
+  //  public bool IsDoneAnimating = false; // Have we finshed moving
     public bool IsDoneRERoll = false;  // Variable to monitor the reroll function
+    public int AnimationsPlaying = 0; // control Animations playing sequence
 
     // below to manage the skip roll process 
     public bool IsSkipRoll1 = false;  // variable for player1 skip roll
@@ -72,6 +73,7 @@ public class StateManger : MonoBehaviour
     public GameObject UISkipTurnMessage;   //game object for skip turn on screen
     public GameObject UIMoveAhead3;   //game object for skip turn on screen
     public GameObject UIMoveAhead6;   //game object for skip turn on screen
+    public GameObject UIWormhole;   //game object for skip turn on screen
 
     PlayerShips ThePlayerships;         // gain access to the playerships vars
     ChanceOptions TheChanceOptions;
@@ -174,7 +176,7 @@ public class StateManger : MonoBehaviour
             //start of a players turn
             IsDoneRolling = false;
             IsDoneClicking = false;
-            IsDoneAnimating = false;
+        //    IsDoneAnimating = false;
 
             if (IsDoneRERoll == true)
             {
@@ -261,7 +263,7 @@ public class StateManger : MonoBehaviour
        // set all the varibale equal to values when turn is done
         IsDoneRolling = true;
         IsDoneClicking = true;
-        IsDoneAnimating = true;
+     //   IsDoneAnimating = true;
       
     }
 
@@ -269,7 +271,7 @@ public class StateManger : MonoBehaviour
     void Update()
     {
         // is the tunrn done ?
-        if (IsDoneRolling && IsDoneClicking && IsDoneAnimating)
+        if (IsDoneRolling && IsDoneClicking && AnimationsPlaying == 0)
         {
 
             NewTurn();          // run the new turn fucntion
@@ -407,7 +409,7 @@ public class StateManger : MonoBehaviour
         //start of a players turn
         IsDoneRolling = false;
         IsDoneClicking = false;
-        IsDoneAnimating = false;
+       // IsDoneAnimating = false;
         IsDoneRERoll = true;
     }
 
@@ -505,7 +507,7 @@ public class StateManger : MonoBehaviour
             Debug.Log("move 3 enableade");
             IsDoneRolling = true;
             IsDoneClicking = false;
-            IsDoneAnimating = false;
+          //  IsDoneAnimating = false;
             IsDoneRERoll = true;
             DiceTotal = 3;
       //      PlayerMoveAhead3.text = "Player1 Move Ahead 3 Spaces";
@@ -534,7 +536,7 @@ public class StateManger : MonoBehaviour
             // Set the variables to be the same a new roll start
             IsDoneRolling = true;
             IsDoneClicking = false;
-            IsDoneAnimating = false;
+          //  IsDoneAnimating = false;
             IsDoneRERoll = true;
             DiceTotal = 6;
        //     PlayerMoveAhead6.text = "Player1 Move Ahead 6 Spaces";
