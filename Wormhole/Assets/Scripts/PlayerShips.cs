@@ -24,6 +24,7 @@ public class PlayerShips : MonoBehaviour
     Tile currentTile;
 
     // try get wormhole to work
+    public Tile WormholeDest;
     public Tile wormholedest24;
     public Tile wormholedest48;
     public Tile wormholedest28;
@@ -36,7 +37,8 @@ public class PlayerShips : MonoBehaviour
 
     public int wormholeenter = 0;
 
-
+    public GameObject UIWormhole;   //game object for skip turn on screen
+    public GameObject UIWormHoleVideo;
 
 
     // added into handle player moving off board
@@ -172,7 +174,7 @@ public class PlayerShips : MonoBehaviour
             Debug.Log("Done animating.");
             this.isAnimating = false;
             theStateManager.AnimationsPlaying --;
-            //   theDiceRoller.TurnEnded();
+            
 
             if (currentTile != null && currentTile.IsRollAgain)
             {
@@ -187,27 +189,25 @@ public class PlayerShips : MonoBehaviour
             if (currentTile != null && currentTile.Wormhole2)
             {
 
-                // StartCoroutine(UIWormholeenter());
-                //   wormholeenter = 1;
-                // StartCoroutine(JustWaitUICoroutineWormhole());
-                // while (wormholeenter != 0)
-                // {
-                wormholeenter = 1;
-               // StartCoroutine(PauseGame(50f));    
-              // wormholemove();
-                theStateManager.AnimationsPlaying++;
-                    Tile finalTile = moveQueue[moveQueue.Length - 1];
-                    finalTile = wormholedest24;
-                    this.transform.position = finalTile.transform.position;
-                    this.targetPosition = finalTile.transform.position;     // this set the tagetfixd to new tile
-                    currentTile = finalTile;
-                    moveQueue = null;
-                    moveQueueIndex = 0;
-                    StartCoroutine(PauseGameexit(2f));
-            //  }
 
-            
-                // add in wormhole dest in player script
+
+                StartCoroutine(EnterWormHole());
+                Debug.Log("Finished wait");
+
+                WormholeDest = wormholedest24;
+                theStateManager.AnimationsPlaying++;
+                /* theStateManager.AnimationsPlaying++;
+                 Tile finalTile = moveQueue[moveQueue.Length - 1];
+                     finalTile = wormholedest24;
+                     this.transform.position = finalTile.transform.position;
+                     this.targetPosition = finalTile.transform.position;     // this set the tagetfixd to new tile
+                     currentTile = finalTile;
+                     moveQueue = null;
+                     moveQueueIndex = 0;
+                   //  StartCoroutine(EnterWormHole());
+               */
+
+
 
 
             }
@@ -233,7 +233,7 @@ public class PlayerShips : MonoBehaviour
 
             if (currentTile != null && currentTile.Wormhole8)
             {
-
+                
                 Tile finalTile = moveQueue[moveQueue.Length - 1];
                 finalTile = wormholedest28;
                 this.transform.position = finalTile.transform.position;
@@ -531,22 +531,22 @@ public class PlayerShips : MonoBehaviour
     public IEnumerator PauseGame (float Pausetime)
     {
         Debug.Log("instide PauseGame into");
-     //   theStateManager.UIWormhole.SetActive(true);
         Time.timeScale = 0f;
+        wormholeenter = 1;
+
+
         float pauseEndTime = Time.realtimeSinceStartup + Pausetime;
-     //   while (wormholeenter != 0)
-    //    {
+     
+    
             while (Time.realtimeSinceStartup < pauseEndTime)
             {
                 yield return 0;
             }
-      //      wormholeenter = 0;
-     //   }
+     
         Time.timeScale = 1f;
         Debug.Log("Done with Pause into");
-        wormholemove();
-        // theStateManager.UIWormhole.SetActive(false);
-        //  wormholeenter = 0;
+        wormholeenter = 5;
+
 
 
 
@@ -567,32 +567,53 @@ public class PlayerShips : MonoBehaviour
 
     }
 
-    IEnumerator JustWaitUICoroutineWormhole()
+
+    IEnumerator EnterWormHole()
+    {
+
+
+       
+        UIWormhole.SetActive(true);
+        
+        // wait one sec
+        yield return new WaitForSecondsRealtime(1);
+        UIWormhole.SetActive(false);
+        UIWormHoleVideo.SetActive(true);
+        yield return new WaitForSecondsRealtime(1);
+        wormhometravel();
+       StartCoroutine(JustWaitUICoroutine());
+
+    }
+
+    public void wormhometravel()
+    {
+        
+                Tile finalTile = moveQueue[moveQueue.Length - 1];
+                    finalTile = WormholeDest;
+        
+        this.transform.position = finalTile.transform.position;
+       // UIWormHoleVideo.SetActive(true);
+        this.targetPosition = finalTile.transform.position;     // this set the tagetfixd to new tile
+       
+        currentTile = finalTile;
+                    moveQueue = null;
+                    moveQueueIndex = 0;
+        UIWormHoleVideo.SetActive(false);
+
+    }
+
+    IEnumerator JustWaitUICoroutine()
     {
 
         // wait one sec
         Debug.Log("Just Wait)");
 
 
-      //  Time.timeScale = 0f;
-        yield return new WaitForSecondsRealtime(10);
-      //  Time.timeScale = 1f;
-     Debug.Log("end wormhole being waint");
+
+        yield return new WaitForSecondsRealtime(2);
+        theStateManager.AnimationsPlaying--;
 
 
 
-    }
-
-    void wormholemove()
-    {
-        theStateManager.AnimationsPlaying++;
-        Tile finalTile = moveQueue[moveQueue.Length - 1];
-        finalTile = wormholedest24;
-        this.transform.position = finalTile.transform.position;
-        this.targetPosition = finalTile.transform.position;     // this set the tagetfixd to new tile
-        currentTile = finalTile;
-        moveQueue = null;
-        moveQueueIndex = 0;
-        StartCoroutine(PauseGameexit(2f));
     }
 }

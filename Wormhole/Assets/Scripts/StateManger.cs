@@ -588,7 +588,7 @@ public class StateManger : MonoBehaviour
 
 
 
-    ///////////Chance Cod
+    ///////////Chance Code
     virtual public  void  DoChanceClick()
                     {
                         // Pick a stone to move, then "click" it.
