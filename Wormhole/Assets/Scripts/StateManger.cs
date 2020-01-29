@@ -25,10 +25,10 @@ public class StateManger : MonoBehaviour
 
         
         //Code Added to force the required players
-       ThePlayers.player1_hum_comp = 0;
-        ThePlayers.player2_hum_comp = 0;
-       ThePlayers.player3_hum_comp = 0;
-        ThePlayers.player4_hum_comp = 0;
+       ThePlayers.player1_hum_comp = 1;
+        ThePlayers.player2_hum_comp = 1;
+       ThePlayers.player3_hum_comp = 1;
+        ThePlayers.player4_hum_comp = 1;
 
 
         setUpPlayers();   // run the function to determine who is human or computer

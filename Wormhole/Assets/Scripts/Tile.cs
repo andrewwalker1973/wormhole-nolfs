@@ -21,10 +21,24 @@ public class Tile : MonoBehaviour
     public bool IsleftTurnSpace;
     public bool IsRollAgain;
     public bool ChanceCard;
-    public bool Wormhole2;
-    public bool Wormhole5;
-    public bool Wormhole8;
-    public bool Wormhole11;
+    public bool Spacegate2;
+    public bool Spacegate5;
+    public bool Spacegate8;
+    public bool Spacegate12;
+    public bool Spacegate38;
+    public bool Spacegate53;
+    public bool Spacegate55;
+    public bool Spacegate62;
+
+    public bool Wormhole33;
+    public bool Wormhole54;
+    public bool Wormhole63;
+    public bool Wormhole76;
+    public bool Wormhole84;
+    public bool Wormhole89;
+    public bool Wormhole95;
+    public bool Wormhole98;
+
 
 
     //  public Tile[] WormholeDest;
