@@ -9,8 +9,9 @@ public class StateManger : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+       
         ThePlayers = GameObject.FindObjectOfType<Player>();
-       ThePlayerships = GameObject.FindObjectOfType<PlayerShips>();
+        ThePlayerships = GameObject.FindObjectOfType<PlayerShips>();
         TheDiceRoller = GameObject.FindObjectOfType<DiceRoller>();
         TheChanceOptions = GameObject.FindObjectOfType<ChanceOptions>();
        
@@ -19,24 +20,26 @@ public class StateManger : MonoBehaviour
         Camera ThePlayer3_camera = GameObject.Find("Player3_Follow_Camera(Clone)").GetComponent<Camera>();
         Camera ThePlayer4_camera = GameObject.Find("Player4_Follow_Camera(Clone)").GetComponent<Camera>();
 
-
-
-        PlayerAIs = new AIPlayer[NumberOfPlayers];
-
         
-        //Code Added to force the required players
-       ThePlayers.player1_hum_comp = 1;
-        ThePlayers.player2_hum_comp = 1;
-       ThePlayers.player3_hum_comp = 1;
-        ThePlayers.player4_hum_comp = 1;
+        
+
+
+
+         
+ 
+        PlayerAIs = new AIPlayer[NumberOfPlayers];
+        //code added to force player
+        
+
 
 
         setUpPlayers();   // run the function to determine who is human or computer
 
-      
+     
 
     }
 
+   
 
     Player ThePlayers;                  // gain access to player scrip vars
     DiceRoller TheDiceRoller;           // gain access to diceroller scrip vars
@@ -74,9 +77,13 @@ public class StateManger : MonoBehaviour
     public GameObject UIMoveAhead3;   //game object for skip turn on screen
     public GameObject UIMoveAhead6;   //game object for skip turn on screen
     public GameObject UIWormhole;   //game object for skip turn on screen
+    public GameObject UISpaceGateenter;
+   
 
     PlayerShips ThePlayerships;         // gain access to the playerships vars
     ChanceOptions TheChanceOptions;
+
+   
 
     public TextMeshProUGUI PlayerSKipMessage;
    // public TextMeshProUGUI PlayerMoveAhead3;
@@ -104,12 +111,16 @@ public class StateManger : MonoBehaviour
 
     //Setup the randomizer for the array
     Random rand = new Random();
-    
+
 
     // Function to setup the players as human or computer
     void setUpPlayers()
     {
 
+        ThePlayers.player1_hum_comp = 1;
+        ThePlayers.player2_hum_comp = 1;
+        ThePlayers.player3_hum_comp = 1;
+        ThePlayers.player4_hum_comp = 1;
 
         //Is a human player value is  null 
         //  if  new AIPlayer(); is an AI PLAYER
@@ -118,10 +129,17 @@ public class StateManger : MonoBehaviour
             PlayerAIs[0] = null;
         }
         else
-            if (ThePlayers.player1_hum_comp == 1)
+            if (ThePlayers.player1_hum_comp == 1 || ThePlayers.player1_hum_comp == 2)
         {
-            PlayerAIs[0] = new AIPlayer(); 
+            PlayerAIs[0] = new AIPlayer();
         }
+      //  else
+      //  if (ThePlayers.player1_hum_comp == 2)
+      //  { 
+      //      PlayerAIs[0] = new AIPlayer();
+      //  }
+
+
 
 
         if (ThePlayers.player2_hum_comp == 0)
@@ -129,10 +147,15 @@ public class StateManger : MonoBehaviour
             PlayerAIs[1] = null;
         }
         else
-            if (ThePlayers.player2_hum_comp == 1)
+            if (ThePlayers.player2_hum_comp == 1 || ThePlayers.player2_hum_comp == 2)
         {
             PlayerAIs[1] = new AIPlayer();
         }
+      //  else
+       // if (ThePlayers.player2_hum_comp == 2)
+      //  {
+      //      PlayerAIs[1] = new AIPlayer();
+      //  }
 
 
         if (ThePlayers.player3_hum_comp == 0)
@@ -140,10 +163,15 @@ public class StateManger : MonoBehaviour
             PlayerAIs[2] = null;
         }
         else
-            if (ThePlayers.player3_hum_comp == 1)
+            if (ThePlayers.player3_hum_comp == 1 || ThePlayers.player3_hum_comp == 2)
         {
             PlayerAIs[2] = new AIPlayer();
         }
+      //  else
+     //   if (ThePlayers.player3_hum_comp == 2)
+     //   {
+     //       PlayerAIs[2] = new AIPlayer();
+     //   }
 
 
         if (ThePlayers.player4_hum_comp == 0)
@@ -151,10 +179,15 @@ public class StateManger : MonoBehaviour
             PlayerAIs[3] = null;
         }
         else
-            if (ThePlayers.player4_hum_comp == 1)
+            if (ThePlayers.player4_hum_comp == 1 || ThePlayers.player4_hum_comp == 2)
         {
             PlayerAIs[3] = new AIPlayer();
         }
+     //   else
+     //   if (ThePlayers.player4_hum_comp == 2)
+    //    {
+     //       PlayerAIs[3] = new AIPlayer();
+     //   }
 
     }
 
@@ -171,9 +204,16 @@ public class StateManger : MonoBehaviour
     // fucntion for new turn of player
     public void NewTurn()
     {
-      
-
-            //start of a players turn
+        Debug.Log("Stopping justwait statemanager");
+       // StopCoroutine(JustWaitUICoroutine());
+        StopAllCoroutines();
+        Debug.Log(" ************     ");
+        Debug.Log(" ************     ");
+        Debug.Log(" ************     ");
+        Debug.Log(" ************     ");
+        Debug.Log(" ************     ");
+        Debug.Log("Start new turn");
+        Debug.Log(" ################## mew turn AnimationsPlaying  " + AnimationsPlaying);        //start of a players turn
             IsDoneRolling = false;
             IsDoneClicking = false;
         //    IsDoneAnimating = false;
@@ -194,14 +234,20 @@ public class StateManger : MonoBehaviour
 
           
           Camera_controls();      // Funtion to set the follow camera to follow playing player
-        
+
         // Check if the Player is skipping a Turn
+
+
+        notplaying();  // check if player is not playing
 
         if ((IsSkipRoll1 == true ) || (IsSkipRoll2 == true) || (IsSkipRoll3 == true) || (IsSkipRoll4 == true)) // if any are equal to true then player is skipping the turn
         {
             check_skip_roll();      // run the function to check and run the skip function
 
         }
+
+       
+   
 
     }
 
@@ -257,6 +303,53 @@ public class StateManger : MonoBehaviour
 
     }
 
+
+
+    void notplaying()
+    {
+
+        // TODO Find a way to show the player is skipping the turn
+        if (CurrentPlayerId == 0 && ThePlayers.player1_hum_comp == 2)  // if player id and skip id match then skip the turn
+        {
+
+            SkipTurn();                 // skip the turn
+           
+
+
+            //  UISkipTurnMessage.SetActive(false);
+        }
+
+        if (CurrentPlayerId == 1 && ThePlayers.player2_hum_comp == 2)
+        {
+
+            SkipTurn();
+            
+
+
+            //   UISkipTurnMessage.SetActive(false);
+        }
+
+        if (CurrentPlayerId == 2 && ThePlayers.player3_hum_comp == 2)
+        {
+
+            SkipTurn();
+            
+
+
+            //  UISkipTurnMessage.SetActive(false);
+        }
+
+        if (CurrentPlayerId == 3 && ThePlayers.player4_hum_comp == 2)
+        {
+
+            SkipTurn();
+            
+
+
+            //  UISkipTurnMessage.SetActive(false);
+        }
+
+    }
     // fucntion to skip the player turn
     void SkipTurn()
     {
@@ -281,7 +374,7 @@ public class StateManger : MonoBehaviour
 
             if (PlayerAIs[CurrentPlayerId] != null)   // Process to run the AI script for AI players
             {
-               
+            //Debug.Log("Calling AI player");
                 PlayerAIs[CurrentPlayerId].DoAI();
             }
         
@@ -292,18 +385,21 @@ public class StateManger : MonoBehaviour
     // Function to check that the move is legal
     public void CheckLegalMoves()
     {
-       // if we roll a 0 we have no legal moves
-       if (DiceTotal == 0)
+        Debug.Log("statemanager    CheckLegalMoves");
+        // if we roll a 0 we have no legal moves
+        if (DiceTotal == 0)
         {
+            Debug.Log("DiceTotal == 0");
             StartCoroutine( NoLegalMovesCoroutine() );
             return;
 
         }
         //loop through all the player stones
-      //  bool hasLegalMove = false;
+        //  bool hasLegalMove = false;
 
         //Highlight the ones that can be legal moved
         // if no logal moves wait a second then move to next player with message
+        Debug.Log("END statemanager CheckLegalMoves");
     }
 
     // Function to display a UI message if there are no Legal moves available
@@ -328,9 +424,9 @@ public class StateManger : MonoBehaviour
         // wait one sec\
         Debug.Log("Skipping tunr co-routine");
         UISkipTurnMessage.SetActive(true);
-        yield return new WaitForSecondsRealtime(3);
+        yield return new WaitForSeconds(3);
         UISkipTurnMessage.SetActive(false);
-        yield return new WaitForSecondsRealtime(3);
+        yield return new WaitForSeconds(3);
 
     }
 
@@ -343,9 +439,9 @@ public class StateManger : MonoBehaviour
        UIMoveAhead3.SetActive(true);
        // PlayerMoveAhead3.enabled = true;
         // wait one sec
-        yield return new WaitForSecondsRealtime(2);
+        yield return new WaitForSeconds(2);
        UIMoveAhead3.SetActive(false);
-        yield return new WaitForSecondsRealtime(2);
+        yield return new WaitForSeconds(2);
         DoChanceClick();
          StartCoroutine(JustWaitUICoroutine());
 
@@ -360,9 +456,9 @@ public class StateManger : MonoBehaviour
      UIMoveAhead6.SetActive(true);
     //    PlayerMoveAhead6.enabled = true;
         // wait one sec
-        yield return new WaitForSecondsRealtime(2);
+        yield return new WaitForSeconds(2);
         UIMoveAhead6.SetActive(false);
-        yield return new WaitForSecondsRealtime(2);
+        yield return new WaitForSeconds(2);
         DoChanceClick();
         StartCoroutine(JustWaitUICoroutine());
 
@@ -371,11 +467,11 @@ public class StateManger : MonoBehaviour
     {
 
         // wait one sec
-        Debug.Log("Just Wait)");
+        Debug.Log("StateManger Just Wait)");
         
         
 
-        yield return new WaitForSecondsRealtime(1);
+        yield return new WaitForSeconds(1);
         
 
 
@@ -404,7 +500,7 @@ public class StateManger : MonoBehaviour
     //fucntion for the roll again fucntion
     public void RollAgain()
     {
-
+        Debug.Log("Roll Again function");
         // Reset all the variables back to begin of turn setting
         //start of a players turn
         IsDoneRolling = false;
@@ -417,7 +513,7 @@ public class StateManger : MonoBehaviour
     // Function for the Chnace card system
     public void ChanceCard()
     {
-    
+        Debug.Log("Chance Card Function");
             // randomize through the chance string and select a value
         string chanceCards = ChanceCards1[Random.Range(0, ChanceCards1.Length)];
      
@@ -604,11 +700,11 @@ public class StateManger : MonoBehaviour
 
                         // BasicAI simply picks a legal move at random
 
-                        PlayerShips pickedStone = PickChanceStoneToMove(ChancelegalStones);
-                        Debug.Log("Picked Stone " + pickedStone);
-      //  UIMoveAhead3.SetActive(false);
-     //   UIMoveAhead6.SetActive(false);
-        pickedStone.MoveMe();            // run the moveme function in playerships script
+                        PlayerShips chancepickedStone = PickChanceStoneToMove(ChancelegalStones);
+                        Debug.Log("Picked Stone " + chancepickedStone);
+        //  UIMoveAhead3.SetActive(false);
+        //   UIMoveAhead6.SetActive(false);
+        chancepickedStone.MoveMe();            // run the moveme function in playerships script
 
                     }
 
@@ -623,34 +719,40 @@ public class StateManger : MonoBehaviour
                                 }
 
         // Loop through all of a player's stones
-        if (CurrentPlayerId == 0)
-        {
-            GameObject PLayer1_ship;
-
-            ThePlayer1 = GameObject.FindObjectOfType<Player>();
-            PLayer1_ship = GameObject.Find("PLAYER1");
-            
-        }
+    //    if (CurrentPlayerId == 0)
+   //     {
+   //         GameObject PLayer1_ship;
+   //
+    //        ThePlayer1 = GameObject.FindObjectOfType<Player>();
+    //        PLayer1_ship = GameObject.Find("PLAYER1");
+    //        
+     //   }
 
 
 
       //  PlayerShips1[] pss = GameObject.FindGameObjectsWithTag("Andrew1");
 
-        PlayerShips[] pss = GameObject.FindObjectsOfType<PlayerShips>();
+        PlayerShips[] pss1 = GameObject.FindObjectsOfType<PlayerShips>();
 
-                                foreach (PlayerShips ps in pss)             //check on every ship found to see if it can move
+                                foreach (PlayerShips ps1 in pss1)             //check on every ship found to see if it can move
                                 {
-                                    if (ps.PlayerId == CurrentPlayerId)
+                                    if (ps1.PlayerId == CurrentPlayerId)
                                     {
-                                         Debug.Log("ps.PlayerId " + ps.PlayerId);
+                                         Debug.Log("ps1.PlayerId " + ps1.PlayerId);
                
 
 
-                if (ps.CanLegallyMoveAhead(DiceTotal))  // check if ship can move based on dice total display
+                if (ps1.CanLegallyMoveAhead(DiceTotal))  // check if ship can move based on dice total display
                                         {
-                                            Debug.Log("ps to array" + ps);
-                                            ChancelegalStones.Add(ps);   // send back values to array
+                                            Debug.Log("ps1 to array" + ps1);
+                                                Debug.Log("PS is " + ps1);
+                                                Debug.Log("ps.CanLegallyMoveAhead " + ps1.CanLegallyMoveAhead(DiceTotal));
+                                                ChancelegalStones.Add(ps1);   // send back values to array
                                         }
+                else
+                {
+                    Debug.Log("############# STATEMAN ps.CanLegallyMoveAhead(theStateManager.DiceTotal)  is false");
+                }
                                     }
                                 }
 
@@ -661,9 +763,12 @@ public class StateManger : MonoBehaviour
   virtual protected PlayerShips PickChanceStoneToMove(PlayerShips[] ChancelegalStones)
             {
 
-                return ChancelegalStones[Random.Range(0, 0)];
+                return ChancelegalStones[Random.Range(0, 1)];
 
 
             }
-    
+
+
+   
 }
+

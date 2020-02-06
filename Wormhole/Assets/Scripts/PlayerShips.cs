@@ -54,10 +54,11 @@ public class PlayerShips : MonoBehaviour
 
     public GameObject UIWormhole;   //game object for skip turn on screen
     public GameObject UIWormHoleVideo;
+    public GameObject UISpaceGateenter;
 
 
     // added into handle player moving off board
-    bool scoreMe = false;
+  bool scoreMe = false;
 
     // added in to keep record of tiles to move across
     Tile[] moveQueue;
@@ -186,7 +187,8 @@ public class PlayerShips : MonoBehaviour
         {
 
             //the movement queue is empty, we are done moving
-            Debug.Log("Done animating.");
+          //  Debug.Log("Done animating.");
+            
             this.isAnimating = false;
             theStateManager.AnimationsPlaying --;
             
@@ -198,98 +200,103 @@ public class PlayerShips : MonoBehaviour
 
             if (currentTile != null && currentTile.ChanceCard)
             {
-                theStateManager.ChanceCard();
+               theStateManager.ChanceCard();
+                
             }
 
-            if (currentTile != null && currentTile.Spacegate2)
-            {
+              if (currentTile != null && currentTile.Spacegate2 || currentTile.Spacegate5 || currentTile.Spacegate8 || currentTile.Spacegate12 || currentTile.Spacegate38 || currentTile.Spacegate53 || currentTile.Spacegate55 || currentTile.Spacegate62)
+              {
 
-
-
-                StartCoroutine(EnterWormHole());
-                // Debug.Log("Finished wait");
-
-                WormholeDest = spacegate24;
-                theStateManager.AnimationsPlaying++;
+                //Debug.Log("Wopuld have done wormhole");            
+               WormholeFunction();
+               // StopAllCoroutines();
 
             }
 
-            if (currentTile != null && currentTile.Spacegate5)
-            {
-                StartCoroutine(EnterWormHole());
-                // Debug.Log("Finished wait");
 
-                WormholeDest = spacegate48;
-                theStateManager.AnimationsPlaying++;
+            /*   StartCoroutine(EnterSpaceGate());
+                  // Debug.Log("Finished wait");
 
-            }
+                  WormholeDest = spacegate24;
+                  theStateManager.AnimationsPlaying++;
+*/
 
-            if (currentTile != null && currentTile.Spacegate8)
-            {
+            /*  if (currentTile != null && currentTile.Spacegate5)
+              {
+                  StartCoroutine(EnterSpaceGate());
+                  // Debug.Log("Finished wait");
 
-                StartCoroutine(EnterWormHole());
-                // Debug.Log("Finished wait");
+                  WormholeDest = spacegate48;
+                  theStateManager.AnimationsPlaying++;
 
-                WormholeDest = spacegate28;
-                theStateManager.AnimationsPlaying++;
+              }
 
+              if (currentTile != null && currentTile.Spacegate8)
+              {
 
-            }
+                  StartCoroutine(EnterSpaceGate());
+                  // Debug.Log("Finished wait");
 
-            if (currentTile != null && currentTile.Spacegate12)
-            {
-                StartCoroutine(EnterWormHole());
-                // Debug.Log("Finished wait");
-
-                WormholeDest = spacegate52;
-                theStateManager.AnimationsPlaying++;
+                  WormholeDest = spacegate28;
+                  theStateManager.AnimationsPlaying++;
 
 
-            }
+              }
 
-            if (currentTile != null && currentTile.Spacegate38)
-            {
-                StartCoroutine(EnterWormHole());
-                // Debug.Log("Finished wait");
+              if (currentTile != null && currentTile.Spacegate12)
+              {
+                  StartCoroutine(EnterSpaceGate());
+                  // Debug.Log("Finished wait");
 
-                WormholeDest = spacegate65;
-                theStateManager.AnimationsPlaying++;
-
-
-            }
-
-            if (currentTile != null && currentTile.Spacegate53)
-            {
-                StartCoroutine(EnterWormHole());
-                // Debug.Log("Finished wait");
-
-                WormholeDest = spacegate72;
-                theStateManager.AnimationsPlaying++;
+                  WormholeDest = spacegate52;
+                  theStateManager.AnimationsPlaying++;
 
 
-            }
-            if (currentTile != null && currentTile.Spacegate55)
-            {
-                StartCoroutine(EnterWormHole());
-                // Debug.Log("Finished wait");
+              }
 
-                WormholeDest = spacegate93;
-                theStateManager.AnimationsPlaying++;
+              if (currentTile != null && currentTile.Spacegate38)
+              {
+                  StartCoroutine(EnterSpaceGate());
+                  // Debug.Log("Finished wait");
 
-
-            }
-
-            if (currentTile != null && currentTile.Spacegate62)
-            {
-                StartCoroutine(EnterWormHole());
-                // Debug.Log("Finished wait");
-
-                WormholeDest = spacegate78;
-                theStateManager.AnimationsPlaying++;
+                  WormholeDest = spacegate65;
+                  theStateManager.AnimationsPlaying++;
 
 
-            }
+              }
 
+              if (currentTile != null && currentTile.Spacegate53)
+              {
+                  StartCoroutine(EnterSpaceGate());
+                  // Debug.Log("Finished wait");
+
+                  WormholeDest = spacegate72;
+                  theStateManager.AnimationsPlaying++;
+
+
+              }
+              if (currentTile != null && currentTile.Spacegate55)
+              {
+                  StartCoroutine(EnterSpaceGate());
+                  // Debug.Log("Finished wait");
+
+                  WormholeDest = spacegate93;
+                  theStateManager.AnimationsPlaying++;
+
+
+              }
+
+              if (currentTile != null && currentTile.Spacegate62)
+              {
+                  StartCoroutine(EnterSpaceGate());
+                  // Debug.Log("Finished wait");
+
+                  WormholeDest = spacegate78;
+                  theStateManager.AnimationsPlaying++;
+
+
+              }
+              */
             if (currentTile != null && currentTile.Wormhole33)
             {
                 StartCoroutine(EnterWormHole());
@@ -375,7 +382,7 @@ public class PlayerShips : MonoBehaviour
 
 
             }
-            
+           
 
         }
     }
@@ -400,11 +407,12 @@ public class PlayerShips : MonoBehaviour
 
     public void MoveMe()
     {
-
+        Debug.Log("$$$$$$$$$$$$$$$$ startingTile Move me");
 
 
         if (theStateManager.CurrentPlayerId != PlayerId)
         {
+     //       Debug.Log("Player ID mismatch");
             return;  // its not my turn
 
         }
@@ -416,7 +424,7 @@ public class PlayerShips : MonoBehaviour
 
             // Have we rolled the dice ?
 
-
+       //     Debug.Log("We have not finshd rolling");
 
             //CHECK TO MAKE SURE THERE IS NO ui OBJECT IN THE WAY
             return;
@@ -425,12 +433,13 @@ public class PlayerShips : MonoBehaviour
         if (theStateManager.IsDoneClicking == true)
         {
             // we have already done a move
+       //     Debug.Log("Done cliking is true");
             return;
         }
 
 
         int spacesToMove = theStateManager.DiceTotal;
-
+     //   Debug.Log("space to move " + spacesToMove);
         //removeing due to movie 7 1:27    
         if (spacesToMove == 0)
         {
@@ -465,9 +474,56 @@ public class PlayerShips : MonoBehaviour
             currentTile = finalTile;
             if (finalTile.IsScoringSpace == false)   // "Scoring" tiles are always "empty"
             {
+         //       Debug.Log("IsScoring Move me");
                 finalTile.PlayerShips = this;
             }
 
+            if (finalTile.IsScoringSpace == true)   
+            {
+         //       Debug.Log("IsScoring true");
+         //       Debug.Log("Setting player to skipp all turn");
+                if (theStateManager.CurrentPlayerId == 0 )  // if player id and skip id match then skip the turn
+                {
+                    ThePlayers.player1_hum_comp = 2;
+                    
+
+
+
+                    //  UISkipTurnMessage.SetActive(false);
+                }
+
+                if (theStateManager.CurrentPlayerId == 1 )
+                {
+
+                    ThePlayers.player2_hum_comp = 2;
+
+
+
+                    //   UISkipTurnMessage.SetActive(false);
+                }
+
+                if (theStateManager.CurrentPlayerId == 2 )
+                {
+
+                    ThePlayers.player3_hum_comp = 2;
+
+
+
+                    //  UISkipTurnMessage.SetActive(false);
+                }
+
+                if (theStateManager.CurrentPlayerId == 3 )
+                {
+
+                    ThePlayers.player4_hum_comp = 2;
+
+
+
+                    //  UISkipTurnMessage.SetActive(false);
+                }
+
+
+            }
 
         }
 
@@ -556,6 +612,7 @@ public class PlayerShips : MonoBehaviour
         if (currentTile != null && currentTile.IsScoringSpace)
         {
             // This stone is already on a scoring tile, so we can't move.
+         //   Debug.Log("CanLegallyMoveAhead is scoroing");
             return false;
         }
 
@@ -592,7 +649,10 @@ public class PlayerShips : MonoBehaviour
         if (destinationTile.PlayerShips.PlayerId == this.PlayerId)
         {
             // we cant land on one of our stones
-            return false;
+            /// orig code return false;
+            /// // force to true to fix bug
+            Debug.Log("SHould be doing destinationTile.PlayerShips.PlayerId");
+             return true;
 
         }
         // if this is an enemy stone is it in a safe square ?
@@ -623,7 +683,7 @@ public class PlayerShips : MonoBehaviour
     public void ReturnToStorage()
     {
         // if we had defined stonestorage this is where t wouldreturn it to storage
-        Debug.Log("Return to storage was activated");
+      //  Debug.Log("Return to storage was activated");
 
     }
 
@@ -633,17 +693,33 @@ public class PlayerShips : MonoBehaviour
 
               
         theStateManager.UIWormhole.SetActive(true);
-        yield return new WaitForSecondsRealtime(2);
+        yield return new WaitForSeconds(2);
         
         theStateManager.UIWormhole.SetActive(false);
+        theStateManager.AnimationsPlaying--;
+        Debug.Log("UIWormholeenter AnimationsPlaying " + theStateManager.AnimationsPlaying);
+        yield return new WaitForSeconds(2);
         
-        yield return new WaitForSecondsRealtime(6);
-           
+
     }
 
-    public IEnumerator PauseGame (float Pausetime)
+    IEnumerator UISpaceGate()
     {
-        Debug.Log("instide PauseGame into");
+
+
+        theStateManager.UISpaceGateenter.SetActive(true);
+        yield return new WaitForSeconds(2);
+
+        theStateManager.UISpaceGateenter.SetActive(false);
+        theStateManager.AnimationsPlaying--;
+        Debug.Log("UIWormholeenter AnimationsPlaying " + theStateManager.AnimationsPlaying);
+        yield return new WaitForSeconds(2);
+   
+
+    }
+  /*  public IEnumerator PauseGame (float Pausetime)
+    {
+       // Debug.Log("instide PauseGame into");
         Time.timeScale = 0f;
        // wormholeenter = 1;
 
@@ -657,17 +733,17 @@ public class PlayerShips : MonoBehaviour
             }
      
         Time.timeScale = 1f;
-        Debug.Log("Done with Pause into");
+      //  Debug.Log("Done with Pause into");
        // wormholeenter = 5;
 
 
 
 
     }
-
-    public IEnumerator PauseGameexit(float Pausetimeexit)
+    */
+  /*  public IEnumerator PauseGameexit(float Pausetimeexit)
     {
-        Debug.Log("instide PauseGame exit");
+     //   Debug.Log("instide PauseGame exit");
         Time.timeScale = 0f;
         float pauseEndTimeexit = Time.realtimeSinceStartup + Pausetimeexit;
         while (Time.realtimeSinceStartup < pauseEndTimeexit)
@@ -675,32 +751,49 @@ public class PlayerShips : MonoBehaviour
             yield return 0;
         }
         Time.timeScale = 1f;
-        Debug.Log("Done with Pause eit");
+    //    Debug.Log("Done with Pause eit");
         theStateManager.AnimationsPlaying--;
 
     }
-
+*/
 
     IEnumerator EnterWormHole()
     {
-
-
-       
+        //   Debug.Log("EnterWormHole function");
+        theStateManager.AnimationsPlaying++;
         UIWormhole.SetActive(true);
         
         // wait one sec
-        yield return new WaitForSecondsRealtime(1);
+        yield return new WaitForSeconds(1);
         UIWormhole.SetActive(false);
         UIWormHoleVideo.SetActive(true);
-        yield return new WaitForSecondsRealtime(1);
+        yield return new WaitForSeconds(1);
         wormhometravel();
        StartCoroutine(JustWaitUICoroutine());
+      //  StopCoroutine(JustWaitUICoroutine());
+    }
+
+    IEnumerator EnterSpaceGate()
+    {
+        //   Debug.Log("Spacegate function");
+        theStateManager.AnimationsPlaying++;
+        UISpaceGateenter.SetActive(true);
+
+        // wait one sec
+        yield return new WaitForSeconds(1);
+        UISpaceGateenter.SetActive(false);
+        UIWormHoleVideo.SetActive(true);
+        yield return new WaitForSeconds(1);
+        wormhometravel();
+       theStateManager.AnimationsPlaying--;
+      //StartCoroutine(JustWaitUICoroutine());
+        //  StopCoroutine(JustWaitUICoroutine());
 
     }
 
     public void wormhometravel()
     {
-        
+     //   Debug.Log("Wormhole function");
                 Tile finalTile = moveQueue[moveQueue.Length - 1];
                     finalTile = WormholeDest;
         
@@ -711,22 +804,77 @@ public class PlayerShips : MonoBehaviour
         currentTile = finalTile;
                     moveQueue = null;
                     moveQueueIndex = 0;
+        theStateManager.AnimationsPlaying--;
         UIWormHoleVideo.SetActive(false);
 
     }
 
     IEnumerator JustWaitUICoroutine()
     {
-
+        //    Debug.Log(" PLayer JustWaitUICoroutine");
         // wait one sec
-        Debug.Log("Just Wait)");
 
 
 
-        yield return new WaitForSecondsRealtime(2);
+
+        // yield return new WaitForSecondsRealtime(2);
+        //yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(2);
         theStateManager.AnimationsPlaying--;
+    //    Debug.Log("Just Wait playerships )");
 
 
 
     }
+
+    void WormholeFunction()
+    {
+
+
+        if (currentTile.Spacegate2)
+        {
+            WormholeDest = spacegate24;
+        }
+
+        if (currentTile.Spacegate5)
+        {
+            WormholeDest = spacegate48;
+        }
+
+        if (currentTile.Spacegate8)
+        {
+            WormholeDest = spacegate28;
+        }
+
+        if (currentTile.Spacegate12)
+        {
+            WormholeDest = spacegate52;
+        }
+
+        if (currentTile.Spacegate38)
+        {
+            WormholeDest = spacegate65;
+        }
+        if (currentTile.Spacegate53)
+        {
+            WormholeDest = spacegate72;
+        }
+        if (currentTile.Spacegate55)
+        {
+            WormholeDest = spacegate93;
+        }
+        if (currentTile.Spacegate62)
+        {
+            WormholeDest = spacegate78;
+        }
+                                 
+        StartCoroutine(EnterSpaceGate());
+        
+
+
+
+        theStateManager.AnimationsPlaying++;
+
+    }
+    
 }

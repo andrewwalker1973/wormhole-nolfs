@@ -97,4 +97,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   smoothspeed: 4
-  offset: {x: -70, y: 60, z: 0}
+  offset: {x: -100, y: 60, z: 0}

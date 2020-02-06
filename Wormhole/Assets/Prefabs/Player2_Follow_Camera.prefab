@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8772043301208488960
 Transform:
   m_ObjectHideFlags: 0
@@ -97,4 +97,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   smoothspeed: 4
-  offset: {x: 90, y: 70, z: 0}
+  offset: {x: 100, y: 70, z: 0}

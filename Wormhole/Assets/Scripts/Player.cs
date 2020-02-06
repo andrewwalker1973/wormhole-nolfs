@@ -10,20 +10,24 @@ public class Player : MonoBehaviour
     public  float player1_hum_comp;
     float player1_ship;
     bool player1_onboard;
+  
 
 
     public float player2_hum_comp;
     float player2_ship;
     bool player2_onboard;
+   
 
 
     public float player3_hum_comp;
     float player3_ship;
     bool player3_onboard;
+    
 
     public float player4_hum_comp;
     float player4_ship;
     bool player4_onboard;
+    
 
 
     //define spawn points for player ships
@@ -106,6 +110,7 @@ public class Player : MonoBehaviour
                             
                             // add in code not to show a ship
                             player1_onboard = true;
+                    
                             break;
                     }
          
@@ -132,6 +137,7 @@ public class Player : MonoBehaviour
                     
                     // add in code not to show a ship
                     player2_onboard = true;
+                  
                     break;
             }
             //check_player1_ship();
@@ -158,6 +164,7 @@ public class Player : MonoBehaviour
                    
                     // add in code not to show a ship
                     player3_onboard = true;
+                   
                     break;
             }
             //check_player1_ship();
@@ -183,6 +190,7 @@ public class Player : MonoBehaviour
                     
                     // add in code not to show a ship
                     player4_onboard = true;
+                  
                     break;
             }
             //check_player1_ship();
