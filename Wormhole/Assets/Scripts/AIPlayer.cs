@@ -30,7 +30,6 @@ public class AIPlayer
         {
             // we need to roll the dice            
             DoRoll();
-        //    Debug.Log("Do roll Done");
             return;
         }
 
@@ -38,9 +37,8 @@ public class AIPlayer
         {
 
             // we have a die roll but still need to pick ship and move
-        //    Debug.Log("Do Click start");
+        
             DoClick();
-         //   Debug.Log("Do Click Done");
             return;
 
         }
@@ -48,7 +46,6 @@ public class AIPlayer
 
     virtual protected void DoRoll()
     {
-       // Debug.Log("DoRoll");
         // roll without clicking the button      
         GameObject.FindObjectOfType<DiceRoller>().RollTheDice();       // find the script diceroller and run the function "rollthedice
         
@@ -57,13 +54,11 @@ public class AIPlayer
     virtual protected void DoClick()
     {
 
-        Debug.Log("DoClick");
+        
         // Pick a stone to move, then "click" it.
-
-
-      
+                     
          PlayerShips[] legalStones = GetLegalMoves();
-           Debug.Log("DoClick   legal Stones" + legalStones[0]);
+           
           if (legalStones == null || legalStones.Length == 0)
           {
               if (legalStones == null)
@@ -74,16 +69,10 @@ public class AIPlayer
               if (legalStones.Length == 0)
               {
                   Debug.Log("legalStones.Length setting");
-                  //   PlayerShips[] legalStones1 = GetLegalMoves();
-                  //    Debug.Log(" force legalStones1.Length " + legalStones1.Length);
-                 // legalStones = GetLegalMoves();
-
+                  
               }
               // We have no legal moves.  How did we get here?
               // We might still be in a delayed coroutine somewhere. Let's not freak out.
-              Debug.Log("!!!!!!!!!!!!!!!!!  in no legal stones fucntion");
-              Debug.Log("legalStones.Length " + legalStones.Length);
-              Debug.Log("legalStones " + legalStones);
               return;
           }
 
@@ -94,22 +83,13 @@ public class AIPlayer
           // BasicAI simply picks a legal move at random
 
           PlayerShips pickedStone = PickStoneToMove(legalStones);
-        Debug.Log("Picked stone  legal sones " + pickedStone);
-          Debug.Log("legalStones" + legalStones[0]);
-          Debug.Log("Legalstones.length " + legalStones.Length);
-        Debug.Log("AI Move me" + pickedStone );
+        
         if (pickedStone == null)
         {
-            Debug.Log("&&&&&&&&&& pickedStone is null");
+            Debug.Log("pickedStone is null");
         }
         
              pickedStone.MoveMe();            // run the moveme function in playerships script
-
-
-      
-
-
-        
     }
 
 
@@ -117,21 +97,21 @@ public class AIPlayer
 
 virtual protected PlayerShips PickStoneToMove(PlayerShips[] legalStones)
 {
-       Debug.Log("PickStoneToMove");
-        // return legalStones[Random.Range(0, legalStones.Length)];
+       
+        
         return legalStones[UnityEngine.Random.Range(0,1)];
 
     }
 
 
 
-/// Returns a list of stones that can be legally moved
+
 
 protected PlayerShips[] GetLegalMoves()
 {
 
       
-      //  Debug.Log("GetLegalMoves");
+    
             List<PlayerShips> legalStones = new List<PlayerShips>();
         if (legalStones == null)
         {
@@ -140,30 +120,21 @@ protected PlayerShips[] GetLegalMoves()
         }
 
         if (theStateManager.DiceTotal == 0)   // make sure we dont roll a 0
-    {
-            //       Debug.Log("DiceRoller total = 0");
-            Debug.Log("sssSSSSSSS" + legalStones.ToArray());
-        return legalStones.ToArray();
-    }
+        {           
+            return legalStones.ToArray();
+        }
         
         // Loop through all of a player's stones
         PlayerShips[] pss = GameObject.FindObjectsOfType<PlayerShips>();
 
         foreach (PlayerShips ps in pss)             //check on every ship found to see if it can move
-    {
-        if (ps.PlayerId == theStateManager.CurrentPlayerId)
         {
-               Debug.Log("ps.name " + ps.name);
-                Debug.Log("ps.playerid " + ps.PlayerId);
-              //  Debug.Log("theStateManager.CurrentPlayerId " + theStateManager.CurrentPlayerId);
-             //   Debug.Log("theStateManager.DiceTotal " + theStateManager.DiceTotal);
-                if (ps.CanLegallyMoveAhead(theStateManager.DiceTotal))  // check if ship can move based on dice total display  equates to true/false
+            if (ps.PlayerId == theStateManager.CurrentPlayerId)
             {
-                    //       Debug.Log("Add stone to array");
-               //     Debug.Log("FindObjectsOfType " + legalStones);
-                    Debug.Log("PS is " + ps);
-                    Debug.Log("ps.CanLegallyMoveAhead " + ps.CanLegallyMoveAhead(theStateManager.DiceTotal));
-                    //Debug.Log("GetLegalMoves  legalStones" + legalStones[0]);
+               
+                if (ps.CanLegallyMoveAhead(theStateManager.DiceTotal))  // check if ship can move based on dice total display  equates to true/false
+                {
+                    
                     legalStones.Add(ps);   // send back values to array
             }
                 else

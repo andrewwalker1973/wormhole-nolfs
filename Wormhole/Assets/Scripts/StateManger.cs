@@ -117,10 +117,10 @@ public class StateManger : MonoBehaviour
     void setUpPlayers()
     {
 
-        ThePlayers.player1_hum_comp = 1;
+        ThePlayers.player1_hum_comp = 0;
         ThePlayers.player2_hum_comp = 1;
-        ThePlayers.player3_hum_comp = 1;
-        ThePlayers.player4_hum_comp = 1;
+        ThePlayers.player3_hum_comp = 0;
+        ThePlayers.player4_hum_comp = 0;
 
         //Is a human player value is  null 
         //  if  new AIPlayer(); is an AI PLAYER
@@ -204,9 +204,9 @@ public class StateManger : MonoBehaviour
     // fucntion for new turn of player
     public void NewTurn()
     {
-        Debug.Log("Stopping justwait statemanager");
+       // Debug.Log("Stopping justwait statemanager");
        // StopCoroutine(JustWaitUICoroutine());
-        StopAllCoroutines();
+     //   StopAllCoroutines();
         Debug.Log(" ************     ");
         Debug.Log(" ************     ");
         Debug.Log(" ************     ");
@@ -394,8 +394,28 @@ public class StateManger : MonoBehaviour
             return;
 
         }
-        //loop through all the player stones
-        //  bool hasLegalMove = false;
+        // Loop through all of a player's stones
+        PlayerShips[] pss2 = GameObject.FindObjectsOfType<PlayerShips>();
+        bool hasLegalMove = false;
+        foreach (PlayerShips ps2 in pss2)
+        {
+            if (ps2.PlayerId == CurrentPlayerId)
+            {
+                if (ps2.CanLegallyMoveAhead(DiceTotal))
+                {
+                    // TODO: Highlight stones that can be legally moved
+                    hasLegalMove = true;
+                }
+            }
+        }
+
+        // If no legal moves are possible, wait a sec then move to next player (probably give message)
+        if (hasLegalMove == false)
+        {
+            StartCoroutine(NoLegalMovesCoroutine());
+            return;
+        }
+       
 
         //Highlight the ones that can be legal moved
         // if no logal moves wait a second then move to next player with message
