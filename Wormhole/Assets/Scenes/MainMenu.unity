@@ -96,9 +96,10 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
+    m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: c304edff42e4cff49848ea0c28e1a5d2,
     type: 2}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1968,7 +1969,8 @@ MonoBehaviour:
     Models
 
 
-    SF Fighter
+    SF
+    Fighter
 
     Spacefighter
 
@@ -1977,7 +1979,8 @@ MonoBehaviour:
     UAV Trident
 
 
-    Special Thanks
+    Special
+    Thanks
 
 
 
@@ -3003,7 +3006,8 @@ MonoBehaviour:
   m_Text: 'UDMY Course - Learn To Create A Complete Menu System in Unity (James Doyle)
 
 
-    Andrew Walker
+    Andrew
+    Walker
 
 
 
@@ -3017,7 +3021,8 @@ MonoBehaviour:
 
     Alexandr Voevodov
 
-    Ignacio Berge
+    Ignacio
+    Berge
 
     Jaroslav Grafskiy
 
@@ -9954,8 +9959,9 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2057385056}
   m_Enabled: 1
-  serializedVersion: 9
+  serializedVersion: 10
   m_Type: 1
+  m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 3.1415927
   m_Range: 10

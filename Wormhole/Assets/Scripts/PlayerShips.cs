@@ -31,7 +31,7 @@ public class PlayerShips : MonoBehaviour
     private bool Player3_finished;
     private bool Player4_finished;
 
-
+    //private bool SomebodyWon;
     //private bool isWon;
 
     public Tile startingTile;
@@ -71,8 +71,12 @@ public class PlayerShips : MonoBehaviour
     public GameObject UIWormHoleVideo;
     public GameObject UISpaceGateenter;
     public GameObject UIPLayerScore;
+    public GameObject UIResumeButton;
 
     public TMP_Text PlayerWon;
+    public TMP_Text PlayerwonLeft;
+
+    //public int NumberOfPlayersStillPlaying = 4; // used to count how many still on the board
 
 
     // added into handle player moving off board
@@ -88,6 +92,7 @@ public class PlayerShips : MonoBehaviour
     private readonly object PlayerShipss;
     Tile theTiles;
 
+    int NumberOfPlayersStillPlaying1 = StateManger.NumberOfPlayersStillPlaying;
     //  DiceRoller theDiceRoller;
 
 
@@ -96,8 +101,10 @@ public class PlayerShips : MonoBehaviour
     void Start()
     {
         theStateManager = GameObject.FindObjectOfType<StateManger>();
+      //   StateManger Statemanger = theStateManager.GetComponent<StateManger>();
         thePlayerWon = GameObject.FindObjectOfType<PlayerWon>();
         //  theChanceCards = GameObject.FindObjectOfType<ChanceCards>();
+        // if (Statemanger.NumberOfPlayersStillPlaying == 1)
 
         targetPosition = this.transform.position;
 
@@ -453,7 +460,9 @@ public class PlayerShips : MonoBehaviour
 
     void OnMouseUp()
     {
-        MoveMe();
+        
+            MoveMe();
+        
 
     }
 
@@ -462,14 +471,14 @@ public class PlayerShips : MonoBehaviour
     public void MoveMe()
     {
         Debug.Log("$$$$$$$$$$$$$$$$ startingTile Move me");
+        
 
+                    if (theStateManager.CurrentPlayerId != PlayerId)
+                {
+                    Debug.Log("Player ID mismatch");
+                    return;  // its not my turn
 
-        if (theStateManager.CurrentPlayerId != PlayerId)
-        {
-     //       Debug.Log("Player ID mismatch");
-            return;  // its not my turn
-
-        }
+                }
 
 
         if (theStateManager.IsDoneRolling == false)
@@ -911,45 +920,120 @@ public class PlayerShips : MonoBehaviour
 
     public void EndGame()
     {
+       
         Debug.Log("Level complete");
+       
+        int NumberOfPlayersStillPlaying1 = StateManger.NumberOfPlayersStillPlaying;
+        bool SomebodyWon1 = StateManger.SomebodyWon;
 
-        // Mark the player as finished playing
-        if (PlayerId == 0)
+        // Decrease the player count as finished playing
+        if (PlayerId == 0 )
         {
-            Player1_finished = true;
-            PlayerWon.text = "Player1 has Finished ";
+            if (SomebodyWon1 == false)
+            {
+                PlayerWon.text = "You have Won !! Congratulations. ";
+            }
+            else
+            {
+                PlayerWon.text = "Player1 has Finished ";
+                
+            }
+            NumberOfPlayersStillPlaying1--;
+            SomebodyWon1 = true;
+
+
         }
 
         if (PlayerId == 1)
         {
-            Player2_finished = true;
-            PlayerWon.text = "Player2 has Finished ";
+            if (SomebodyWon1 == false)
+            {
+                PlayerWon.text = "You have Won !! Congratulations. ";
+            }
+            else
+            {
+                
+                PlayerWon.text = "Player2 has Finished ";
+                
+            }
+            NumberOfPlayersStillPlaying1--;
+            SomebodyWon1 = true;
         }
 
         if (PlayerId == 2)
         {
-            Player3_finished = true;
-            PlayerWon.text = "Player3 has Finished ";
+            if (SomebodyWon1 == false)
+            {
+                PlayerWon.text = "You have Won !! Congratulations. ";
+            }
+            else
+            {
+                PlayerWon.text = "Player3 has Finished ";
+            }
+
+                NumberOfPlayersStillPlaying1--;
+            SomebodyWon1 = true;
+
+            
         }
 
         if (PlayerId == 3)
         {
-            Player4_finished = true;
-            PlayerWon.text = "Player4 has Finished ";
+
+            if (SomebodyWon1 == false)
+            {
+                PlayerWon.text = "You have Won !! Congratulations. ";
+            }
+            else
+            {
+                PlayerWon.text = "Player4 has Finished ";
+            }
+            NumberOfPlayersStillPlaying1--;
+            SomebodyWon1 = true;
+
+            
         }
 
+        StateManger.NumberOfPlayersStillPlaying = NumberOfPlayersStillPlaying1;
+        StateManger.SomebodyWon = SomebodyWon1;
+
         // Who has won the race
-        
+
 
         // Who is left still playing
+        if (StateManger.NumberOfPlayersStillPlaying == 0)
+        {
+            PlayerwonLeft.text = "There are no more players playing";
+            UIResumeButton.SetActive(false);
+            //ebug.Log("Number of players" + theStateManager.NumberOfPlayersStillPlaying);
+        }
+           else
+           if (StateManger.NumberOfPlayersStillPlaying == 1)
+            {
+            PlayerwonLeft.text = " There are 1 players still playing";
+           // Debug.Log("Number of players" + theStateManager.NumberOfPlayersStillPlaying);
+        }
+            else
+            if (StateManger.NumberOfPlayersStillPlaying == 2)
+        {
+            PlayerwonLeft.text = " There are 2 players still playing";
+           // Debug.Log("Number of players" + theStateManager.NumberOfPlayersStillPlaying);
+        }
+        else
+            if (StateManger.NumberOfPlayersStillPlaying == 3)
+        {
+            PlayerwonLeft.text = " There are 3 players still playing";
+           // Debug.Log("Number of players" + theStateManager.NumberOfPlayersStillPlaying);
+        }
 
-
+        
+        
 
         UIPLayerScore.SetActive(true);
-      //  PlayerWon.text = "HI Player1 has finshed ";
+      
         Time.timeScale = 0f;
 
-      //  UIPLayerScore.SetActive(false);
+    
         
     }
 

@@ -107,9 +107,10 @@ public class Player : MonoBehaviour
                             player1_onboard = true;
                             break;
                         case 2:
-                            
-                            // add in code not to show a ship
-                            player1_onboard = true;
+
+                    // add in code not to show a ship
+                    check_player1_ship();
+                    player1_onboard = true;
                     
                             break;
                     }
@@ -134,8 +135,9 @@ public class Player : MonoBehaviour
                     player2_onboard = true;
                     break;
                 case 2:
-                    
+
                     // add in code not to show a ship
+                    check_player2_ship();
                     player2_onboard = true;
                   
                     break;
@@ -161,8 +163,9 @@ public class Player : MonoBehaviour
                     player3_onboard = true;
                     break;
                 case 2:
-                   
+
                     // add in code not to show a ship
+                    check_player3_ship();
                     player3_onboard = true;
                    
                     break;
@@ -187,8 +190,9 @@ public class Player : MonoBehaviour
                     player4_onboard = true;
                     break;
                 case 2:
-                    
+
                     // add in code not to show a ship
+                    check_player4_ship();
                     player4_onboard = true;
                   
                     break;
@@ -214,8 +218,9 @@ public class Player : MonoBehaviour
              player1_ships = Instantiate(Ship1, Player1_SpawnPoint.transform.position, Player1_SpawnPoint.transform.rotation);
               
                 player1_ships.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
-               player1_ships.transform.position = new Vector3(-5, 30, -130);
-                  player1_ships.SetActive(true);
+                //   player1_ships.transform.position = new Vector3(-5, 30, -130);
+                player1_ships.transform.position = new Vector3(-5, 5, -167);
+                player1_ships.SetActive(true);
                 player1_ships.tag = "Game_player_1";
                     player1_ships.name = "PLAYER1";
 
@@ -262,7 +267,7 @@ public class Player : MonoBehaviour
             case 0:
                 player2_ships = Instantiate(Ship1, Player2_SpawnPoint.transform.position, Player2_SpawnPoint.transform.rotation);
                 player2_ships.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-                player1_ships.transform.position = new Vector3(-5, 15, -134);
+                player1_ships.transform.position = new Vector3(-5, 15, -167);
                 player2_ships.SetActive(true);
                 player2_ships.name = "PLAYER2";
                 player2_ships.tag = "Game_player_2";
@@ -273,7 +278,7 @@ public class Player : MonoBehaviour
             case 1:
                 player2_ships = Instantiate(Ship2, Player2_SpawnPoint.transform.position, Player2_SpawnPoint.transform.rotation);
                 player2_ships.transform.localScale = new Vector3(0.2f, 0.4f, 0.2f);
-                player2_ships.transform.position = new Vector3(-5, 15, -138);
+                player2_ships.transform.position = new Vector3(-5, 2, -171);
                player2_ships.SetActive(true);
                                 player2_ships.name = "PLAYER2";
                 player2_ships.tag = "Game_player_2";
@@ -322,7 +327,7 @@ public class Player : MonoBehaviour
             case 2:
                 player3_ships = Instantiate(Ship3, Player3_SpawnPoint.transform.position, Player3_SpawnPoint.transform.rotation);
                 player3_ships.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-                player3_ships.transform.position = new Vector3(0.5f, 2, -133);
+                player3_ships.transform.position = new Vector3(0.5f, 1, -160);
                 player3_ships.SetActive(true);
                 player3_ships.name = "PLAYER3";
 
@@ -370,7 +375,7 @@ public class Player : MonoBehaviour
             case 3:
                 player4_ships = Instantiate(Ship4, Player4_SpawnPoint.transform.position, Player4_SpawnPoint.transform.rotation);
                 player4_ships.transform.localScale = new Vector3(0.1f,0.1f,0.1f);
-                player4_ships.transform.position = new Vector3(-4,12, -128);
+                player4_ships.transform.position = new Vector3(-4,4, -161);
                 player4_ships.SetActive(true);
                 player4_ships.name = "PLAYER4";
 

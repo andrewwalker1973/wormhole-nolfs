@@ -34,8 +34,9 @@ public class StateManger : MonoBehaviour
 
 
         setUpPlayers();   // run the function to determine who is human or computer
+        notplaying();
+        // try setup player to force a new turn at start
 
-     
 
     }
 
@@ -45,6 +46,7 @@ public class StateManger : MonoBehaviour
     DiceRoller TheDiceRoller;           // gain access to diceroller scrip vars
    
     public int NumberOfPlayers = 4; //max number of players playing
+  public static int NumberOfPlayersStillPlaying = 4; // used to count how many still on the board
     public int CurrentPlayerId = 0;  //set current playerid = 0 Ie - Player1
     public int DiceTotal;           // Total all dice rolls
 
@@ -68,6 +70,8 @@ public class StateManger : MonoBehaviour
     public int player2_skipping = 0;    // is player 2 skipping  0 = no 1 = yes
     public int player3_skipping = 0;    // is player 3 skipping  0 = no 1 = yes
     public int player4_skipping = 0;    // is player 4 skipping  0 = no 1 = yes
+
+    public static bool SomebodyWon;
 
 
 
@@ -117,10 +121,10 @@ public class StateManger : MonoBehaviour
     void setUpPlayers()
     {
 
-        ThePlayers.player1_hum_comp = 0;
-        ThePlayers.player2_hum_comp = 1;
-        ThePlayers.player3_hum_comp = 0;
-        ThePlayers.player4_hum_comp = 0;
+       // ThePlayers.player1_hum_comp = 1;
+      //  ThePlayers.player2_hum_comp = 1;
+      //  ThePlayers.player3_hum_comp = 1;
+      //  ThePlayers.player4_hum_comp = 1;
 
         //Is a human player value is  null 
         //  if  new AIPlayer(); is an AI PLAYER
@@ -133,15 +137,7 @@ public class StateManger : MonoBehaviour
         {
             PlayerAIs[0] = new AIPlayer();
         }
-      //  else
-      //  if (ThePlayers.player1_hum_comp == 2)
-      //  { 
-      //      PlayerAIs[0] = new AIPlayer();
-      //  }
-
-
-
-
+      
         if (ThePlayers.player2_hum_comp == 0)
         {
             PlayerAIs[1] = null;
@@ -151,13 +147,7 @@ public class StateManger : MonoBehaviour
         {
             PlayerAIs[1] = new AIPlayer();
         }
-      //  else
-       // if (ThePlayers.player2_hum_comp == 2)
-      //  {
-      //      PlayerAIs[1] = new AIPlayer();
-      //  }
-
-
+      
         if (ThePlayers.player3_hum_comp == 0)
         {
             PlayerAIs[2] = null;
@@ -167,13 +157,7 @@ public class StateManger : MonoBehaviour
         {
             PlayerAIs[2] = new AIPlayer();
         }
-      //  else
-     //   if (ThePlayers.player3_hum_comp == 2)
-     //   {
-     //       PlayerAIs[2] = new AIPlayer();
-     //   }
-
-
+      
         if (ThePlayers.player4_hum_comp == 0)
         {
             PlayerAIs[3] = null;
@@ -183,12 +167,7 @@ public class StateManger : MonoBehaviour
         {
             PlayerAIs[3] = new AIPlayer();
         }
-     //   else
-     //   if (ThePlayers.player4_hum_comp == 2)
-    //    {
-     //       PlayerAIs[3] = new AIPlayer();
-     //   }
-
+     
     }
 
 
@@ -385,54 +364,60 @@ public class StateManger : MonoBehaviour
     // Function to check that the move is legal
     public void CheckLegalMoves()
     {
-        Debug.Log("statemanager    CheckLegalMoves");
-        // if we roll a 0 we have no legal moves
-        if (DiceTotal == 0)
-        {
-            Debug.Log("DiceTotal == 0");
-            StartCoroutine( NoLegalMovesCoroutine() );
-            return;
 
-        }
-        // Loop through all of a player's stones
-        PlayerShips[] pss2 = GameObject.FindObjectsOfType<PlayerShips>();
-        bool hasLegalMove = false;
-        foreach (PlayerShips ps2 in pss2)
-        {
-            if (ps2.PlayerId == CurrentPlayerId)
+        Debug.Log("CurrentPlayerId == " + CurrentPlayerId);
+        //if (CurrentPlayerId == 0 && ThePlayers.player1_hum_comp != 2)  // if player id and skip id match then skip the turn
+       // {
+
+            Debug.Log("statemanager    CheckLegalMoves");
+            // if we roll a 0 we have no legal moves
+            if (DiceTotal == 0)
             {
-                if (ps2.CanLegallyMoveAhead(DiceTotal))
+                Debug.Log("DiceTotal == 0");
+                StartCoroutine(NoLegalMovesCoroutine());
+                return;
+
+            }
+            // Loop through all of a player's stones
+            PlayerShips[] pss2 = GameObject.FindObjectsOfType<PlayerShips>();
+            bool hasLegalMove = false;
+            foreach (PlayerShips ps2 in pss2)
+            {
+                if (ps2.PlayerId == CurrentPlayerId)
                 {
-                    // TODO: Highlight stones that can be legally moved
-                    hasLegalMove = true;
+                    if (ps2.CanLegallyMoveAhead(DiceTotal))
+                    {
+                        // TODO: Highlight stones that can be legally moved
+                        hasLegalMove = true;
+                    }
                 }
             }
-        }
 
-        // If no legal moves are possible, wait a sec then move to next player (probably give message)
-        if (hasLegalMove == false)
-        {
-            StartCoroutine(NoLegalMovesCoroutine());
-            return;
-        }
-       
+            // If no legal moves are possible, wait a sec then move to next player (probably give message)
+            if (hasLegalMove == false)
+            {
+                StartCoroutine(NoLegalMovesCoroutine());
+                return;
+            }
 
-        //Highlight the ones that can be legal moved
-        // if no logal moves wait a second then move to next player with message
-        Debug.Log("END statemanager CheckLegalMoves");
+
+            //Highlight the ones that can be legal moved
+            // if no logal moves wait a second then move to next player with message
+            Debug.Log("END statemanager CheckLegalMoves");
+      //  }
     }
 
-    // Function to display a UI message if there are no Legal moves available
+            // Function to display a UI message if there are no Legal moves available
     IEnumerator NoLegalMovesCoroutine()
-    {
-        // display mesage
-        NoLegalMovesPopup.SetActive(true);
-        // wait one sec
-        yield return new WaitForSeconds(1f);
-        NoLegalMovesPopup.SetActive(false);
-        NewTurn();
-        
+        {
+            // display mesage
+            NoLegalMovesPopup.SetActive(true);
+            // wait one sec
+            yield return new WaitForSeconds(1f);
+            NoLegalMovesPopup.SetActive(false);
+            NewTurn();
 
+        
     }
 
     IEnumerator SkipRollUICoroutine()
@@ -654,7 +639,7 @@ public class StateManger : MonoBehaviour
             IsDoneClicking = false;
           //  IsDoneAnimating = false;
             IsDoneRERoll = true;
-            DiceTotal = 6;
+            DiceTotal = 5;
        //     PlayerMoveAhead6.text = "Player1 Move Ahead 6 Spaces";
       //      PlayerMoveAhead6.enabled = true;
           //  UIMoveAhead6.SetActive(true);
