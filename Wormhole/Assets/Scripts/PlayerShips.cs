@@ -263,8 +263,9 @@ public class PlayerShips : MonoBehaviour
                 if (currentTile != null && currentTile.Spacegate2 || currentTile.Spacegate5 || currentTile.Spacegate8 || currentTile.Spacegate12 || currentTile.Spacegate38 || currentTile.Spacegate53 || currentTile.Spacegate55 || currentTile.Spacegate62)
               {
 
-                //Debug.Log("Wopuld have done wormhole");            
-               WormholeFunction();
+                //Debug.Log("Wopuld have done wormhole"); 
+               // this.
+                WormholeFunction();
                 Debug.Log("Anim Count " + theStateManager.AnimationsPlaying);
                // StopAllCoroutines();
 
@@ -356,10 +357,12 @@ public class PlayerShips : MonoBehaviour
               */
             if (currentTile != null && currentTile.Wormhole33)
             {
+                
                 StartCoroutine(EnterWormHole());
                 // Debug.Log("Finished wait");
-
+                
                 WormholeDest = wormhole7;
+                
                 theStateManager.AnimationsPlaying++;
                 transform.Rotate(0, 180, 0);
 
@@ -439,7 +442,7 @@ public class PlayerShips : MonoBehaviour
 
                 WormholeDest = wormhole79;
                 theStateManager.AnimationsPlaying++;
-                transform.Rotate(0, 180, 0);
+               
 
 
             }
@@ -827,13 +830,15 @@ public class PlayerShips : MonoBehaviour
         UIWormhole.SetActive(true);
         
         // wait one sec
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         UIWormhole.SetActive(false);
         UIWormHoleVideo.SetActive(true);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         wormhometravel();
-       StartCoroutine(JustWaitUICoroutine());
-      //  StopCoroutine(JustWaitUICoroutine());
+       
+        StartCoroutine(JustWaitUICoroutine());
+       
+        //  StopCoroutine(JustWaitUICoroutine());
     }
 
     IEnumerator EnterSpaceGate()
@@ -843,11 +848,12 @@ public class PlayerShips : MonoBehaviour
         UISpaceGateenter.SetActive(true);
 
         // wait one sec
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         UISpaceGateenter.SetActive(false);
         UIWormHoleVideo.SetActive(true);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         wormhometravel();
+       
      //  theStateManager.AnimationsPlaying--;
       StartCoroutine(JustWaitUICoroutine());
         //  StopCoroutine(JustWaitUICoroutine());

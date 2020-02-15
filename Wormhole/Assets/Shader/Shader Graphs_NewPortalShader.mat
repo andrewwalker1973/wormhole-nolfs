@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_PortalShader
+  m_Name: Shader Graphs_NewPortalShader
   m_Shader: {fileID: -6465566751694194690, guid: c08c8294118e1874ea507033189353e7,
     type: 3}
   m_ShaderKeywords: 
@@ -24,19 +24,10 @@ Material:
         m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - Texture2D_8A8B333F:
-        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_148D227B: 10
     - Vector1_1EF22E85: 0.18
-    - Vector1_2A4C103D: 1
-    - Vector1_8CF93B5C: 4.8
-    - Vector1_A3B8E393: 3.5
+    - Vector1_8CF93B5C: 4.72
     - Vector1_C8DE2FC0: 50
-    - Vector1_F5C9068: 0
-    - Vector1_FF4E06A: 0.5
+    - Vector1_F5C9068: 1
     m_Colors:
     - Color_3EE2F20F: {r: 4.6543074, g: 0.11037883, b: 0.22075766, a: 0}
-    - Color_7E1B5D77: {r: 4.434004, g: 0.41786423, b: 1.1839486, a: 0}

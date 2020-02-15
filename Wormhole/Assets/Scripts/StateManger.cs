@@ -121,10 +121,10 @@ public class StateManger : MonoBehaviour
     void setUpPlayers()
     {
 
-       // ThePlayers.player1_hum_comp = 1;
+      //  ThePlayers.player1_hum_comp = 1;
       //  ThePlayers.player2_hum_comp = 1;
-      //  ThePlayers.player3_hum_comp = 1;
-      //  ThePlayers.player4_hum_comp = 1;
+      //  ThePlayers.player3_hum_comp = 2;
+      //  ThePlayers.player4_hum_comp = 2;
 
         //Is a human player value is  null 
         //  if  new AIPlayer(); is an AI PLAYER
@@ -168,6 +168,24 @@ public class StateManger : MonoBehaviour
             PlayerAIs[3] = new AIPlayer();
         }
      
+        if (ThePlayers.player1_hum_comp == 2)
+        {
+            NumberOfPlayersStillPlaying--;
+        }
+        if (ThePlayers.player2_hum_comp == 2)
+        {
+            NumberOfPlayersStillPlaying--;
+        }
+        if (ThePlayers.player3_hum_comp == 2)
+        {
+            NumberOfPlayersStillPlaying--;
+        }
+        if (ThePlayers.player4_hum_comp == 2)
+        {
+            NumberOfPlayersStillPlaying--;
+        }
+
+        Debug.Log("NumberOfPlayersStillPlaying " + NumberOfPlayersStillPlaying);
     }
 
 
@@ -176,6 +194,7 @@ public class StateManger : MonoBehaviour
     {
         // roll without clicking the button
         TheDiceRoller.RollTheDice();     // find the script diceroller and run the function "rollthedice
+        UIRollAgainPopup.SetActive(false);
 
     }
 
@@ -183,9 +202,10 @@ public class StateManger : MonoBehaviour
     // fucntion for new turn of player
     public void NewTurn()
     {
-       // Debug.Log("Stopping justwait statemanager");
-       // StopCoroutine(JustWaitUICoroutine());
-     //   StopAllCoroutines();
+        // Debug.Log("Stopping justwait statemanager");
+        // StopCoroutine(JustWaitUICoroutine());
+        //   StopAllCoroutines();
+        
         Debug.Log(" ************     ");
         Debug.Log(" ************     ");
         Debug.Log(" ************     ");
@@ -432,6 +452,7 @@ public class StateManger : MonoBehaviour
         yield return new WaitForSeconds(3);
         UISkipTurnMessage.SetActive(false);
         yield return new WaitForSeconds(3);
+        AnimationsPlaying--;
 
     }
 
@@ -472,12 +493,13 @@ public class StateManger : MonoBehaviour
     {
 
         // wait one sec
-        Debug.Log("StateManger Just Wait)");
+        
         
         
 
-        yield return new WaitForSeconds(1);
-        
+        yield return new WaitForSeconds(2);
+        Debug.Log("StateManger Just Wait)");
+
 
 
     }
@@ -530,14 +552,15 @@ public class StateManger : MonoBehaviour
             IsDoneRERoll = true;            // Set the value for roll gain to be true so that the roll again functon willreset values
             
             RollAgain();                // run the roll again fucntion
-            
+           
+
         }
 
        
         //Skip Turn
         if (chanceCards == "Skip Turn")         // Chance cards selected
         {
-
+            AnimationsPlaying++;
             // based on the current player ID set the variables to skipp the next turn
             switch (CurrentPlayerId)
             {
@@ -594,7 +617,8 @@ public class StateManger : MonoBehaviour
                 
             }
 
-
+            StartCoroutine(JustWaitUICoroutine());
+            
 
         }
         if (chanceCards == "MoveAhead3")
