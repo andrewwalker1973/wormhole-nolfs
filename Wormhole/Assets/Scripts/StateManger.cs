@@ -20,13 +20,13 @@ public class StateManger : MonoBehaviour
         Camera ThePlayer3_camera = GameObject.Find("Player3_Follow_Camera(Clone)").GetComponent<Camera>();
         Camera ThePlayer4_camera = GameObject.Find("Player4_Follow_Camera(Clone)").GetComponent<Camera>();
 
-        
-        
+     //   Camera MainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();
 
 
 
-         
- 
+
+
+
         PlayerAIs = new AIPlayer[NumberOfPlayers];
         //code added to force player
         
@@ -449,9 +449,9 @@ public class StateManger : MonoBehaviour
         // wait one sec\
         Debug.Log("Skipping tunr co-routine");
         UISkipTurnMessage.SetActive(true);
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
         UISkipTurnMessage.SetActive(false);
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
         AnimationsPlaying--;
 
     }
@@ -511,6 +511,7 @@ public class StateManger : MonoBehaviour
         Camera ThePlayer2_camera = GameObject.Find("Player2_Follow_Camera(Clone)").GetComponent<Camera>();
         Camera ThePlayer3_camera = GameObject.Find("Player3_Follow_Camera(Clone)").GetComponent<Camera>();
         Camera ThePlayer4_camera = GameObject.Find("Player4_Follow_Camera(Clone)").GetComponent<Camera>();
+       // Camera MainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();
         MainCamera.enabled = false;
         ThePlayer1_camera.enabled = false;
         ThePlayer2_camera.enabled = false;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class MainMenu : MonoBehaviour
 {
@@ -10,7 +11,8 @@ public class MainMenu : MonoBehaviour
     public string firstlevel;
     public GameObject optionsScreen, CreditScreen, GameStartScreen, LoadGameScreen, NewGameScreen;
     public GameObject loadingScreen, loadingIcon;
-    public Text loadingText;
+    //public Text loadingText;
+    public TextMeshProUGUI loadingText;
 
 
     // Start is called before the first frame update

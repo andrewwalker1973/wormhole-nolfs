@@ -57,8 +57,13 @@ public class PlayerShips : MonoBehaviour
     public Tile wormhole45;
     public Tile wormhole68;
     public Tile wormhole79;
-    
 
+    public Camera MainCamera;            //define the main camera
+                                         //define the player follow cameras
+    public Camera ThePlayer1_camera;
+    public Camera ThePlayer2_camera;
+    public Camera ThePlayer3_camera;
+    public Camera ThePlayer4_camera;
 
     //   Tile WormholeDest;
 
@@ -832,10 +837,17 @@ public class PlayerShips : MonoBehaviour
         // wait one sec
         yield return new WaitForSeconds(2);
         UIWormhole.SetActive(false);
-        UIWormHoleVideo.SetActive(true);
+        //  UIWormHoleVideo.SetActive(true);
+        theStateManager.disableAllCamera();
+        MainCamera.enabled = true;
+        
         yield return new WaitForSeconds(2);
         wormhometravel();
-       
+        MainCamera.enabled = false;
+        if (PlayerId == 0)
+        {
+            ThePlayer1_camera.enabled = true;
+        }
         StartCoroutine(JustWaitUICoroutine());
        
         //  StopCoroutine(JustWaitUICoroutine());
@@ -862,8 +874,16 @@ public class PlayerShips : MonoBehaviour
 
     public void wormhometravel()
     {
-     //   Debug.Log("Wormhole function");
-                Tile finalTile = moveQueue[moveQueue.Length - 1];
+
+
+        if (PlayerId == 0)
+        {
+            Camera ThePlayer1_camera = GameObject.Find("Player1_Follow_Camera(Clone)").GetComponent<Camera>();
+
+            ThePlayer1_camera.enabled = false;
+        }
+        //   Debug.Log("Wormhole function");
+        Tile finalTile = moveQueue[moveQueue.Length - 1];
                     finalTile = WormholeDest;
         
         this.transform.position = finalTile.transform.position;
@@ -873,8 +893,42 @@ public class PlayerShips : MonoBehaviour
         currentTile = finalTile;
                     moveQueue = null;
                     moveQueueIndex = 0;
+        if (PlayerId == 0)
+        {
+            Camera ThePlayer1_camera = GameObject.Find("Player1_Follow_Camera(Clone)").GetComponent<Camera>();
+        
+            ThePlayer1_camera.enabled = true;
+        }
+
+        if (PlayerId == 1)
+        {
+            
+            Camera ThePlayer2_camera = GameObject.Find("Player2_Follow_Camera(Clone)").GetComponent<Camera>();
+            
+            ThePlayer2_camera.enabled = true;
+        }
+
+        if (PlayerId == 2)
+        {
+
+            Camera ThePlayer3_camera = GameObject.Find("Player3_Follow_Camera(Clone)").GetComponent<Camera>();
+
+            ThePlayer3_camera.enabled = true;
+        }
+
+        if (PlayerId == 3)
+        {
+
+            Camera ThePlayer4_camera = GameObject.Find("Player4_Follow_Camera(Clone)").GetComponent<Camera>();
+
+            ThePlayer4_camera.enabled = true;
+        }
+
+
+
         theStateManager.AnimationsPlaying--;
-        UIWormHoleVideo.SetActive(false);
+      //  UIWormHoleVideo.SetActive(false);
+       
 
     }
 

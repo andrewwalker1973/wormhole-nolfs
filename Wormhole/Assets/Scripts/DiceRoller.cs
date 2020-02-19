@@ -128,7 +128,7 @@ public class DiceRoller : MonoBehaviour
         }
 
         ///  alter this to set dice value for testing   
-  // theStateManager.DiceTotal = 33;
+   theStateManager.DiceTotal = 33;
         theStateManager.IsDoneRolling = true;
         theStateManager.CheckLegalMoves();
         theStateManager.UIRollAgainPopup.SetActive(false);
