@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Diagnostics;
+using System.Threading;
+using System.Threading.Tasks;
+using Debug = UnityEngine.Debug;
 
 public class PlayerShips : MonoBehaviour
 {
@@ -81,6 +85,12 @@ public class PlayerShips : MonoBehaviour
     public TMP_Text PlayerWon;
     public TMP_Text PlayerwonLeft;
 
+
+    // Fireworks
+    public ParticleSystem Fireworks1;
+    public ParticleSystem Fireworks2;
+    public ParticleSystem Fireworks3;
+
     //public int NumberOfPlayersStillPlaying = 4; // used to count how many still on the board
 
 
@@ -116,12 +126,29 @@ public class PlayerShips : MonoBehaviour
         ThePlayers = GameObject.FindObjectOfType<Player>();
         theTiles = GameObject.FindObjectOfType<Tile>();
 
+       // Fireworks1 = GetComponent<ParticleSystem>();
+
+        //Fireworks1.Stop();
+    //    Fireworks1.enabled = false;
+        //  Fireworks1.emission == enabled;
+
+        Fireworks1 = GetComponent<ParticleSystem>();
+        Fireworks2 = GetComponent<ParticleSystem>();
+        Fireworks3 = GetComponent<ParticleSystem>();
+        // Fireworks1.Stop();
+        // particleAuraPlay();
     }
 
 
 
 
-
+   // public void particleAuraPlay()
+   // {
+  //      if (!Fireworks1.isPlaying)
+   //     {
+   //         Fireworks1.Play();
+   //     }
+   // }
 
 
 
@@ -198,7 +225,7 @@ public class PlayerShips : MonoBehaviour
            // }
             //else
             //{
-                //  Debug.Log("nextTile  " + nextTile);
+                  Debug.Log("nextTile  " + nextTile);
                 if (nextTile.IsrightTurnSpace == true)
                 {
 
@@ -258,14 +285,19 @@ public class PlayerShips : MonoBehaviour
                //     moveQueue = null;
                 this.scoreMe = true;
                 Debug.Log("this.scoreMe = true;");
+                theStateManager.AnimationsPlaying++;
                 //theStateManager.AnimationsPlaying++;
                 //StartCoroutine(PLayerScore());
-               // WonMenu();
+                // WonMenu();
+                StartCoroutine(RunAsyncFromCoroutineTest());
+                // UIPLayerScore.SetActive(true);
 
-                 }
+                //   Time.timeScale = 0f;
+                StopFireworks();
+            }
 
 
-                if (currentTile != null && currentTile.Spacegate2 || currentTile.Spacegate5 || currentTile.Spacegate8 || currentTile.Spacegate12 || currentTile.Spacegate38 || currentTile.Spacegate53 || currentTile.Spacegate55 || currentTile.Spacegate62)
+            if (currentTile != null && currentTile.Spacegate2 || currentTile.Spacegate5 || currentTile.Spacegate8 || currentTile.Spacegate12 || currentTile.Spacegate38 || currentTile.Spacegate53 || currentTile.Spacegate55 || currentTile.Spacegate62)
               {
 
                 //Debug.Log("Wopuld have done wormhole"); 
@@ -526,6 +558,7 @@ public class PlayerShips : MonoBehaviour
 
         if (finalTile == null)
         {
+            Debug.Log("final tile is null");
             // we are scoring this player
             scoreMe = true;
         }
@@ -533,6 +566,7 @@ public class PlayerShips : MonoBehaviour
         {
             if (CanLegallyMoveTo(finalTile) == false)
             {
+                Debug.Log("setting move queue etc");
                 // not allowed
                 finalTile = currentTile;
                 moveQueue = null;
@@ -695,18 +729,17 @@ public class PlayerShips : MonoBehaviour
     bool CanLegallyMoveTo(Tile destinationTile)
     {
 
-
+        Debug.Log("Playerships CanLegallyMoveTo");
         // does the tilealready have a stone - not needed for me
         // is this one of our stones - not needed for me
         // is this a safe tile for enemy ?
         if (destinationTile == null)
         {
+            Debug.Log("We are trying to move off baord which is not leagl.");
             // Note NULL tile means we are overshooting the victory roll and not legal
             return false;
 
-            // We are trying to move off the board
-            //  Debug.Log("We are trying to move off baord which is leagl.");
-            //  return true;
+            
         }
         //is the tile empty
         if (destinationTile.PlayerShips == null)
@@ -855,7 +888,7 @@ public class PlayerShips : MonoBehaviour
 
     IEnumerator EnterSpaceGate()
     {
-        //   Debug.Log("Spacegate function");
+          Debug.Log("Spacegate function");
         theStateManager.AnimationsPlaying++;
         UISpaceGateenter.SetActive(true);
 
@@ -998,7 +1031,7 @@ public class PlayerShips : MonoBehaviour
 
     IEnumerator JustWaitUICoroutine()
     {
-        //    Debug.Log(" PLayer JustWaitUICoroutine");
+           Debug.Log(" PLayer JustWaitUICoroutine");
         // wait one sec
 
 
@@ -1014,9 +1047,9 @@ public class PlayerShips : MonoBehaviour
 
     }
 
-  //  IEnumerator JustWaitUICoroutine_noAnim()
-  //  {
-        //    Debug.Log(" PLayer JustWaitUICoroutine");
+    IEnumerator JustWaitUICoroutine2()
+    {
+        Debug.Log(" PLayer JustWaitUICoroutine");
         // wait one sec
 
 
@@ -1024,23 +1057,121 @@ public class PlayerShips : MonoBehaviour
 
         // yield return new WaitForSecondsRealtime(2);
         //yield return new WaitForSeconds(2);
- //       yield return new WaitForSeconds(2);
-        
+        yield return new WaitForSeconds(2);
+       // theStateManager.AnimationsPlaying--;
         //    Debug.Log("Just Wait playerships )");
 
 
 
- //   }
-
-    IEnumerator PLayerScore()
-    {
-        // display mesage
-        UIPLayerScore.SetActive(true);
-        // wait one sec
-        yield return new WaitForSeconds(5f);
-        UIPLayerScore.SetActive(false);
-        StartCoroutine(JustWaitUICoroutine());
     }
+    //  IEnumerator JustWaitUICoroutine_noAnim()
+    //  {
+    //    Debug.Log(" PLayer JustWaitUICoroutine");
+    // wait one sec
+
+
+
+
+    // yield return new WaitForSecondsRealtime(2);
+    //yield return new WaitForSeconds(2);
+    //       yield return new WaitForSeconds(2);
+
+    //    Debug.Log("Just Wait playerships )");
+
+
+
+    //   }
+
+
+
+    //    IEnumerator Start_Fireworks()
+    // IEnumerator Start_Fireworks()
+    //  {
+    //      Debug.Log("Start_Fireworks Begin");
+    //      //Fireworks1.Stop();
+    //  Fireworks1.enabled = false;
+    //      yield return new WaitForSeconds(5f);
+    //      Debug.Log("Start_Fireworks end");
+
+    // Fireworks1.GetComponent<ParticleSystem>().emission.enabled = false;
+
+    //   }
+
+
+
+
+
+
+    IEnumerator RunAsyncFromCoroutineTest()
+    {
+        Debug.Log("Waiting 1 second...");
+        yield return new WaitForSeconds(1.0f);
+        Debug.Log("Waiting 1 second again...");
+      //  yield return RunAsyncFromCoroutineTest2().AsIEnumerator();
+        Debug.Log("################################Done");
+
+        if (StateManger.NumberOfPlayersStillPlaying == 0)
+        {
+            PlayerwonLeft.text = "There are no more players playing";
+            theStateManager.AnimationsPlaying++;
+            UIResumeButton.SetActive(false);
+
+            //ebug.Log("Number of players" + theStateManager.NumberOfPlayersStillPlaying);
+        }
+        else
+           if (StateManger.NumberOfPlayersStillPlaying == 1)
+        {
+            PlayerwonLeft.text = " There are 1 players still playing";
+            // Debug.Log("Number of players" + theStateManager.NumberOfPlayersStillPlaying);
+        }
+        else
+            if (StateManger.NumberOfPlayersStillPlaying == 2)
+        {
+            PlayerwonLeft.text = " There are 2 players still playing";
+            // Debug.Log("Number of players" + theStateManager.NumberOfPlayersStillPlaying);
+        }
+        else
+            if (StateManger.NumberOfPlayersStillPlaying == 3)
+        {
+            PlayerwonLeft.text = " There are 3 players still playing";
+            // Debug.Log("Number of players" + theStateManager.NumberOfPlayersStillPlaying);
+        }
+
+        Debug.Log("anim Count " + theStateManager.AnimationsPlaying);
+        UIPLayerScore.SetActive(true);
+
+           Time.timeScale = 0f;
+        theStateManager.AnimationsPlaying--;
+        Debug.Log("anim Count end " + theStateManager.AnimationsPlaying);
+    }
+
+    async Task RunAsyncFromCoroutineTest2()
+    {
+        await new WaitForSeconds(1.0f);
+    }
+
+    void StartFireworks()
+    {
+        Debug.Log("in fioreworks function");
+       
+         Fireworks1.Play();
+        Fireworks2.Play();
+        Fireworks3.Play();
+        
+
+    }
+
+    void StopFireworks()
+    {
+        Debug.Log("stop in fioreworks function");
+
+        Fireworks1.Stop();
+        Fireworks2.Stop();
+        Fireworks3.Stop();
+
+
+    }
+
 
     public void EndGame()
     {
@@ -1055,7 +1186,9 @@ public class PlayerShips : MonoBehaviour
         {
             if (SomebodyWon1 == false)
             {
+                StartFireworks();
                 PlayerWon.text = "You have Won !! Congratulations. ";
+                Debug.Log("Player text set");
             }
             else
             {
@@ -1072,7 +1205,11 @@ public class PlayerShips : MonoBehaviour
         {
             if (SomebodyWon1 == false)
             {
+                StartFireworks();
                 PlayerWon.text = "You have Won !! Congratulations. ";
+                Debug.Log("Player text set");
+
+
             }
             else
             {
@@ -1088,7 +1225,9 @@ public class PlayerShips : MonoBehaviour
         {
             if (SomebodyWon1 == false)
             {
+                StartFireworks();
                 PlayerWon.text = "You have Won !! Congratulations. ";
+                Debug.Log("Player text set");
             }
             else
             {
@@ -1106,7 +1245,9 @@ public class PlayerShips : MonoBehaviour
 
             if (SomebodyWon1 == false)
             {
+                StartFireworks();
                 PlayerWon.text = "You have Won !! Congratulations. ";
+                Debug.Log("Player text set");
             }
             else
             {
@@ -1123,12 +1264,14 @@ public class PlayerShips : MonoBehaviour
 
         // Who has won the race
 
-
+        Debug.Log("Determine who still playing");
         // Who is left still playing
         if (StateManger.NumberOfPlayersStillPlaying == 0)
         {
             PlayerwonLeft.text = "There are no more players playing";
+            theStateManager.AnimationsPlaying++;
             UIResumeButton.SetActive(false);
+            
             //ebug.Log("Number of players" + theStateManager.NumberOfPlayersStillPlaying);
         }
            else
@@ -1150,15 +1293,11 @@ public class PlayerShips : MonoBehaviour
            // Debug.Log("Number of players" + theStateManager.NumberOfPlayersStillPlaying);
         }
 
-        
-        
+      //  Debug.Log("Setting move queue to be null -- TEMP");
+    //    moveQueue = null;
+        // StartFireworks();
 
-        UIPLayerScore.SetActive(true);
-      
-        Time.timeScale = 0f;
 
-    
-        
     }
 
     void WormholeFunction()
@@ -1205,7 +1344,8 @@ public class PlayerShips : MonoBehaviour
         }
                                  
         StartCoroutine(EnterSpaceGate());
-        
+     
+
 
 
 
@@ -1214,5 +1354,7 @@ public class PlayerShips : MonoBehaviour
     }
 
 
-  
+   
+    
+
 }

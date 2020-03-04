@@ -18,7 +18,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!224 &169748229
 RectTransform:
@@ -27,13 +27,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 169748228}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0.7071068, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 7407321643086691386}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 180}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 2, y: 2}
   m_AnchoredPosition: {x: 0, y: 0.54}
@@ -53,10 +53,11 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8b29aaa3eec7468097ff07adfcf29ac9, type: 2}
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -111,16 +112,16 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Start
+  m_text: 2
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 8b29aaa3eec7468097ff07adfcf29ac9, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4293309580
+    rgba: 4293375117
   m_fontColor: {r: 0.55108577, g: 0.7075269, b: 0.9056604, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -180,7 +181,7 @@ MonoBehaviour:
   m_margin: {x: 44.91003, y: 0, z: 44.879158, w: 0}
   m_textInfo:
     textComponent: {fileID: 169748230}
-    characterCount: 5
+    characterCount: 1
     spriteCount: 0
     spaceCount: 0
     wordCount: 1
@@ -220,9 +221,9 @@ GameObject:
   m_Layer: 0
   m_Name: Tile1
   m_TagString: GameTiles
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 1
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &7407321643086691386
 Transform:
@@ -261,6 +262,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -296,8 +298,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1.009451}
-  m_Center: {x: 0, y: 0, z: 0.0047258376}
+  m_Size: {x: 1, y: 0.8, z: 0.8}
+  m_Center: {x: 0, y: 0, z: -0.03}
 --- !u!114 &3797151724029737519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,6 +315,27 @@ MonoBehaviour:
   NextTiles:
   - {fileID: 0}
   PlayerShips: {fileID: 0}
+  IsScoringSpace: 1
+  IsrightTurnSpace: 0
+  IsleftTurnSpace: 0
+  IsRollAgain: 0
+  ChanceCard: 0
+  Spacegate2: 1
+  Spacegate5: 0
+  Spacegate8: 0
+  Spacegate12: 0
+  Spacegate38: 0
+  Spacegate53: 0
+  Spacegate55: 0
+  Spacegate62: 0
+  Wormhole33: 0
+  Wormhole54: 0
+  Wormhole63: 0
+  Wormhole76: 0
+  Wormhole84: 0
+  Wormhole89: 0
+  Wormhole95: 0
+  Wormhole98: 0
 --- !u!54 &7599809567106349183
 Rigidbody:
   m_ObjectHideFlags: 0

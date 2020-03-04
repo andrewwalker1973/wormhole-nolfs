@@ -10,8 +10,9 @@ public class Tile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
-       
+
+        
+
     }
 
     public Tile[] NextTiles;
@@ -38,6 +39,7 @@ public class Tile : MonoBehaviour
     public bool Wormhole89;
     public bool Wormhole95;
     public bool Wormhole98;
+
 
 
 

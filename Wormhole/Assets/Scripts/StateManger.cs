@@ -27,6 +27,7 @@ public class StateManger : MonoBehaviour
 
 
 
+
         PlayerAIs = new AIPlayer[NumberOfPlayers];
         //code added to force player
         
@@ -416,6 +417,7 @@ public class StateManger : MonoBehaviour
             // If no legal moves are possible, wait a sec then move to next player (probably give message)
             if (hasLegalMove == false)
             {
+            Debug.Log("StateManager no legal");
                 StartCoroutine(NoLegalMovesCoroutine());
                 return;
             }

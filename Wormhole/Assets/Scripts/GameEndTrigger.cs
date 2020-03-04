@@ -11,16 +11,19 @@ public class GameEndTrigger : MonoBehaviour
     public PlayerShips ThePlayerships4;
 
 
-
+   // public ParticleSystem Fireworks1;
 
     void Start()
     {
 
-       // ThePlayerships = GameObject.FindObjectOfType<PlayerShips>();
+        // ThePlayerships = GameObject.FindObjectOfType<PlayerShips>();
+       // Fireworks1 = GetComponent<ParticleSystem>();
     }
 
         private void OnTriggerEnter(Collider theCollision)
     {
+
+       // Fireworks1.Play();
         if (theCollision.gameObject.tag == "Game_player_1")
         // By using {}, the condition apply to that entire scope, instead of the next line.
         {

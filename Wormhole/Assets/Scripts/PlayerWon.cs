@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerWon : MonoBehaviour
 {
@@ -9,11 +10,13 @@ public class PlayerWon : MonoBehaviour
         Debug.Log("ResumeButton pressed");
         Time.timeScale = 1f;
         UIPLayerScore.SetActive(false);
+
     }
     
     public void QuitButton()
     {
         Debug.Log("Quit Button Pressed");
+        SceneManager.LoadScene(0);
     }
 }
 
