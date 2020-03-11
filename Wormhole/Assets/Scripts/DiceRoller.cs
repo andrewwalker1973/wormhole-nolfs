@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class DiceRoller : MonoBehaviour
 {
@@ -128,7 +129,8 @@ public class DiceRoller : MonoBehaviour
         }
 
         ///  alter this to set dice value for testing   
-// theStateManager.DiceTotal = 101;
+        ///  
+       //theStateManager.DiceTotal = 33;
         theStateManager.IsDoneRolling = true;
         theStateManager.CheckLegalMoves();
         theStateManager.UIRollAgainPopup.SetActive(false);

@@ -5001,6 +5001,7 @@ GameObject:
   - component: {fileID: 750093983}
   - component: {fileID: 750093985}
   - component: {fileID: 750093984}
+  - component: {fileID: 750093986}
   m_Layer: 5
   m_Name: Text Wormholes (TMP)
   m_TagString: Untagged
@@ -5148,6 +5149,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 750093982}
   m_CullTransparentMesh: 0
+--- !u!111 &750093986
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 750093982}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 489c024c72e66b040bef7fa78ce50a97, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 489c024c72e66b040bef7fa78ce50a97, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &752109298
 GameObject:
   m_ObjectHideFlags: 0
@@ -6989,6 +7006,8 @@ GameObject:
   - component: {fileID: 1579886357}
   - component: {fileID: 1579886359}
   - component: {fileID: 1579886358}
+  - component: {fileID: 1579886361}
+  - component: {fileID: 1579886360}
   m_Layer: 5
   m_Name: 'Text SpaceGates (TMP) '
   m_TagString: Untagged
@@ -7134,6 +7153,40 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1579886356}
   m_CullTransparentMesh: 0
+--- !u!111 &1579886360
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1579886356}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!95 &1579886361
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1579886356}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b3cadd15143cf0741b568fa4557d268a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1593185060
 GameObject:
   m_ObjectHideFlags: 0
