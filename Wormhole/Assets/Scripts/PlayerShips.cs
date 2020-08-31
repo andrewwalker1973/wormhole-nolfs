@@ -70,6 +70,7 @@ public class PlayerShips : MonoBehaviour
     public Camera ThePlayer2_camera;
     public Camera ThePlayer3_camera;
     public Camera ThePlayer4_camera;
+    public Camera Wormhole_camera;
 
     //   Tile WormholeDest;
 
@@ -146,14 +147,7 @@ public class PlayerShips : MonoBehaviour
 
 
 
-   // public void particleAuraPlay()
-   // {
-  //      if (!Fireworks1.isPlaying)
-   //     {
-   //         Fireworks1.Play();
-   //     }
-   // }
-
+   
 
 
     // Update is called once per frame
@@ -799,15 +793,15 @@ public class PlayerShips : MonoBehaviour
         UIWormhole.SetActive(true);
         
         // wait one sec
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(4);
         UIWormhole.SetActive(false);
         //  UIWormHoleVideo.SetActive(true);
         theStateManager.disableAllCamera();
-        MainCamera.enabled = true;
+        Wormhole_camera.enabled = true;
         
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(4);
         wormhometravel();
-        MainCamera.enabled = false;
+        Wormhole_camera.enabled = false;
         if (PlayerId == 0)
         {
             ThePlayer1_camera.enabled = true;
@@ -1009,39 +1003,10 @@ public class PlayerShips : MonoBehaviour
 
 
     }
-    //  IEnumerator JustWaitUICoroutine_noAnim()
-    //  {
-    //    Debug.Log(" PLayer JustWaitUICoroutine");
-    // wait one sec
+ 
 
 
-
-
-    // yield return new WaitForSecondsRealtime(2);
-    //yield return new WaitForSeconds(2);
-    //       yield return new WaitForSeconds(2);
-
-    //    Debug.Log("Just Wait playerships )");
-
-
-
-    //   }
-
-
-
-    //    IEnumerator Start_Fireworks()
-    // IEnumerator Start_Fireworks()
-    //  {
-    //      Debug.Log("Start_Fireworks Begin");
-    //      //Fireworks1.Stop();
-    //  Fireworks1.enabled = false;
-    //      yield return new WaitForSeconds(5f);
-    //      Debug.Log("Start_Fireworks end");
-
-    // Fireworks1.GetComponent<ParticleSystem>().emission.enabled = false;
-
-    //   }
-
+  
 
 
 

@@ -99,10 +99,11 @@ public class StateManger : MonoBehaviour
 
     //Code to allow for Camera Selection 
     public Camera MainCamera;            //define the main camera
-  
+    public Camera Wormhole_camera;
+
 
     //define the player follow cameras
- public Camera ThePlayer1_camera;
+    public Camera ThePlayer1_camera;
  public   Camera ThePlayer2_camera;
     public Camera ThePlayer3_camera;
     public Camera ThePlayer4_camera;
@@ -515,7 +516,8 @@ public class StateManger : MonoBehaviour
         Camera ThePlayer4_camera = GameObject.Find("Player4_Follow_Camera(Clone)").GetComponent<Camera>();
        // Camera MainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();
         MainCamera.enabled = false;
-        ThePlayer1_camera.enabled = false;
+        Wormhole_camera.enabled = false; 
+    ThePlayer1_camera.enabled = false;
         ThePlayer2_camera.enabled = false;
         ThePlayer3_camera.enabled = false;
         ThePlayer4_camera.enabled = false;
