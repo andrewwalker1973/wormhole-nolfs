@@ -55,6 +55,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -91,8 +92,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3a1d659573eee24d9b21d9a0baf66cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colors: {x: 1, y: 1, z: 1}
-  noise: {x: 0.41, y: 3.3, z: 3.42, w: 5.01}
-  size: 5.53
-  speed: -10.38
-  intensity: -1.9
+  colors: {x: -0.88, y: -1.81, z: 1.5}
+  noise: {x: 3.71, y: 5.66, z: 2.67, w: 0.9}
+  size: 5.59
+  speed: 21.3
+  intensity: 0.15

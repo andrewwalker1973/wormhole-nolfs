@@ -8,13 +8,15 @@ public class DiceTotalDisplay : MonoBehaviour
 {
 
   StateManger theStateManager;
-  
+    DiceRoller theDiceRoller;
+
+    Image DiceFaceImage;
 
     // Start is called before the first frame update
     void Start()
     {
         theStateManager = GameObject.FindObjectOfType<StateManger>();
-        
+      //  theDiceRoller = GameObject.FindObjectOfType<DiceRoller>();
     }
 
     // Update is called once per frame
@@ -22,7 +24,10 @@ public class DiceTotalDisplay : MonoBehaviour
     {
         if (theStateManager.IsDoneRolling == false)
         {
-            GetComponent<TMP_Text>().text = "Dice Total =  ?";            
+           // Debug.Log("in dice total");
+            GetComponent<TMP_Text>().text = "Dice Total =  ?";
+            //TRY blankj dice face image
+          //  theDiceRoller.ResetDiceImage();
         }
         else
         {

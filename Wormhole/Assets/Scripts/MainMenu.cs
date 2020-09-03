@@ -117,7 +117,7 @@ public class MainMenu : MonoBehaviour
         {
             if (asyncload.progress >= .9f)
             {
-                loadingText.text = "Press any key to continue....";
+                loadingText.text = "Press to start ....";
                 // couild not get icon to turn off          
                 loadingIcon.SetActive(false);
 
