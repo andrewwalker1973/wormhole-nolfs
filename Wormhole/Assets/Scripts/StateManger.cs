@@ -26,7 +26,7 @@ public class StateManger : MonoBehaviour
         Camera ThePlayer3_camera = GameObject.Find("Player3_Follow_Camera(Clone)").GetComponent<Camera>();
         Camera ThePlayer4_camera = GameObject.Find("Player4_Follow_Camera(Clone)").GetComponent<Camera>();
 
-        //   Camera MainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();
+        
 
         source = GetComponent<AudioSource>();
 
@@ -42,7 +42,7 @@ public class StateManger : MonoBehaviour
 
         setUpPlayers();   // run the function to determine who is human or computer
         notplaying();
-        // try setup player to force a new turn at start
+        
 
 
     }
@@ -63,7 +63,7 @@ public class StateManger : MonoBehaviour
 
     public bool IsDoneRolling = false;  // is done rolling false - have we finshed rollling
     public bool IsDoneClicking = false; //have we finished clicking
-  //  public bool IsDoneAnimating = false; // Have we finshed moving
+  
     public bool IsDoneRERoll = false;  // Variable to monitor the reroll function
     public int AnimationsPlaying = 0; // control Animations playing sequence
 
@@ -97,8 +97,7 @@ public class StateManger : MonoBehaviour
    
 
     public TextMeshProUGUI PlayerSKipMessage;
-   // public TextMeshProUGUI PlayerMoveAhead3;
-  //  public TextMeshProUGUI PlayerMoveAhead6;
+ 
 
     Player ThePlayer;
     Player ThePlayer1;
@@ -204,7 +203,7 @@ public class StateManger : MonoBehaviour
             NumberOfPlayersStillPlaying--;
         }
 
-        Debug.Log("NumberOfPlayersStillPlaying " + NumberOfPlayersStillPlaying);
+        
     }
 
 
@@ -212,8 +211,7 @@ public class StateManger : MonoBehaviour
     virtual protected void DoRoll()
     {
         // roll without clicking the button
-        //TRY blankj dice face image
-      //  TheDiceRoller.ResetDiceImage();
+
         TheDiceRoller.RollTheDice();     // find the script diceroller and run the function "rollthedice
         UIRollAgainPopup.SetActive(false);
 
@@ -223,20 +221,12 @@ public class StateManger : MonoBehaviour
     // fucntion for new turn of player
     public void NewTurn()
     {
-        // Debug.Log("Stopping justwait statemanager");
-        // StopCoroutine(JustWaitUICoroutine());
-        //   StopAllCoroutines();
+      
         
-        Debug.Log(" ************     ");
-        Debug.Log(" ************     ");
-        Debug.Log(" ************     ");
-        Debug.Log(" ************     ");
-        Debug.Log(" ************     ");
-        Debug.Log("Start new turn");
-        Debug.Log(" ################## mew turn AnimationsPlaying  " + AnimationsPlaying);        //start of a players turn
+       
             IsDoneRolling = false;
             IsDoneClicking = false;
-        //    IsDoneAnimating = false;
+        
 
             if (IsDoneRERoll == true)
             {
@@ -266,13 +256,13 @@ public class StateManger : MonoBehaviour
 
         }
 
-        Debug.Log(" before music" + CurrentPlayerId);
+        
         if (CurrentPlayerId == 0)
         {
             if (ThePlayers.player1_hum_comp == 0)
             {
                 source.PlayOneShot(Player1announce);
-                // Debug.Log("Play music" + CurrentPlayerId);
+                
             }
         }
         if (CurrentPlayerId == 1)
@@ -280,7 +270,7 @@ public class StateManger : MonoBehaviour
             if (ThePlayers.player2_hum_comp == 0)
             {
                 source.PlayOneShot(Player2announce);
-                //  Debug.Log("Play music" + CurrentPlayerId);
+               
             }
         }
         if (CurrentPlayerId == 2)
@@ -288,7 +278,7 @@ public class StateManger : MonoBehaviour
             if (ThePlayers.player3_hum_comp == 0)
             {
                 source.PlayOneShot(Player3announce);
-                //  Debug.Log("Play music" + CurrentPlayerId);
+               
             }
         }
         if (CurrentPlayerId == 3)
@@ -296,7 +286,7 @@ public class StateManger : MonoBehaviour
             if (ThePlayers.player4_hum_comp == 0)
             {
                 source.PlayOneShot(Player4announce);
-                // Debug.Log("Play music" + CurrentPlayerId);
+                
             }
         }
 
@@ -317,7 +307,7 @@ public class StateManger : MonoBehaviour
             IsSkipRoll1 = false;        // set back to no skip setting
             
 
-          //  UISkipTurnMessage.SetActive(false);
+          
         }
 
         if (CurrentPlayerId == 1 && player2_skipping == 1)
@@ -328,7 +318,7 @@ public class StateManger : MonoBehaviour
             IsSkipRoll2 = false;
             
 
-            //   UISkipTurnMessage.SetActive(false);
+            
         }
 
         if (CurrentPlayerId == 2 && player3_skipping == 1)
@@ -339,7 +329,7 @@ public class StateManger : MonoBehaviour
             IsSkipRoll3 = false;
             
 
-            //  UISkipTurnMessage.SetActive(false);
+           
         }
 
         if (CurrentPlayerId == 3 && player4_skipping == 1)
@@ -350,7 +340,7 @@ public class StateManger : MonoBehaviour
             IsSkipRoll4 = false;
             
 
-            //  UISkipTurnMessage.SetActive(false);
+            
         }
 
     }
@@ -368,7 +358,7 @@ public class StateManger : MonoBehaviour
            
 
 
-            //  UISkipTurnMessage.SetActive(false);
+            
         }
 
         if (CurrentPlayerId == 1 && ThePlayers.player2_hum_comp == 2)
@@ -378,7 +368,7 @@ public class StateManger : MonoBehaviour
             
 
 
-            //   UISkipTurnMessage.SetActive(false);
+            
         }
 
         if (CurrentPlayerId == 2 && ThePlayers.player3_hum_comp == 2)
@@ -388,7 +378,7 @@ public class StateManger : MonoBehaviour
             
 
 
-            //  UISkipTurnMessage.SetActive(false);
+           
         }
 
         if (CurrentPlayerId == 3 && ThePlayers.player4_hum_comp == 2)
@@ -398,7 +388,7 @@ public class StateManger : MonoBehaviour
             
 
 
-            //  UISkipTurnMessage.SetActive(false);
+            
         }
 
     }
@@ -408,7 +398,7 @@ public class StateManger : MonoBehaviour
        // set all the varibale equal to values when turn is done
         IsDoneRolling = true;
         IsDoneClicking = true;
-     //   IsDoneAnimating = true;
+    
       
     }
 
@@ -426,7 +416,7 @@ public class StateManger : MonoBehaviour
 
             if (PlayerAIs[CurrentPlayerId] != null)   // Process to run the AI script for AI players
             {
-            //Debug.Log("Calling AI player");
+            
                 PlayerAIs[CurrentPlayerId].DoAI();
             }
         
@@ -438,39 +428,14 @@ public class StateManger : MonoBehaviour
     public void CheckLegalMoves()
     {
 
-        Debug.Log("CurrentPlayerId ====== " + CurrentPlayerId);
-       /* switch (CurrentPlayerId)
-        {
 
-            case 0:
-                source.PlayOneShot(Player1announce);
-                Debug.Log("Play music" + CurrentPlayerId);
-                break;
-            case 1:
-                source.PlayOneShot(Player2announce);
-                Debug.Log("Play music" + CurrentPlayerId);
-                break;
-            case 2:
-                source.PlayOneShot(Player3announce);
-                Debug.Log("Play music" + CurrentPlayerId);
-                break;
-            case 3:
-                source.PlayOneShot(Player4announce);
-                Debug.Log("Play music" + CurrentPlayerId);
-                break;
-
-        }
-        */
         
 
-        //if (CurrentPlayerId == 0 && ThePlayers.player1_hum_comp != 2)  // if player id and skip id match then skip the turn
-        // {
-
-        Debug.Log("statemanager    CheckLegalMoves");
+        
             // if we roll a 0 we have no legal moves
             if (DiceTotal == 0)
             {
-                Debug.Log("DiceTotal == 0");
+                
                 StartCoroutine(NoLegalMovesCoroutine());
                 return;
 
@@ -493,7 +458,7 @@ public class StateManger : MonoBehaviour
             // If no legal moves are possible, wait a sec then move to next player (probably give message)
             if (hasLegalMove == false)
             {
-            Debug.Log("StateManager no legal");
+            
                 StartCoroutine(NoLegalMovesCoroutine());
                 return;
             }
@@ -501,8 +466,8 @@ public class StateManger : MonoBehaviour
 
             //Highlight the ones that can be legal moved
             // if no logal moves wait a second then move to next player with message
-            Debug.Log("END statemanager CheckLegalMoves");
-      //  }
+            
+      
     }
 
             // Function to display a UI message if there are no Legal moves available
@@ -522,10 +487,8 @@ public class StateManger : MonoBehaviour
     {
 
 
-        //  GetComponent<TMP_Text>().text = "Hello";
-        //  UISkipTurnMessage.SetActive(true);
-        // wait one sec\
-        Debug.Log("Skipping tunr co-routine");
+       
+        
         UISkipTurnMessage.SetActive(true);
         yield return new WaitForSeconds(2);
         UISkipTurnMessage.SetActive(false);
@@ -539,9 +502,9 @@ public class StateManger : MonoBehaviour
     {
 
 
-        //  GetComponent<TMP_Text>().text = "Hello";
+        
        UIMoveAhead3.SetActive(true);
-       // PlayerMoveAhead3.enabled = true;
+      
         // wait one sec
         yield return new WaitForSeconds(2);
        UIMoveAhead3.SetActive(false);
@@ -556,9 +519,9 @@ public class StateManger : MonoBehaviour
     {
 
 
-        //  GetComponent<TMP_Text>().text = "Hello";
+       
      UIMoveAhead6.SetActive(true);
-    //    PlayerMoveAhead6.enabled = true;
+    
         // wait one sec
         yield return new WaitForSeconds(2);
         UIMoveAhead6.SetActive(false);
@@ -576,7 +539,7 @@ public class StateManger : MonoBehaviour
         
 
         yield return new WaitForSeconds(2);
-      //  Debug.Log("StateManger Just Wait)");
+      
 
 
 
@@ -589,7 +552,7 @@ public class StateManger : MonoBehaviour
         Camera ThePlayer2_camera = GameObject.Find("Player2_Follow_Camera(Clone)").GetComponent<Camera>();
         Camera ThePlayer3_camera = GameObject.Find("Player3_Follow_Camera(Clone)").GetComponent<Camera>();
         Camera ThePlayer4_camera = GameObject.Find("Player4_Follow_Camera(Clone)").GetComponent<Camera>();
-       // Camera MainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();
+      
         MainCamera.enabled = false;
         Wormhole_camera.enabled = false; 
     ThePlayer1_camera.enabled = false;
@@ -607,13 +570,10 @@ public class StateManger : MonoBehaviour
     //fucntion for the roll again fucntion
     public void RollAgain()
     {
-        //  Debug.Log("Roll Again function");
-        // Reset all the variables back to begin of turn setting
-        //start of a players turn
-       // source.PlayOneShot(PlayerRollagain);
+        
         IsDoneRolling = false;
         IsDoneClicking = false;
-       // IsDoneAnimating = false;
+       
         IsDoneRERoll = true;
         
     }
@@ -622,8 +582,7 @@ public class StateManger : MonoBehaviour
     // Function for the Chnace card system
     public void ChanceCard()
     {
-      //  Debug.Log("Chance Card Function");
-            // randomize through the chance string and select a value
+      
         string chanceCards = ChanceCards1[Random.Range(0, ChanceCards1.Length)];
      
         // check what the value is and perform the fucntioin based on the string output
@@ -706,59 +665,34 @@ public class StateManger : MonoBehaviour
         }
         if (chanceCards == "MoveAhead3")
         {
-            //   Debug.Log("Move ahead 3 spaces");
-            //  UIMoveAhead3.SetActive(true);
-            // Set the variables to be the same a new roll start
-            // UIMoveAhead3.SetActive(true);
-            // UIRollAgainPopup.SetActive(true);
-            // StartCoroutine(MoveAhead3RollUICoroutine());
-            //   Debug.Log("move 3 enableade");
+            
             source.PlayOneShot(PlayerMoveAhead3);
             IsDoneRolling = true;
             IsDoneClicking = false;
-          //  IsDoneAnimating = false;
+          
             IsDoneRERoll = true;
             DiceTotal = 3;
-      //      PlayerMoveAhead3.text = "Player1 Move Ahead 3 Spaces";
-        //   PlayerMoveAhead3.enabled = true;
-        //    UIMoveAhead3.SetActive(true);
-         //   UIRollAgainPopup.SetActive(true);
+
             StartCoroutine(MoveAhead3RollUICoroutine());
 
-         //   DoChanceClick();
-        //    StartCoroutine(JustWaitUICoroutine());
-            //   UIMoveAhead3.SetActive(false);
+     
 
         }
 
         if (chanceCards == "MoveAhead6")
         {
-            //  Debug.Log("Move ahead 6 spaces");
-            // UIRollAgainPopup.SetActive(true);
-            //     PlayerMoveAhead6.enabled = true;
-            //   UIMoveAhead6.SetActive(true);
-            //  UIRoll.SetActive(true); 
-            //    StartCoroutine(MoveAhead6RollUICoroutine());
-
-            //    Debug.Log("move 6 enableade");
+           
 
             // Set the variables to be the same a new roll start
             source.PlayOneShot(PlayerMoveAhead5);
             IsDoneRolling = true;
             IsDoneClicking = false;
-          //  IsDoneAnimating = false;
+          
             IsDoneRERoll = true;
             DiceTotal = 5;
-       //     PlayerMoveAhead6.text = "Player1 Move Ahead 6 Spaces";
-      //      PlayerMoveAhead6.enabled = true;
-          //  UIMoveAhead6.SetActive(true);
-            
-          //  UIRollAgainPopup.SetActive(true);
+      
            StartCoroutine(MoveAhead6RollUICoroutine());
-         //   DoChanceClick();
-         //   StartCoroutine(JustWaitUICoroutine());
-            //  UIMoveAhead6.SetActive(false);
-
+        
 
         }
 
@@ -815,9 +749,7 @@ public class StateManger : MonoBehaviour
                         // BasicAI simply picks a legal move at random
 
                         PlayerShips chancepickedStone = PickChanceStoneToMove(ChancelegalStones);
-                //        Debug.Log("Picked Stone " + chancepickedStone);
-        //  UIMoveAhead3.SetActive(false);
-        //   UIMoveAhead6.SetActive(false);
+      
         chancepickedStone.MoveMe();            // run the moveme function in playerships script
 
                     }
@@ -832,19 +764,10 @@ public class StateManger : MonoBehaviour
                                     return ChancelegalStones.ToArray();
                                 }
 
-        // Loop through all of a player's stones
-    //    if (CurrentPlayerId == 0)
-   //     {
-   //         GameObject PLayer1_ship;
-   //
-    //        ThePlayer1 = GameObject.FindObjectOfType<Player>();
-    //        PLayer1_ship = GameObject.Find("PLAYER1");
-    //        
-     //   }
+  
 
 
 
-      //  PlayerShips1[] pss = GameObject.FindGameObjectsWithTag("Andrew1");
 
         PlayerShips[] pss1 = GameObject.FindObjectsOfType<PlayerShips>();
 
@@ -852,20 +775,18 @@ public class StateManger : MonoBehaviour
                                 {
                                     if (ps1.PlayerId == CurrentPlayerId)
                                     {
-                                  //       Debug.Log("ps1.PlayerId " + ps1.PlayerId);
+                                  
                
 
 
                 if (ps1.CanLegallyMoveAhead(DiceTotal))  // check if ship can move based on dice total display
                                         {
-                                      //      Debug.Log("ps1 to array" + ps1);
-                                      //          Debug.Log("PS is " + ps1);
-                                      //          Debug.Log("ps.CanLegallyMoveAhead " + ps1.CanLegallyMoveAhead(DiceTotal));
+                                   
                                                 ChancelegalStones.Add(ps1);   // send back values to array
                                         }
                 else
                 {
-                    Debug.Log("############# STATEMAN ps.CanLegallyMoveAhead(theStateManager.DiceTotal)  is false");
+                    Debug.Log(" ");
                 }
                                     }
                                 }

@@ -63,12 +63,12 @@ public class AIPlayer
           {
               if (legalStones == null)
               {
-                  Debug.Log(" legalStones == null");
+                  Debug.Log(" ");
 
               }
               if (legalStones.Length == 0)
               {
-                  Debug.Log("legalStones.Length setting");
+                  Debug.Log(" ");
                   
               }
               // We have no legal moves.  How did we get here?
@@ -86,7 +86,7 @@ public class AIPlayer
         
         if (pickedStone == null)
         {
-            Debug.Log("pickedStone is null");
+            Debug.Log(" ");
         }
         
              pickedStone.MoveMe();            // run the moveme function in playerships script
@@ -115,7 +115,7 @@ protected PlayerShips[] GetLegalMoves()
             List<PlayerShips> legalStones = new List<PlayerShips>();
         if (legalStones == null)
         {
-            Debug.Log(" GetLegalMoves legalStones == null");
+            Debug.Log(" ");
 
         }
 
@@ -139,14 +139,12 @@ protected PlayerShips[] GetLegalMoves()
             }
                 else
                 {
-                    Debug.Log("############# ps.CanLegallyMoveAhead(theStateManager.DiceTotal)  is false");
-                   // DoClick();
+                    Debug.Log(" ");
+                   
                 }
         }
     }
-        // Debug.Log("legalStones.ToArray " );
-
-        //Debug.Log("sss" + legalStones.ToArray());
+       
         return legalStones.ToArray();
 }
 

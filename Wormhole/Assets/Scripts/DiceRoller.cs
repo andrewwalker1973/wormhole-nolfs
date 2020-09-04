@@ -18,11 +18,11 @@ public class DiceRoller : MonoBehaviour
     {
         DiceValues = new int[1];        // only using one dice
         DiceFaceImage = GetComponent<Image>();
-        Debug.Log("Image" + DiceFaceImage);
+        
         theStateManager = GameObject.FindObjectOfType<StateManger>();
      
 
-        //AW find a way to set dice image to blank
+       
    
 
 
@@ -53,20 +53,9 @@ public class DiceRoller : MonoBehaviour
 
 
 
-    // Update is called once per frame
-    void Update()
-    {
+   
 
-    }
-
-   // public void ResetDiceImage()
-  //  {
-
-        //try blank die
-  //      Debug.Log("blank die");
-   //     this.transform.GetChild(7).GetComponent<Image>().sprite =
- //               DiceBlank[7];
- //   }
+ 
  
 
     public void RollTheDice()
@@ -80,13 +69,13 @@ public class DiceRoller : MonoBehaviour
         }
 
         theStateManager.DiceTotal = 0;
-      //  Debug.Log("passing Image set");
+     
         DiceFaceImage = GetComponent<Image>();
 
        
 
 
-        //AW add in amim or something to make it show the dice is ready to roll
+        
 
         // anim.SetTrigger("DiceRollAnim");
         for (int i = 0; i < DiceValues.Length; i++)
@@ -135,7 +124,7 @@ public class DiceRoller : MonoBehaviour
 
         ///  alter this to set dice value for testing   
         ///  
-     theStateManager.DiceTotal = 100;
+    theStateManager.DiceTotal = 100;
         theStateManager.IsDoneRolling = true;
         theStateManager.CheckLegalMoves();
         theStateManager.UIRollAgainPopup.SetActive(false);

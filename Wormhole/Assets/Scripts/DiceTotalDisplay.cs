@@ -16,7 +16,7 @@ public class DiceTotalDisplay : MonoBehaviour
     void Start()
     {
         theStateManager = GameObject.FindObjectOfType<StateManger>();
-      //  theDiceRoller = GameObject.FindObjectOfType<DiceRoller>();
+      
     }
 
     // Update is called once per frame
@@ -24,10 +24,9 @@ public class DiceTotalDisplay : MonoBehaviour
     {
         if (theStateManager.IsDoneRolling == false)
         {
-           // Debug.Log("in dice total");
+           
             GetComponent<TMP_Text>().text = "Dice Total =  ?";
-            //TRY blankj dice face image
-          //  theDiceRoller.ResetDiceImage();
+         
         }
         else
         {

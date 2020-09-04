@@ -85,11 +85,7 @@ public class Player : MonoBehaviour
         player4_ship = PlayerPrefs.GetFloat("player4_ship");
 
 
-        //TODO - camera fly in
-        //TODO for now just set player1 camera active
-
-     //   Camera_Player1_follow.enabled = true;
-     //   Camera_Player2_follow.enabled = false;
+       
 
         if (this.gameObject.name == "Player1" && player1_onboard == false)
             {
@@ -170,7 +166,7 @@ public class Player : MonoBehaviour
                    
                     break;
             }
-            //check_player1_ship();
+            
             player3_onboard = true;
         }
 
@@ -197,7 +193,7 @@ public class Player : MonoBehaviour
                   
                     break;
             }
-            //check_player1_ship();
+            
             player4_onboard = true;
         }
     }
@@ -218,7 +214,7 @@ public class Player : MonoBehaviour
              player1_ships = Instantiate(Ship1, Player1_SpawnPoint.transform.position, Player1_SpawnPoint.transform.rotation);
               
                 player1_ships.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
-                //   player1_ships.transform.position = new Vector3(-5, 30, -130);
+                
                 player1_ships.transform.position = new Vector3(-5, 5, -167);
                 player1_ships.SetActive(true);
                 player1_ships.tag = "Game_player_1";

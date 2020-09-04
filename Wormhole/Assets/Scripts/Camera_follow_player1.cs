@@ -29,7 +29,7 @@ public class Camera_follow_player1 : MonoBehaviour
         Vector3 desiredposition = target1.position + offset;
         Vector3 smoothedposition = Vector3.Lerp(transform.position, desiredposition, smoothspeed);
         transform.position = smoothedposition;
-      //  transform.LookAt(target1);
+      
         
 
     }

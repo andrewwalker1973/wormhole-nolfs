@@ -33,7 +33,7 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame ()
     {
-        // SceneManager.LoadScene(firstlevel);
+        
 
         StartCoroutine(LoadStart());
     }
@@ -118,7 +118,7 @@ public class MainMenu : MonoBehaviour
             if (asyncload.progress >= .9f)
             {
                 loadingText.text = "Press to start ....";
-                // couild not get icon to turn off          
+                          
                 loadingIcon.SetActive(false);
 
                 if (Input.anyKeyDown)
