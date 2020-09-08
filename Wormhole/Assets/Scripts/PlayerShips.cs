@@ -28,10 +28,10 @@ public class PlayerShips : MonoBehaviour
     private bool Player3_won;
     private bool Player4_won;
 
-    private bool Player1_finished;
-    private bool Player2_finished;
-    private bool Player3_finished;
-    private bool Player4_finished;
+    public bool  Player1_finished;
+    public bool Player2_finished;
+    public bool Player3_finished;
+    public bool Player4_finished;
 
     bool playerturning = false;
 
@@ -928,12 +928,15 @@ public class PlayerShips : MonoBehaviour
                 StartFireworks();
             
                 PlayerWon.text = "You have Won !! Congratulations. ";
-                
+                Player1_finished = true;
+
             }
             else
             {
                 PlayerWon.text = "Player1 has Finished ";
-                
+                Player1_finished = true;
+
+
             }
             NumberOfPlayersStillPlaying1--;
             SomebodyWon1 = true;
@@ -947,7 +950,8 @@ public class PlayerShips : MonoBehaviour
             {
                 StartFireworks();
                 PlayerWon.text = "You have Won !! Congratulations. ";
-                
+                Player2_finished = true;
+
 
 
             }
@@ -955,7 +959,8 @@ public class PlayerShips : MonoBehaviour
             {
                 
                 PlayerWon.text = "Player2 has Finished ";
-                
+                Player2_finished = true;
+
             }
             NumberOfPlayersStillPlaying1--;
             SomebodyWon1 = true;
@@ -967,11 +972,13 @@ public class PlayerShips : MonoBehaviour
             {
                 StartFireworks();
                 PlayerWon.text = "You have Won !! Congratulations. ";
-                
+                Player3_finished = true;
+
             }
             else
             {
                 PlayerWon.text = "Player3 has Finished ";
+                Player3_finished = true;
             }
 
                 NumberOfPlayersStillPlaying1--;
@@ -987,11 +994,13 @@ public class PlayerShips : MonoBehaviour
             {
                 StartFireworks();
                 PlayerWon.text = "You have Won !! Congratulations. ";
-                
+                Player4_finished = true;
+
             }
             else
             {
                 PlayerWon.text = "Player4 has Finished ";
+                Player4_finished = true;
             }
             NumberOfPlayersStillPlaying1--;
             SomebodyWon1 = true;

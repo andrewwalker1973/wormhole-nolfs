@@ -708,22 +708,59 @@ public class StateManger : MonoBehaviour
             case 0:
                 Camera ThePlayer1_camera = GameObject.Find("Player1_Follow_Camera(Clone)").GetComponent<Camera>();   //find the follow camera for player1
                 disableAllCamera();                 // disable all the cameras
+               
+                if (ThePlayerships.Player1_finished ==  false || IsSkipRoll1 == false)
+                {
+                    ThePlayer1_camera.enabled = true;
+                }
+                else
+                {
+                    ThePlayer1_camera.enabled = false;
+                }
+
                 ThePlayer1_camera.enabled = true;       // enable only player1 follow camera
                 break;
             case 1:
                 Camera ThePlayer2_camera = GameObject.Find("Player2_Follow_Camera(Clone)").GetComponent<Camera>();
                 disableAllCamera();
-                ThePlayer2_camera.enabled = true;           
+
+                if (ThePlayerships.Player2_finished == false || IsSkipRoll2 == false)
+                {
+                    ThePlayer2_camera.enabled = true;
+                }
+                else
+                {
+                    ThePlayer2_camera.enabled = false;
+                }
+                           
                 break;
             case 2:
                 Camera ThePlayer3_camera = GameObject.Find("Player3_Follow_Camera(Clone)").GetComponent<Camera>();
                 disableAllCamera();
-                ThePlayer3_camera.enabled = true;
+
+                if (ThePlayerships.Player3_finished == false || IsSkipRoll3 == false)
+                {
+                    ThePlayer3_camera.enabled = true;
+                }
+                else
+                {
+                    ThePlayer3_camera.enabled = false;
+                }
+
                 break;
             case 3:
                 Camera ThePlayer4_camera = GameObject.Find("Player4_Follow_Camera(Clone)").GetComponent<Camera>();
                 disableAllCamera();
-                ThePlayer4_camera.enabled = true;                
+                
+                if (ThePlayerships.Player4_finished == false || IsSkipRoll4 == false)
+                {
+                    ThePlayer4_camera.enabled = true;
+                }
+                else
+                {
+                    ThePlayer4_camera.enabled = false;
+                }
+
                 break;
         }
     }
